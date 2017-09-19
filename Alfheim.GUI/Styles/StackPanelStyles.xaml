@@ -1,0 +1,19 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Alfheim.GUI.Styles">
+    <Style x:Key="StackPanelFooter"
+        TargetType="StackPanel">
+
+        <Setter 
+            Property="Background"
+            Value="{StaticResource AccentColorBrush}" />
+
+        <Setter
+            Property="Orientation"
+            Value="Horizontal" />
+
+        <Setter
+            Property="Height"
+            Value="Auto" />
+    </Style>
+</ResourceDictionary>

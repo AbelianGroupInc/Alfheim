@@ -1,0 +1,15 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Alfheim.GUI.Styles">
+    <Style x:Key="ButtonsWrapPanel"
+           TargetType="WrapPanel">
+
+        <Setter
+            Property="Orientation"
+            Value="Horizontal"/>
+
+        <Setter
+            Property="FlowDirection"
+            Value="RightToLeft"/>
+    </Style>
+</ResourceDictionary>
