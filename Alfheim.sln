@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfheim.GUI", "Alfheim.GUI\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfheim.FuzzyLogic", "Alfheim.FuzzyLogic\Alfheim.FuzzyLogic.csproj", "{8ED10668-B80E-4B3D-A091-66B64F9F7013}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfheim.Tests", "Alfheim.Tests\Alfheim.Tests.csproj", "{C59D4CCA-DE02-4742-A2D3-D186E5B51CA6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{8ED10668-B80E-4B3D-A091-66B64F9F7013}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8ED10668-B80E-4B3D-A091-66B64F9F7013}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8ED10668-B80E-4B3D-A091-66B64F9F7013}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C59D4CCA-DE02-4742-A2D3-D186E5B51CA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C59D4CCA-DE02-4742-A2D3-D186E5B51CA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C59D4CCA-DE02-4742-A2D3-D186E5B51CA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C59D4CCA-DE02-4742-A2D3-D186E5B51CA6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
