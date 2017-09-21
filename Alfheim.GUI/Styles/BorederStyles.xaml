@@ -39,10 +39,6 @@
             <Setter
                 Property="BorderThickness"
                 Value="1" />
-
-            <Setter
-                Property="Margin"
-                Value="6 3" />
         </Style.Setters>
     </Style>
     

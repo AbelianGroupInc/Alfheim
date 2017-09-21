@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Alfheim.GUI.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,32 @@ namespace Alfheim.GUI.Views
         {
             InitializeComponent();
             mProjectNameTB.Text = ProjectName;
+        }
+
+        private void AddInputButton_Click(object sender, RoutedEventArgs e)
+        {
+            mInputList.Items.Add(DateTime.Now.Ticks);
+        }
+
+        private void AddOutputButton_Click(object sender, RoutedEventArgs e)
+        {
+            mOutputsList.Items.Add(DateTime.Now.Ticks);
+        }
+
+        private void RemoveOutputButton_Click(object sender, RoutedEventArgs e)
+        {
+            RemoveSelectedItem(mOutputsList);
+        }
+
+        private void RemoveInputButton_Click(object sender, RoutedEventArgs e)
+        {
+            RemoveSelectedItem(mInputList);
+        }
+
+        public void RemoveSelectedItem(ListBoxWithHeader control)
+        {
+            if (control != null && control.SelectedItem != null)
+                control.Items.Remove(control.SelectedItem);
         }
     }
 }

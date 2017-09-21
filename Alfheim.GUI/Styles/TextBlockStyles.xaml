@@ -123,20 +123,24 @@
             Value="24" />
     </Style>
 
-    <Style x:Key="Header"
+    <Style x:Key="HeaderWithoutBackground"
            TargetType="TextBlock">
-
-        <Setter
-            Property="Background"
-            Value="{StaticResource AccentColorBrush}" />
-
         <Setter
             Property="Foreground"
             Value="White" />
 
         <Setter
             Property="Padding"
-            Value="3" />
+            Value="5 3" />
+    </Style>
+
+    <Style x:Key="Header"
+           TargetType="TextBlock"
+           BasedOn="{StaticResource HeaderWithoutBackground}">
+
+        <Setter
+            Property="Background"
+            Value="{StaticResource AccentColorBrush}" />
     </Style>
 
     <Style x:Key="SearchButton"

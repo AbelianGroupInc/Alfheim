@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Alfheim.GUI.Views"
+      xmlns:m="clr-namespace:Alfheim.GUI.Controls"
       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="800"
@@ -39,8 +40,8 @@
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="10*" />
-                <ColumnDefinition Width="5*" />
-                <ColumnDefinition Width="5*" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="3*" />
 
             </Grid.ColumnDefinitions>
 
@@ -52,68 +53,45 @@
             </Grid.RowDefinitions>
 
 
-            <Border
+            <m:ListBoxWithHeader
+                x:Name="mInputList"
                 Grid.Row="0" Grid.Column="1"
                 Grid.ColumnSpan="2"
-                Style="{StaticResource DefaultBorder}">
-                <StackPanel>
-                    <TextBlock 
-                        Style="{StaticResource Header}"
-                        Text="{DynamicResource cInputs}"/>
+                Style="{StaticResource DefaultListBoxWithHeader}"
+                Title="{DynamicResource cInputs}" />
 
-                    <ListBox
-                        Grid.Row="1" Grid.Column="0"
-                        Style="{StaticResource ListBoxWithHeader}" />
-                </StackPanel>
-            </Border>
-
-            <Border
+            <m:ListBoxWithHeader
                 Grid.Row="0" Grid.Column="0"
                 Grid.RowSpan="3"
-                Style="{StaticResource DefaultBorder}">
-                <StackPanel>
-                    <TextBlock 
-                        Style="{StaticResource Header}"
-                        Text="{DynamicResource cRules}"/>
+                Style="{StaticResource DefaultListBoxWithHeader}"
+                Title="{DynamicResource cRules}" />
 
-                    <ListView
-                        Grid.Row="1" Grid.Column="0"
-                        Style="{StaticResource ListBoxWithHeader}">
-                    </ListView>
-                </StackPanel>
-            </Border>
-
-            <Border
+            <m:ListBoxWithHeader
+                x:Name="mOutputsList"
                 Grid.Row="2" Grid.Column="1"
                 Grid.ColumnSpan="2"
-                Style="{StaticResource DefaultBorder}">
-                <StackPanel>
-                    <TextBlock 
-                        Style="{StaticResource Header}"
-                        Text="{DynamicResource cOutputs}"/>
-
-                    <ListBox
-                        Grid.Row="1" Grid.Column="0"
-                        Style="{StaticResource ListBoxWithHeader}" />
-                </StackPanel>
-            </Border>
+                Style="{StaticResource DefaultListBoxWithHeader}"
+                Title="{DynamicResource cOutputs}" />
 
             <Button
                 Grid.Row="1" Grid.Column="1"
-                Style="{StaticResource BigFlatButton}">
+                Style="{StaticResource BigFlatButton}"
+                Click="AddInputButton_Click">
 
                 <TextBlock Text="{DynamicResource cAdd}"/>
             </Button>
             
             <Button
                 Grid.Row="1" Grid.Column="2"
-                Style="{StaticResource BigFlatButton}">
+                Style="{StaticResource BigFlatButton}"
+                Click="RemoveInputButton_Click">
 
                 <TextBlock Text="{DynamicResource cRemove}"/>
             </Button>
             
             <Button
                 Grid.Row="4" Grid.Column="1"
+                Click="AddOutputButton_Click"
                 Style="{StaticResource BigFlatButton}">
 
                 <TextBlock Text="{DynamicResource cAdd}"/>
@@ -121,7 +99,8 @@
             
             <Button
                 Grid.Row="4" Grid.Column="2"
-                Style="{StaticResource BigFlatButton}">
+                Style="{StaticResource BigFlatButton}"
+                Click="RemoveOutputButton_Click">
 
                 <TextBlock Text="{DynamicResource cRemove}"/>
             </Button>
