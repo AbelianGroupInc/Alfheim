@@ -4,9 +4,9 @@
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
     <v:String x:Key="cAlfheim">Alfheim</v:String>
     <v:String x:Key="cCopyRight">© AbelianGroup 2017</v:String>
-    <v:String x:Key="cLanguage">Language</v:String>
-    <v:String x:Key="cOpenProject">Open Project</v:String>
-    <v:String x:Key="cCreateProject">Create Project</v:String>
-    <v:String x:Key="cImportFIS">Import FIS</v:String>
+    <v:String x:Key="cLanguage">Язык</v:String>
+    <v:String x:Key="cOpenProject">Открыть проект</v:String>
+    <v:String x:Key="cCreateProject">Создать проект</v:String>
+    <v:String x:Key="cImportFIS">Импорт FIS</v:String>
     <v:String x:Key="cFAQ">FAQ</v:String>
 </ResourceDictionary>

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Alfheim.GUI"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="{DynamicResource mAlfheim}" 
+        Title="{DynamicResource cAlfheim}" 
         Height="600" Width="800" 
         Icon="Resources/A_ICO.ico"
         BorderThickness="0" 
@@ -16,12 +16,13 @@
         WindowStartupLocation="CenterScreen">
     <Controls:MetroWindow.RightWindowCommands>
     <Controls:WindowCommands>
-        <Menu 
-                 Style="{StaticResource TopMenu}">
+        <Menu            
+            Style="{StaticResource TopMenu}">
 
                 <MenuItem  
+                    x:Name="mLanguageMenu"
                     Style="{StaticResource TopMenuItem}"                                      
-                    Header="{DynamicResource mLanguage}"/>
+                    Header="{DynamicResource cLanguage}"/>
             </Menu>
     </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
@@ -35,7 +36,7 @@
 
             <TextBlock 
                 Style="{StaticResource TextBlockFooter}" 
-                Text="{DynamicResource mCopyRight}" />
+                Text="{DynamicResource cCopyRight}" />
         </StackPanel>
 
         <Frame 
