@@ -26,7 +26,8 @@
             </Button>
             
             <Button
-                Style="{StaticResource BigFlatButton}">
+                Style="{StaticResource BigFlatButton}"
+                Click="OpenProject_Click">
                 
                 <TextBlock 
                     Style="{StaticResource BigTextStyle}"

@@ -1,10 +1,10 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Alfheim.GUI.Styles">
-   
-    <Style x:Key="BorderForTextBoxAndButton"
-        TargetType="Border">
 
+    <Style x:Key="BorderWithTrigger"
+        TargetType="Border">
+        
         <Style.Setters>
             <Setter
                 Property="BorderBrush"
@@ -27,6 +27,25 @@
         </Style.Triggers>
     </Style>
 
+    <Style
+        x:Key="DefaultBorder"
+        TargetType="Border">
+        
+        <Style.Setters>
+            <Setter
+                Property="BorderBrush"
+                Value="#FFC7C7C7" />
+
+            <Setter
+                Property="BorderThickness"
+                Value="1" />
+
+            <Setter
+                Property="Margin"
+                Value="6 3" />
+        </Style.Setters>
+    </Style>
+    
     <Style x:Key="BorderForSimpleTextBlock"
         TargetType="Border">
 

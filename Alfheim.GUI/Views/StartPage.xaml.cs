@@ -22,12 +22,17 @@ namespace Alfheim.GUI.Views
     {
         public StartPage()
         {
-            InitializeComponent();
+            InitializeComponent(); 
         }
 
         private void OpenHelp_Click(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Process.Start(Alfheim.GUI.Properties.Settings.Default.HelpSite);
+        }
+
+        private void OpenProject_Click(object sender, RoutedEventArgs e)
+        {
+            (Window.GetWindow(this) as MainWindow).OpenPage(new ProjectPage("Test Project"));
         }
     }
 }

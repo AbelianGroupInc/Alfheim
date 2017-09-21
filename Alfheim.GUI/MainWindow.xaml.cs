@@ -28,7 +28,7 @@ namespace Alfheim.GUI
             InitializeComponent();
             InitLanguageMenu();
 
-            mMainFrame.Content = new StartPage();
+            OpenPage(new StartPage());
             App.LanguageChanged += LanguageChanged;
             
         }
@@ -72,6 +72,16 @@ namespace Alfheim.GUI
                 menuLang.Click += ChangeLanguageClick;
                 mLanguageMenu.Items.Add(menuLang);
             }
+        }
+
+        public void OpenPage(Page page)
+        {          
+            mMainFrame.Content = page;
+        }
+
+        private void Home_Click(object sender, RoutedEventArgs e)
+        {
+            OpenPage(new StartPage());
         }
     }
 }

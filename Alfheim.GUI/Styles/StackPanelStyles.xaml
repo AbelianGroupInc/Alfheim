@@ -17,6 +17,18 @@
             Value="Auto" />
     </Style>
 
+    <Style x:Key="DefaultHorizontalStackPanel"
+        TargetType="StackPanel">
+
+        <Setter
+            Property="Orientation"
+            Value="Horizontal" />
+
+        <Setter
+            Property="VerticalAlignment"
+            Value="Center" />
+    </Style>
+    
     <Style x:Key="FlatStackPanel"
            TargetType="StackPanel">
 

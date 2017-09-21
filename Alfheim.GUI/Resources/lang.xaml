@@ -5,8 +5,16 @@
     <v:String x:Key="cAlfheim">Alfheim</v:String>
     <v:String x:Key="cCopyRight">© AbelianGroup 2017</v:String>
     <v:String x:Key="cLanguage">Language</v:String>
+    <v:String x:Key="cHome">Home</v:String>
     <v:String x:Key="cOpenProject">Open Project</v:String>
     <v:String x:Key="cCreateProject">Create Project</v:String>
     <v:String x:Key="cImportFIS">Import FIS</v:String>
     <v:String x:Key="cHelp">Help</v:String>
+    <v:String x:Key="cInputs">Inputs</v:String>
+    <v:String x:Key="cOutputs">Outputs</v:String>
+    <v:String x:Key="cRules">Rules</v:String>
+    <v:String x:Key="cSettings">Settings</v:String>
+    <v:String x:Key="cAdd">Add</v:String>
+    <v:String x:Key="cRemove">Remove</v:String>
+    <v:String x:Key="cEdit">Edit</v:String>
 </ResourceDictionary>
