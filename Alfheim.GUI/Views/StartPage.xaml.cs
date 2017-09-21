@@ -24,5 +24,10 @@ namespace Alfheim.GUI.Views
         {
             InitializeComponent();
         }
+
+        private void OpenHelp_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(Alfheim.GUI.Properties.Settings.Default.HelpSite);
+        }
     }
 }

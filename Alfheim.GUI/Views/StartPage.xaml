@@ -41,10 +41,11 @@
             </Button>
 
             <Button
-                Style="{StaticResource BigFlatButton}">
+                Style="{StaticResource BigFlatButton}"
+                Click="OpenHelp_Click">
                 <TextBlock 
                     Style="{StaticResource BigTextStyle}"
-                    Text="{DynamicResource cFAQ}" />
+                    Text="{DynamicResource cHelp}" />
             </Button>
         </StackPanel>
         

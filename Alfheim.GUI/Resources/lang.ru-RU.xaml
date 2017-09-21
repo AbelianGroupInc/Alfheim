@@ -8,5 +8,5 @@
     <v:String x:Key="cOpenProject">Открыть проект</v:String>
     <v:String x:Key="cCreateProject">Создать проект</v:String>
     <v:String x:Key="cImportFIS">Импорт FIS</v:String>
-    <v:String x:Key="cFAQ">FAQ</v:String>
+    <v:String x:Key="cHelp">Помощь</v:String>
 </ResourceDictionary>

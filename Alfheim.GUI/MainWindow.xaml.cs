@@ -33,7 +33,6 @@ namespace Alfheim.GUI
             
         }
 
-
         private void LanguageChanged(Object sender, EventArgs e)
         {
             CultureInfo currLang = App.Language;

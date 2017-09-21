@@ -34,5 +34,14 @@ namespace Alfheim.GUI.Properties {
                 this["DefaultLanguage"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://abeliangroup.kl.com.ua/alfheim/")]
+        public string HelpSite {
+            get {
+                return ((string)(this["HelpSite"]));
+            }
+        }
     }
 }
