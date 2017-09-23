@@ -9,19 +9,28 @@ namespace Alfheim.FuzzyLogic.Variables.Model
     public class Term
     {
         public string Name { get; set; }
-        public IFuzzyFunction FuzzyFunction { get; }
+        public IFuzzyFunction FuzzyFunction { get; private set; }
         public LinguisticVariable Variable { get;}
         
-        public Term(string name, IFuzzyFunction function, LinguisticVariable variable)
+        public Term(string name, LinguisticVariable variable)
         {
             Name = name;
-            SetFunction(function);
             Variable = variable;
         }
 
-        public void SetFunction(IFuzzyFunction function)
+        /// <summary>
+        /// The common usage : 
+        /// Term term = new Term("term1", variable);
+        /// term.SetFunction<TrapezoidalFunction>();
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        public void SetFunction<T> ()
+            where T : IFuzzyFunction, new ()
         {
-            // TODO 
+            this.FuzzyFunction = new T();
+
+            FuzzyFunction.MaxInputValue = Variable.MaxValue;
+            FuzzyFunction.MinInputValue = Variable.MinValue;
         }
     }
 }

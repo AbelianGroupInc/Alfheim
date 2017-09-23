@@ -21,10 +21,10 @@ namespace Alfheim.FuzzyLogic.Variables.Services.Tests
             LinguisticVariable variable = new LinguisticVariable("var1", 1, 10);
 
             TriangleFunction function = new TriangleFunction();
-            Term term = new Term("term1", function, variable);
+            Term term = new Term("term1", variable);
 
-            Term term2 = new Term("term2", function, variable);
-            Term term3 = new Term("term3", function, variable);
+            Term term2 = new Term("term2", variable);
+            Term term3 = new Term("term3", variable);
 
             variable.AddTerm(term);
             variable.AddTerm(term2);
@@ -37,10 +37,10 @@ namespace Alfheim.FuzzyLogic.Variables.Services.Tests
             LinguisticVariable variable2 = new LinguisticVariable("var2", 1, 10);
 
             TriangleFunction function2 = new TriangleFunction();
-            Term term21 = new Term("term1", function2, variable);
+            Term term21 = new Term("term1", variable);
 
-            Term term22 = new Term("term2", function2, variable);
-            Term term23 = new Term("term3", function2, variable);
+            Term term22 = new Term("term2", variable);
+            Term term23 = new Term("term3", variable);
 
             variable2.AddTerm(term);
             variable2.AddTerm(term2);
@@ -80,12 +80,26 @@ namespace Alfheim.FuzzyLogic.Variables.Services.Tests
             TriangleFunction function = new TriangleFunction();
 
             variable.AddTerm(
-                    new Term("term1", function, variable)
+                    new Term("term1", variable)
                 );
 
             variable.AddTerm(
-                   new Term("term1", function, variable)
+                   new Term("term1", variable)
                );
+             
         }
+
+        [TestMethod()]
+        public void TermFunctionDomainTest()
+        {
+            LinguisticVariable variable = new LinguisticVariable("var1", 1, 10);
+            Term term = new Term("term1", variable);
+
+            term.SetFunction<TrapezoidalFunction>();
+
+            Assert.AreEqual(term.FuzzyFunction.MinInputValue, 1);
+            Assert.AreEqual(term.FuzzyFunction.MaxInputValue, 10);
+        }
+
     }
 }

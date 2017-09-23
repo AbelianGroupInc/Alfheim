@@ -55,6 +55,7 @@
       <DependentUpon>FuzzyFunctionStringConstants.resx</DependentUpon>
     </Compile>
     <Compile Include="FuzzyLogicException.cs" />
+    <Compile Include="IFunction.cs" />
     <Compile Include="IFuzzyFunction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Variables\Model\LinguisticVariableAlreadyExistsException.cs" />

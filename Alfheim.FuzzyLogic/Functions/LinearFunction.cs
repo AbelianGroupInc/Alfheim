@@ -1,6 +1,6 @@
 ﻿namespace Alfheim.FuzzyLogic.Functions
 {
-    public class LinearFunction : IFuzzyFunction
+    public class LinearFunction : IFunction
     {
         public LinearFunction(Point leftPoint, Point rightPoint)
         {
