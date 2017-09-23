@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace Alfheim.FuzzyLogic.Rules.Model
 {
-    enum ChainOperation
+    public enum OperationType
     {
-        OR,
-        AND
+        Or,
+        OrNot,
+        And,
+        AndNot
     }
 }
