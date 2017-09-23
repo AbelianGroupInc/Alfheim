@@ -52,5 +52,10 @@ namespace Alfheim.GUI.Views
             if (control != null && control.SelectedItem != null)
                 control.Items.Remove(control.SelectedItem);
         }
+
+        private void EditRules_Click(object sender, RoutedEventArgs e)
+        {
+            (Window.GetWindow(this) as MainWindow).OpenPage(new LinguisticVariablePage(this));
+        }
     }
 }

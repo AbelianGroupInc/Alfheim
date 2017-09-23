@@ -14,7 +14,11 @@
     <v:String x:Key="cOutputs">Выходы</v:String>
     <v:String x:Key="cRules">Правила</v:String>
     <v:String x:Key="cSettings">Настройки</v:String>
+    <v:String x:Key="cTermSettings">Настройки терма</v:String>
     <v:String x:Key="cAdd">Добавить</v:String>
     <v:String x:Key="cRemove">Удалить</v:String>
     <v:String x:Key="cEdit">Изменить</v:String>
+    <v:String x:Key="cTerms">Термы</v:String>
+    <v:String x:Key="cMembership">Принадлежность</v:String>
+    <v:String x:Key="cValue">Значение</v:String>
 </ResourceDictionary>

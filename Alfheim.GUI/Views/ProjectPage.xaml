@@ -107,7 +107,8 @@
             
             <Button
                 Grid.Row="4" Grid.Column="0"
-                Style="{StaticResource BigFlatButton}">
+                Style="{StaticResource BigFlatButton}"
+                Click="EditRules_Click">
 
                 <TextBlock Text="{DynamicResource cEdit}"/>
             </Button>

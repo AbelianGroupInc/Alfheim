@@ -14,7 +14,11 @@
     <v:String x:Key="cOutputs">Outputs</v:String>
     <v:String x:Key="cRules">Rules</v:String>
     <v:String x:Key="cSettings">Settings</v:String>
+    <v:String x:Key="cTermSettings">Term settings</v:String>
     <v:String x:Key="cAdd">Add</v:String>
     <v:String x:Key="cRemove">Remove</v:String>
     <v:String x:Key="cEdit">Edit</v:String>
+    <v:String x:Key="cTerms">Terms</v:String>
+    <v:String x:Key="cMembership">Membership</v:String>
+    <v:String x:Key="cValue">Value</v:String>
 </ResourceDictionary>
