@@ -74,6 +74,7 @@
     <Compile Include="Variables\Model\TermNotFoundException.cs" />
     <Compile Include="Variables\Services\ILinguisticVariableService.cs" />
     <Compile Include="Variables\Services\LinguisticVariableService.cs" />
+    <Compile Include="Variables\Model\LinguisticVariableType.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="FuzzyFunctionStringConstants.resx">

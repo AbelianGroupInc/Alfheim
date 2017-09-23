@@ -32,7 +32,7 @@ namespace Alfheim.FuzzyLogic.Variables.Services.Tests
 
             variable.RemoveTerm(term2);
 
-            service.AddLinguisticVariable(variable);
+            service.AddLinguisticVariable(variable, LinguisticVariableType.Input);
 
             LinguisticVariable variable2 = new LinguisticVariable("var2", 1, 10);
 
@@ -46,15 +46,34 @@ namespace Alfheim.FuzzyLogic.Variables.Services.Tests
             variable2.AddTerm(term2);
             variable2.AddTerm(term3);
 
-            service.AddLinguisticVariable(variable2);
+            service.AddLinguisticVariable(variable2, LinguisticVariableType.Input);
 
-            IEnumerable<LinguisticVariable> variables = service.LinguisticVariables;
+            LinguisticVariable variable3 = new LinguisticVariable("var3", 1, 10);
+
+            TriangleFunction function3 = new TriangleFunction();
+            Term term31 = new Term("term1", variable);
+
+            Term term32 = new Term("term2", variable);
+            Term term33 = new Term("term3", variable);
+
+            variable3.AddTerm(term);
+            variable3.AddTerm(term2);
+            variable3.AddTerm(term3);
+             
+            service.AddLinguisticVariable(variable3, LinguisticVariableType.Output);
+
+            IEnumerable<LinguisticVariable> variables = service.InputLinguisticVariables;
 
             Assert.AreEqual(variables.Count(), 2);
             Assert.IsNotNull(service.GetLinguisticVariable("var2"));
 
             Assert.AreEqual(service.GetLinguisticVariable("var1").Terms.Count(), 2);
             Assert.IsNotNull(service.GetLinguisticVariable("var1").GetTerm("term3"));
+
+            IEnumerable<LinguisticVariable> variablesOutput = service.OutputLinguisticVariables;
+
+            Assert.AreEqual(variablesOutput.Count(), 1);
+            Assert.IsNotNull(service.GetLinguisticVariable("var3"));
         }
 
         [TestMethod()]
@@ -63,11 +82,45 @@ namespace Alfheim.FuzzyLogic.Variables.Services.Tests
         {
             LinguisticVariableService service = new LinguisticVariableService();
             service.AddLinguisticVariable(
-                     new LinguisticVariable("var2", 1, 10)
+                     new LinguisticVariable("var2", 1, 10),
+                     LinguisticVariableType.Input
                 );
 
             service.AddLinguisticVariable(
-                     new LinguisticVariable("var2", 4, 5)
+                     new LinguisticVariable("var2", 4, 5),
+                     LinguisticVariableType.Input
+                );
+        }
+
+        [TestMethod()]
+        [ExpectedException(typeof(LinguisticVariableNameAlreadyExistsException))]
+        public void LinguisticVariableNameAlreadyExistsOutputException()
+        {
+            LinguisticVariableService service = new LinguisticVariableService();
+            service.AddLinguisticVariable(
+                     new LinguisticVariable("var2", 1, 10),
+                     LinguisticVariableType.Output
+                );
+
+            service.AddLinguisticVariable(
+                     new LinguisticVariable("var2", 4, 5),
+                     LinguisticVariableType.Output
+                );
+        }
+
+        [TestMethod()]
+        [ExpectedException(typeof(LinguisticVariableNameAlreadyExistsException))]
+        public void LinguisticVariableNameAlreadyExistsInputOutputException()
+        {
+            LinguisticVariableService service = new LinguisticVariableService();
+            service.AddLinguisticVariable(
+                     new LinguisticVariable("var2", 1, 10),
+                     LinguisticVariableType.Input
+                );
+
+            service.AddLinguisticVariable(
+                     new LinguisticVariable("var2", 4, 5),
+                     LinguisticVariableType.Output
                 );
         }
 
@@ -101,5 +154,32 @@ namespace Alfheim.FuzzyLogic.Variables.Services.Tests
             Assert.AreEqual(term.FuzzyFunction.MaxInputValue, 10);
         }
 
+        [TestMethod()]
+        public void GetLinguisticVariableTest()
+        {
+            LinguisticVariableService service = new LinguisticVariableService();
+            service.AddLinguisticVariable(new LinguisticVariable("var1", 1, 10), LinguisticVariableType.Input);
+            service.AddLinguisticVariable(new LinguisticVariable("var2", 1, 10), LinguisticVariableType.Input);
+            service.AddLinguisticVariable(new LinguisticVariable("var3", 1, 10), LinguisticVariableType.Input);
+            service.AddLinguisticVariable(new LinguisticVariable("var4", 1, 10), LinguisticVariableType.Output);
+            service.AddLinguisticVariable(new LinguisticVariable("var5", 1, 10), LinguisticVariableType.Output);
+
+            Assert.IsNotNull(service.GetLinguisticVariable("var1"));
+            Assert.IsNotNull(service.GetLinguisticVariable("var5"));
+        }
+
+        [TestMethod()]
+        [ExpectedException(typeof(LinguisticVariableNotFoundException))]
+        public void GetLinguisticVariableTest2()
+        {
+            LinguisticVariableService service = new LinguisticVariableService();
+            service.AddLinguisticVariable(new LinguisticVariable("var1", 1, 10), LinguisticVariableType.Input);
+            service.AddLinguisticVariable(new LinguisticVariable("var2", 1, 10), LinguisticVariableType.Input);
+            service.AddLinguisticVariable(new LinguisticVariable("var3", 1, 10), LinguisticVariableType.Input);
+            service.AddLinguisticVariable(new LinguisticVariable("var4", 1, 10), LinguisticVariableType.Output);
+            service.AddLinguisticVariable(new LinguisticVariable("var5", 1, 10), LinguisticVariableType.Output);
+
+            Assert.IsNotNull(service.GetLinguisticVariable("var6"));
+        }
     }
 }
