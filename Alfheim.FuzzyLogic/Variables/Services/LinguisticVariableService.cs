@@ -16,16 +16,18 @@ namespace Alfheim.FuzzyLogic.Variables.Services
             linguisticVariableDao = new LinguisticVariableDao();
         }
 
-        public IEnumerable<LinguisticVariable> LinguisticVariables {
+        public IEnumerable<LinguisticVariable> InputLinguisticVariables {
             get
             {
-                return linguisticVariableDao.LinguisticVariables;
+                return linguisticVariableDao.InputLinguisticVariables;
             }
         }
-
-        public void AddLinguisticVariable(LinguisticVariable variable)
+        public IEnumerable<LinguisticVariable> OutputLinguisticVariables
         {
-            linguisticVariableDao.AddLinguisticVariable(variable);
+            get
+            {
+                return linguisticVariableDao.OutputLinguisticVariables;
+            }
         }
 
         public LinguisticVariable GetLinguisticVariable(string name)
@@ -33,9 +35,14 @@ namespace Alfheim.FuzzyLogic.Variables.Services
             return linguisticVariableDao.GetLinguisticVariable(name);
         }
 
-        public void RemoveLinguisticVariable(LinguisticVariable variable)
+        public void RemoveLinguisticVariable(LinguisticVariable variable, LinguisticVariableType type)
         {
-            linguisticVariableDao.RemoveLinguisticVariable(variable);
+            linguisticVariableDao.RemoveLinguisticVariable(variable, type);
+        }
+
+        public void AddLinguisticVariable(LinguisticVariable variable, LinguisticVariableType type)
+        {
+            linguisticVariableDao.AddLinguisticVariable(variable, type);
         }
     }
 }

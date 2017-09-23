@@ -9,47 +9,73 @@ namespace Alfheim.FuzzyLogic.Variables.Model
 {
     class LinguisticVariableDao
     {
-        private IList<LinguisticVariable> linguisticVariables;
-        public IEnumerable<LinguisticVariable> LinguisticVariables
+        Dictionary<LinguisticVariableType, IList<LinguisticVariable>> linguisticVariables;
+        public IEnumerable<LinguisticVariable> InputLinguisticVariables
         {
             get
             {
-                return linguisticVariables;
+                return linguisticVariables[LinguisticVariableType.Input];
+            }
+        }
+        public IEnumerable<LinguisticVariable> OutputLinguisticVariables
+        {
+            get
+            {
+                return linguisticVariables[LinguisticVariableType.Output];
             }
         }
 
+        public object outputLinguisticVariables { get; private set; }
+
         public LinguisticVariableDao()
         {
-            this.linguisticVariables = new List<LinguisticVariable>();
+            linguisticVariables = new Dictionary<LinguisticVariableType, IList<LinguisticVariable>>();
+
+            this.linguisticVariables[LinguisticVariableType.Input] = new List<LinguisticVariable>();
+            this.linguisticVariables[LinguisticVariableType.Output] = new List<LinguisticVariable>();
         }
-
-        public void AddLinguisticVariable(LinguisticVariable variable)
-        {
-            bool isExist = linguisticVariables
-                .Where(curVariable => curVariable.Name == variable.Name)
-                .Any();
-
-            if (isExist)
-                throw new LinguisticVariableNameAlreadyExistsException("Linguistic variable name already exists;");
-
-            linguisticVariables.Add(variable);
-            
-
-        }
-         
         public LinguisticVariable GetLinguisticVariable(String name)
         {
-            var variableByName = linguisticVariables.FirstOrDefault(variable => variable.Name == name);
+            LinguisticVariable inputVariableByName = InputVariableByName(name);
+            LinguisticVariable outputVariableByName = OutputVariableByName(name);
 
-            if (variableByName == null)
+            if (inputVariableByName != null)
+                return inputVariableByName;
+            else if (outputVariableByName != null)
+                return outputVariableByName;
+            else
                 throw new LinguisticVariableNotFoundException("Linguistic variable not found");
-
-            return variableByName;
         }
 
-        public void RemoveLinguisticVariable(LinguisticVariable variable)
+        private LinguisticVariable OutputVariableByName(string name)
         {
-            linguisticVariables.Remove(variable);
+            return OutputLinguisticVariables
+                            .FirstOrDefault(variable => variable.Name == name);
+        }
+
+        private LinguisticVariable InputVariableByName(string name)
+        {
+            return InputLinguisticVariables
+                            .FirstOrDefault(variable => variable.Name == name);
+        }
+
+        public void AddLinguisticVariable(LinguisticVariable variable, LinguisticVariableType type)
+        {
+            IList<LinguisticVariable> variables = linguisticVariables[type];
+
+            LinguisticVariable inputVariableByName = InputVariableByName(variable.Name);
+            LinguisticVariable outputVariableByName = OutputVariableByName(variable.Name);
+
+            if (inputVariableByName != null || outputVariableByName != null)
+                throw new LinguisticVariableNameAlreadyExistsException("Linguistic variable name already exists;");
+
+            variables.Add(variable);
+        }
+
+        public void RemoveLinguisticVariable(LinguisticVariable variable, LinguisticVariableType type)
+        {
+            IList<LinguisticVariable> variables = linguisticVariables[type];
+            variables.Remove(variable);
         }
     }
 }
