@@ -21,4 +21,8 @@
     <v:String x:Key="cTerms">Terms</v:String>
     <v:String x:Key="cMembership">Membership</v:String>
     <v:String x:Key="cValue">Value</v:String>
+    <v:String x:Key="cAddVariable">Add linguistic variable</v:String>
+    <v:String x:Key="cName">Name</v:String>
+    <v:String x:Key="cMinInputValue">Min input value</v:String>
+    <v:String x:Key="cMaxInputValue">Max input value</v:String>
 </ResourceDictionary>

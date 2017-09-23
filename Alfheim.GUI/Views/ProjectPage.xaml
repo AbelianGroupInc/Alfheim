@@ -53,12 +53,56 @@
             </Grid.RowDefinitions>
 
 
-            <m:ListBoxWithHeader
+            <Border
+                Grid.Row="0" Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Margin="6 3"
+                Style="{StaticResource DefaultBorder}">
+                <Grid
+                   x:Name="mGrid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <DockPanel
+                        Grid.Row="0" 
+                        Style="{StaticResource HeaderDockPanel}">
+
+                        <TextBlock 
+                            DockPanel.Dock="Right"
+                            Style="{StaticResource HeaderWithoutBackground}"
+                            Text="{Binding ElementName=mInputList, Path=Items.Count}"/>
+
+                        <TextBlock
+                            Text="{DynamicResource cInputs}"
+                            Style="{StaticResource HeaderWithoutBackground}"/>
+                    </DockPanel>
+
+                    <ListBox
+                        x:Name="mInputList"
+                        Grid.Row="1"
+                        Style="{StaticResource ListBoxWithHeader}"
+                        ItemsSource="{Binding mLinguisticVariables}" >
+
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock 
+                                    Text="{Binding Path=Name}"
+                                    MouseDown="ListBoxDoubleClick" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+
+                    </ListBox>
+                </Grid>
+            </Border>
+
+            <!--<m:ListBoxWithHeader
                 x:Name="mInputList"
                 Grid.Row="0" Grid.Column="1"
                 Grid.ColumnSpan="2"
                 Style="{StaticResource DefaultListBoxWithHeader}"
-                Title="{DynamicResource cInputs}" />
+                Title="{DynamicResource cInputs}" />-->
 
             <m:ListBoxWithHeader
                 Grid.Row="0" Grid.Column="0"
@@ -70,6 +114,7 @@
                 x:Name="mOutputsList"
                 Grid.Row="2" Grid.Column="1"
                 Grid.ColumnSpan="2"
+                ItemsSource="{Binding mLinguisticVariables}"
                 Style="{StaticResource DefaultListBoxWithHeader}"
                 Title="{DynamicResource cOutputs}" />
 

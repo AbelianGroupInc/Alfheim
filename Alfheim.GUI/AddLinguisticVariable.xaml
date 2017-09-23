@@ -1,0 +1,50 @@
+﻿<Controls:MetroWindow x:Class="Alfheim.GUI.AddLinguisticVariableWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:local="clr-namespace:Alfheim.GUI"
+        xmlns:m="clr-namespace:Alfheim.GUI.Controls"
+        mc:Ignorable="d"
+        Title="{DynamicResource cAddVariable}" 
+        Height="176" Width="300"
+        BorderThickness="0" 
+        GlowBrush="Black"
+        ResizeMode="NoResize"
+        WindowTransitionsEnabled="False"
+        WindowStartupLocation="CenterOwner">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <m:TextBlockWithTitle
+            Grid.Row="0"
+            Style="{StaticResource DefaultTextBlockWithTitle}"
+            Title="{DynamicResource cName}" />
+        
+        <m:TextBlockWithTitle
+            Grid.Row="1"
+            Style="{StaticResource DefaultTextBlockWithTitle}"
+            Title="{DynamicResource cMinInputValue}" />
+        
+        <m:TextBlockWithTitle
+            Grid.Row="2"
+            Style="{StaticResource DefaultTextBlockWithTitle}"
+            Title="{DynamicResource cMaxInputValue}" />
+
+        <Button
+            Margin="6 0"
+            Grid.Row="3"
+            Style="{StaticResource BigFlatButton}">
+
+            <TextBlock 
+                Text="{DynamicResource cAdd}"/>
+        </Button>
+    </Grid>
+</Controls:MetroWindow>
