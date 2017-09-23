@@ -6,12 +6,19 @@ namespace Alfheim.FuzzyLogic.Functions
     {
         private const double cDefaultIndentation = 0.5;
 
-        public TriangleFunction() : base()
-        {
-            MiddlePoint = cDefaultIndentation * (MinInputValue + MaxInputValue);
-            LeftPoint = cDefaultIndentation * (MinInputValue + MiddlePoint);
-            RightPoint = cDefaultIndentation * (MiddlePoint + MaxInputValue);
-        }
+        #region Constructors
+
+        public TriangleFunction() { }
+        public TriangleFunction(double maxInputValue) : base(maxInputValue) { }
+
+        public TriangleFunction(double minInputValue, double maxInputValue)
+            : base(minInputValue, maxInputValue) { }
+
+        public TriangleFunction(double minInputValue, double maxInputValue,
+            double minOutputValue, double maxOutputValue) : base(minInputValue, maxInputValue,
+                minOutputValue, maxOutputValue) { }
+
+        #endregion
 
         #region Properties
 
@@ -28,8 +35,15 @@ namespace Alfheim.FuzzyLogic.Functions
 
         protected override double Function(double x)
         {
-            return x <= MiddlePoint ? 
+            return x < MiddlePoint ? 
                 LeftFunction(x) : RightFunction(x);
+        }
+
+        protected override void InitProperties()
+        {
+            MiddlePoint = cDefaultIndentation * (MinInputValue + MaxInputValue);
+            LeftPoint = cDefaultIndentation * (MinInputValue + MiddlePoint);
+            RightPoint = cDefaultIndentation * (MiddlePoint + MaxInputValue);
         }
 
         #region Private methods

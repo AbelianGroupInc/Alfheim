@@ -121,26 +121,26 @@
         <Setter
             Property="FontSize"
             Value="24" />
-
-        <Setter
-            Property="Margin"
-            Value="0 5" />
     </Style>
 
-    <Style x:Key="ComboBoxHeader"
+    <Style x:Key="HeaderWithoutBackground"
            TargetType="TextBlock">
-
-        <Setter
-            Property="Background"
-            Value="{StaticResource AccentColorBrush}" />
-
         <Setter
             Property="Foreground"
             Value="White" />
 
         <Setter
             Property="Padding"
-            Value="3" />
+            Value="5 3" />
+    </Style>
+
+    <Style x:Key="Header"
+           TargetType="TextBlock"
+           BasedOn="{StaticResource HeaderWithoutBackground}">
+
+        <Setter
+            Property="Background"
+            Value="{StaticResource AccentColorBrush}" />
     </Style>
 
     <Style x:Key="SearchButton"
@@ -189,5 +189,29 @@
         <Setter
             Property="TextWrapping"
             Value="Wrap" />
+    </Style>
+    
+    <Style x:Key="BigTextStyle"
+           TargetType="TextBlock">
+
+        <Setter 
+            Property="FontSize"
+            Value="24" />
+
+        <Setter
+            Property="FontWeight"
+            Value="Light" />
+
+        <Setter
+            Property="HorizontalAlignment"
+            Value="Center" />
+
+        <Setter
+            Property="VerticalAlignment"
+            Value="Center" />
+
+        <Setter
+            Property="TextAlignment"
+            Value="Center" />
     </Style>
 </ResourceDictionary>

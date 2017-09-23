@@ -1,0 +1,118 @@
+﻿<Page x:Class="Alfheim.GUI.Views.ProjectPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Alfheim.GUI.Views"
+      xmlns:m="clr-namespace:Alfheim.GUI.Controls"
+      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="ProjectPage">
+
+    <DockPanel
+        LastChildFill="True">
+
+        <StackPanel
+            Style="{StaticResource DefaultHorizontalStackPanel}"
+            DockPanel.Dock="Top">
+
+            <Button 
+                DockPanel.Dock="Right"
+                Margin="5"
+                Width="30" Height="30"
+                Style="{DynamicResource MetroCircleButtonStyle}"
+                VerticalAlignment="Center">
+
+                <Rectangle
+                    Width="10" Height="10">
+                    <Rectangle.Fill>
+                        <VisualBrush Visual="{StaticResource appbar_cog}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+
+            <TextBlock 
+                Style="{StaticResource BigTextStyle}"
+                x:Name="mProjectNameTB" />
+        </StackPanel>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10*" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="3*" />
+
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="50"/>
+                <RowDefinition />
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+
+
+            <m:ListBoxWithHeader
+                x:Name="mInputList"
+                Grid.Row="0" Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Style="{StaticResource DefaultListBoxWithHeader}"
+                Title="{DynamicResource cInputs}" />
+
+            <m:ListBoxWithHeader
+                Grid.Row="0" Grid.Column="0"
+                Grid.RowSpan="3"
+                Style="{StaticResource DefaultListBoxWithHeader}"
+                Title="{DynamicResource cRules}" />
+
+            <m:ListBoxWithHeader
+                x:Name="mOutputsList"
+                Grid.Row="2" Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Style="{StaticResource DefaultListBoxWithHeader}"
+                Title="{DynamicResource cOutputs}" />
+
+            <Button
+                Grid.Row="1" Grid.Column="1"
+                Style="{StaticResource BigFlatButton}"
+                Click="AddInputButton_Click">
+
+                <TextBlock Text="{DynamicResource cAdd}"/>
+            </Button>
+            
+            <Button
+                Grid.Row="1" Grid.Column="2"
+                Style="{StaticResource BigFlatButton}"
+                Click="RemoveInputButton_Click">
+
+                <TextBlock Text="{DynamicResource cRemove}"/>
+            </Button>
+            
+            <Button
+                Grid.Row="4" Grid.Column="1"
+                Click="AddOutputButton_Click"
+                Style="{StaticResource BigFlatButton}">
+
+                <TextBlock Text="{DynamicResource cAdd}"/>
+            </Button>
+            
+            <Button
+                Grid.Row="4" Grid.Column="2"
+                Style="{StaticResource BigFlatButton}"
+                Click="RemoveOutputButton_Click">
+
+                <TextBlock Text="{DynamicResource cRemove}"/>
+            </Button>
+            
+            <Button
+                Grid.Row="4" Grid.Column="0"
+                Style="{StaticResource BigFlatButton}"
+                Click="EditRules_Click">
+
+                <TextBlock Text="{DynamicResource cEdit}"/>
+            </Button>
+            
+        </Grid>
+    </DockPanel>
+</Page>

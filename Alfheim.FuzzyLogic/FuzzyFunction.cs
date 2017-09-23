@@ -24,6 +24,8 @@ namespace Alfheim.FuzzyLogic
 
             MinOutputValue = minOutputValue;
             MaxOutputValue = maxOutputValue;
+
+            InitProperties();
         }
 
         #endregion
@@ -54,6 +56,8 @@ namespace Alfheim.FuzzyLogic
         #region Protected methods
 
         protected abstract double Function(double x);
+
+        protected abstract void InitProperties();
 
         protected virtual double Normalize(double y)
         {

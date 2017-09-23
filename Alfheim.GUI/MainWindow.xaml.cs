@@ -1,6 +1,8 @@
-﻿using MahApps.Metro.Controls;
+﻿using Alfheim.GUI.Views;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +26,62 @@ namespace Alfheim.GUI
         public MainWindow()
         {
             InitializeComponent();
+            InitLanguageMenu();
+
+            OpenPage(new StartPage());
+            App.LanguageChanged += LanguageChanged;
+            
+        }
+
+        private void LanguageChanged(Object sender, EventArgs e)
+        {
+            CultureInfo currLang = App.Language;
+
+            foreach (MenuItem i in mLanguageMenu.Items)
+            {
+                CultureInfo ci = i.Tag as CultureInfo;
+                i.IsChecked = ci != null && ci.Equals(currLang);
+            }
+        }
+
+        private void ChangeLanguageClick(Object sender, EventArgs e)
+        {
+            MenuItem mi = sender as MenuItem;
+
+            if (mi != null)
+            {
+                CultureInfo lang = mi.Tag as CultureInfo;
+
+                if (lang != null)
+                    App.Language = lang;
+            }
+        }
+
+        private void InitLanguageMenu()
+        {
+            CultureInfo currentLanguage = App.Language;
+            mLanguageMenu.Items.Clear();
+
+            foreach (var lang in App.Languages)
+            {
+                MenuItem menuLang = new MenuItem();
+
+                menuLang.Header = lang.DisplayName;
+                menuLang.Tag = lang;
+                menuLang.IsChecked = lang.Equals(currentLanguage);
+                menuLang.Click += ChangeLanguageClick;
+                mLanguageMenu.Items.Add(menuLang);
+            }
+        }
+
+        public void OpenPage(Page page)
+        {          
+            mMainFrame.Content = page;
+        }
+
+        private void Home_Click(object sender, RoutedEventArgs e)
+        {
+            OpenPage(new StartPage());
         }
     }
 }

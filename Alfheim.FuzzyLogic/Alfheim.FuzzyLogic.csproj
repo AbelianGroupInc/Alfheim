@@ -40,8 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Functions\GaussianFunction.cs" />
     <Compile Include="Functions\LinearFunction.cs" />
     <Compile Include="Functions\Point.cs" />
+    <Compile Include="Functions\TrapezoidalFunction.cs" />
     <Compile Include="Functions\TriangleFunction.cs" />
     <Compile Include="FuzzyFunction.cs" />
     <Compile Include="FuzzyFunctionAttributes\InRangePointAttribute.cs" />

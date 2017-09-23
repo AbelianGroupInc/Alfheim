@@ -1,0 +1,24 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Alfheim.GUI.Resources"
+                    xmlns:v="clr-namespace:System;assembly=mscorlib">
+    <v:String x:Key="cAlfheim">Alfheim</v:String>
+    <v:String x:Key="cCopyRight">© AbelianGroup 2017</v:String>
+    <v:String x:Key="cLanguage">Язык</v:String>
+    <v:String x:Key="cHome">Главная</v:String>
+    <v:String x:Key="cOpenProject">Открыть проект</v:String>
+    <v:String x:Key="cCreateProject">Создать проект</v:String>
+    <v:String x:Key="cImportFIS">Импорт FIS</v:String>
+    <v:String x:Key="cHelp">Помощь</v:String>
+    <v:String x:Key="cInputs">Входы</v:String>
+    <v:String x:Key="cOutputs">Выходы</v:String>
+    <v:String x:Key="cRules">Правила</v:String>
+    <v:String x:Key="cSettings">Настройки</v:String>
+    <v:String x:Key="cTermSettings">Настройки терма</v:String>
+    <v:String x:Key="cAdd">Добавить</v:String>
+    <v:String x:Key="cRemove">Удалить</v:String>
+    <v:String x:Key="cEdit">Изменить</v:String>
+    <v:String x:Key="cTerms">Термы</v:String>
+    <v:String x:Key="cMembership">Принадлежность</v:String>
+    <v:String x:Key="cValue">Значение</v:String>
+</ResourceDictionary>

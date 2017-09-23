@@ -13,8 +13,12 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
 
+                <ResourceDictionary Source="Resources/Icons.xaml" />
                 <ResourceDictionary Source="Resources/lang.xaml" />
+                <ResourceDictionary Source="Resources/images.xaml" />
 
+                <ResourceDictionary Source="Styles/CustomControlsStyles.xaml" />
+                <ResourceDictionary Source="Styles/DockPanelStyles.xaml" />
                 <ResourceDictionary Source="Styles/ItemsControlStyles.xaml" />
                 <ResourceDictionary Source="Styles/ListBoxStyles.xaml" />
                 <ResourceDictionary Source="Styles/TopMenuStyles.xaml" />
