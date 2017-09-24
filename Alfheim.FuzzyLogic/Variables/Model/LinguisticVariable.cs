@@ -68,6 +68,8 @@ namespace Alfheim.FuzzyLogic.Variables.Model
 
             if (IsTermNameExist(item.Name))
                 throw new TermNameAlreadyExistsException("Term name already exists;");
+
+            item.Variable = this;
         }
 
         #endregion
