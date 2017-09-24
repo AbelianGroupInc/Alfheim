@@ -1,4 +1,5 @@
-﻿using LiveCharts;
+﻿using Alfheim.FuzzyLogic.Variables.Model;
+using LiveCharts;
 using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
@@ -23,27 +24,31 @@ namespace Alfheim.GUI.Views
     public partial class LinguisticVariablePage : Page
     {
         private Page mOwner;
+        private LinguisticVariable mThisVariable;
 
-        public LinguisticVariablePage(Page owner)
+
+        public LinguisticVariablePage(Page owner, LinguisticVariable variable)
         {
             InitializeComponent();
 
             mOwner = owner;
-
-            mPlot.Series = new SeriesCollection
-            {
-                new LineSeries
-                {
-                    LineSmoothness = 0,
-                    Values = new ChartValues<double> { 0, 0, 1, 0, 0 },
-                    PointGeometry = null
-                },
-            };  
+            mThisVariable = variable;
+            Init();
         }
 
         private void PreviousPage_Click(object sender, RoutedEventArgs e)
         {
             (Window.GetWindow(this) as MainWindow).OpenPage(mOwner);
+        }
+
+        private void Init()
+        {
+            mTitleTB.Text = mThisVariable.Name;
+
+            mXAxis.MinValue = mThisVariable.MinValue;
+            mXAxis.MaxValue = mThisVariable.MaxValue;
+            mXAxis.Separator.Step = ((double)(mThisVariable.MinValue + mThisVariable.MaxValue) / 20.0);
+            mXAxis.Separator.StrokeThickness = 2;
         }
     }
 }

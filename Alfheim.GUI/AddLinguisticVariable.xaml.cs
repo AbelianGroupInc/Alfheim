@@ -1,4 +1,5 @@
-﻿using MahApps.Metro.Controls;
+﻿using Alfheim.FuzzyLogic.Variables.Model;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,22 @@ namespace Alfheim.GUI
         public AddLinguisticVariableWindow()
         {
             InitializeComponent();
+        }
+
+        public bool ShowResult { get; private set; } = false;
+
+        public LinguisticVariable Result { get; private set; }
+
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            ShowResult = true;
+
+            Result = new LinguisticVariable(
+                mNameTB.Text,
+                Convert.ToDouble(mMinValueTB.Text),
+                Convert.ToDouble(mMaxValueTB.Text));
+
+            Close();
         }
     }
 }

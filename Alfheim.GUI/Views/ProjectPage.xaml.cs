@@ -3,6 +3,7 @@ using Alfheim.FuzzyLogic.Variables.Services;
 using Alfheim.GUI.Controls;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,13 +24,13 @@ namespace Alfheim.GUI.Views
     /// </summary>
     public partial class ProjectPage : Page
     {
-        private LinguisticVariableService mLinguisticVariableService = new LinguisticVariableService();
-        private List<LinguisticVariable> mLinguisticVariables = new List<LinguisticVariable>();
+        LinguisticVariableService mLinguisticVariableService = new LinguisticVariableService();
 
         public ProjectPage(string ProjectName)
         {
             InitializeComponent();
 
+            mInputList.ItemsSource = mLinguisticVariableService.InputLinguisticVariables;
             mProjectNameTB.Text = ProjectName;
         }
 
@@ -38,7 +39,17 @@ namespace Alfheim.GUI.Views
             AddLinguisticVariableWindow addVariableWindow = new AddLinguisticVariableWindow();
             addVariableWindow.Owner = Window.GetWindow(this);
             addVariableWindow.ShowDialog();
-            //mInputList.Items.Add(new LinguisticVariable("test", 0, 100));
+
+            try
+            {
+                if (addVariableWindow.ShowResult == true)
+                    mLinguisticVariableService.InputLinguisticVariables.Add(addVariableWindow.Result);
+            }
+            catch(LinguisticVariableNameAlreadyExistsException)
+            {
+                MessageBox.Show((string)this.FindResource("mAdd"), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
         }
 
         private void AddOutputButton_Click(object sender, RoutedEventArgs e)
@@ -53,7 +64,10 @@ namespace Alfheim.GUI.Views
 
         private void RemoveInputButton_Click(object sender, RoutedEventArgs e)
         {
-            //RemoveSelectedItem(mInputList);
+            var item = mInputList.SelectedItem as LinguisticVariable;
+
+            if(item != null)
+                mLinguisticVariableService.InputLinguisticVariables.Remove(item);
         }
 
         public void RemoveSelectedItem(ListBoxWithHeader control)
@@ -64,14 +78,16 @@ namespace Alfheim.GUI.Views
 
         private void EditRules_Click(object sender, RoutedEventArgs e)
         {
-            (Window.GetWindow(this) as MainWindow).OpenPage(new LinguisticVariablePage(this));
+            
         }
 
         private void ListBoxDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            var item = mInputList.SelectedItem as LinguisticVariable;
+
             if (e.ClickCount >= 2)
             {
-
+                (Window.GetWindow(this) as MainWindow).OpenPage(new LinguisticVariablePage(this, item));
             }
         }
     }

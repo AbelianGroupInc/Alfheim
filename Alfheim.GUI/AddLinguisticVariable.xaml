@@ -24,16 +24,19 @@
         </Grid.RowDefinitions>
 
         <m:TextBlockWithTitle
+            x:Name="mNameTB"
             Grid.Row="0"
             Style="{StaticResource DefaultTextBlockWithTitle}"
             Title="{DynamicResource cName}" />
         
         <m:TextBlockWithTitle
+            x:Name="mMinValueTB"
             Grid.Row="1"
             Style="{StaticResource DefaultTextBlockWithTitle}"
             Title="{DynamicResource cMinInputValue}" />
         
         <m:TextBlockWithTitle
+            x:Name="mMaxValueTB"
             Grid.Row="2"
             Style="{StaticResource DefaultTextBlockWithTitle}"
             Title="{DynamicResource cMaxInputValue}" />
@@ -41,7 +44,8 @@
         <Button
             Margin="6 0"
             Grid.Row="3"
-            Style="{StaticResource BigFlatButton}">
+            Style="{StaticResource BigFlatButton}"
+            Click="Add_Click">
 
             <TextBlock 
                 Text="{DynamicResource cAdd}"/>

@@ -58,6 +58,9 @@
     <Compile Include="IFunction.cs" />
     <Compile Include="IFuzzyFunction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Variables\Model\FuzzyLogicObservableCollection.cs" />
+    <Compile Include="Variables\Model\ItemAddingEventArgs.cs" />
+    <Compile Include="Variables\Model\ItemAddingEventHandler.cs" />
     <Compile Include="Variables\Model\LinguisticVariableAlreadyExistsException.cs" />
     <Compile Include="Variables\Model\LinguisticVariableDao.cs" />
     <Compile Include="Variables\Model\LinguisticVariable.cs" />

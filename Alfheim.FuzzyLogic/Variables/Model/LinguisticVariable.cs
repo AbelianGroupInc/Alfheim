@@ -1,65 +1,69 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 
 namespace Alfheim.FuzzyLogic.Variables.Model
 {
     public class LinguisticVariable
     {
-        private IList<Term> terms;
+        private FuzzyLogicObservableCollection<Term> mTerms = new FuzzyLogicObservableCollection<Term>();
+
+        #region Properties
 
         public string Name { get; set; }
         public double MinValue { get; set; }
         public double MaxValue { get; set; }
-        public IEnumerable<Term> Terms {
-            get {
-                return terms;
+
+        public FuzzyLogicObservableCollection<Term> Terms
+        {
+            get
+            {
+                return mTerms;
             }
         }
+
+        #endregion
+
+        #region Constructors
 
         public LinguisticVariable(string name, double minValue, double maxValue)
         {
             Name = name;
             MinValue = minValue;
             MaxValue = maxValue;
-            terms = new List<Term>();
+
+            mTerms.ItemAdding += OnItemAdding; ;
         }
 
-        public LinguisticVariable(string name, double minValue, double maxValue, IList<Term> terms)
+        #endregion
+        
+        public Term GetTermByName(string name)
         {
-            Name = name;
-            MinValue = minValue;
-            MaxValue = maxValue;
-            this.terms = terms;
-        }
-
-        public void AddTerm(Term term)
-        {
-            bool isExist = terms
-                .Where(curTerm => curTerm.Name == term.Name)
-                .Any();
-
-            if (isExist)
-                throw new TermNameAlreadyExistsException("Term name already exists;");
-
-            terms.Add(term);
-        }
-
-        public void RemoveTerm(Term term)
-        {
-            terms.Remove(term);
-        }
-
-        public Term GetTerm(String name)
-        {
-            var termByName = terms.FirstOrDefault(term => term.Name == name);
+            var termByName = mTerms.FirstOrDefault(term => term.Name == name);
 
             if (termByName == null)
                 throw new TermNotFoundException("Term not found");
 
             return termByName;
         }
+
+        #region Private methods
+
+        private bool IsTermNameExist(string name)
+        {
+            return mTerms
+                .Where(term => term.Name == name)
+                .Any();
+        }
+
+        #region Event handlers
+
+        private void OnItemAdding(object sender, ItemAddingEventArgs e)
+        {
+            Term item = (e.NewItem as Term);
+
+            if (IsTermNameExist(item.Name))
+                throw new TermNameAlreadyExistsException("Term name already exists;");
+        }
+
+        #endregion
     }
 }

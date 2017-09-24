@@ -68,7 +68,7 @@ namespace Alfheim.FuzzyLogic.Variables.Services.Tests
             Assert.IsNotNull(service.GetLinguisticVariable("var2"));
 
             Assert.AreEqual(service.GetLinguisticVariable("var1").Terms.Count(), 2);
-            Assert.IsNotNull(service.GetLinguisticVariable("var1").GetTerm("term3"));
+            Assert.IsNotNull(service.GetLinguisticVariable("var1").GetTermByName("term3"));
 
             IEnumerable<LinguisticVariable> variablesOutput = service.OutputLinguisticVariables;
 
