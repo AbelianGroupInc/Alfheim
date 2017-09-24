@@ -25,4 +25,6 @@
     <v:String x:Key="cName">Имя переменной</v:String>
     <v:String x:Key="cMinInputValue">Минимальное входное значение</v:String>
     <v:String x:Key="cMaxInputValue">Максимальное входное значение</v:String>
+    <v:String x:Key="cError">Ошибка</v:String>
+    <v:String x:Key="cNameIsExist">Данное имя уже существует</v:String>
 </ResourceDictionary>

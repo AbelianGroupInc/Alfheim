@@ -114,7 +114,6 @@
                 x:Name="mOutputsList"
                 Grid.Row="2" Grid.Column="1"
                 Grid.ColumnSpan="2"
-                ItemsSource="{Binding mLinguisticVariables}"
                 Style="{StaticResource DefaultListBoxWithHeader}"
                 Title="{DynamicResource cOutputs}" />
 

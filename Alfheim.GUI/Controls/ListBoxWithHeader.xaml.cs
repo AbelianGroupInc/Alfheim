@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -17,8 +18,7 @@ namespace Alfheim.GUI.Controls
         public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title", typeof(string),
             typeof(ListBoxWithHeader), new UIPropertyMetadata(string.Empty));
 
-        public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register("ItemsSource", typeof(IEnumerable<object>),
-            typeof(ListBoxWithHeader));
+        public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(ListBoxWithHeader));
 
 
         public ItemCollection Items
@@ -54,11 +54,11 @@ namespace Alfheim.GUI.Controls
             }
         }
 
-        public string ItemsSource
+        public IEnumerable ItemsSource
         {
             get
             {
-                return (string)this.GetValue(ItemsSourceProperty);
+                return (IEnumerable)this.GetValue(ItemsSourceProperty);
             }
             set
             {

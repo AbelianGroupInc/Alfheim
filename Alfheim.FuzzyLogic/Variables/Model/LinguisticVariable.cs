@@ -65,5 +65,6 @@ namespace Alfheim.FuzzyLogic.Variables.Model
         }
 
         #endregion
+        #endregion
     }
 }

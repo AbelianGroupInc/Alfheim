@@ -30,50 +30,82 @@ namespace Alfheim.GUI.Views
         {
             InitializeComponent();
 
+            mOutputsList.ItemsSource = mLinguisticVariableService.OutputLinguisticVariables;
             mInputList.ItemsSource = mLinguisticVariableService.InputLinguisticVariables;
             mProjectNameTB.Text = ProjectName;
         }
 
+        #region Add events
+
         private void AddInputButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var variable = CreateLinguisticVariable();
+
+                if (variable != null)
+                    mLinguisticVariableService.InputLinguisticVariables.Add(variable);
+            }
+            catch(LinguisticVariableNameAlreadyExistsException)
+            {
+                ShowLinguisticVariableNameAlreadyExistsException();
+            }          
+        }
+
+        private void AddOutputButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var variable = CreateLinguisticVariable();
+
+                if (variable != null)
+                    mLinguisticVariableService.OutputLinguisticVariables.Add(variable);
+            }
+            catch (LinguisticVariableNameAlreadyExistsException)
+            {
+                ShowLinguisticVariableNameAlreadyExistsException();
+            }
+        }
+
+        private LinguisticVariable CreateLinguisticVariable()
         {
             AddLinguisticVariableWindow addVariableWindow = new AddLinguisticVariableWindow();
             addVariableWindow.Owner = Window.GetWindow(this);
             addVariableWindow.ShowDialog();
 
-            try
-            {
-                if (addVariableWindow.ShowResult == true)
-                    mLinguisticVariableService.InputLinguisticVariables.Add(addVariableWindow.Result);
-            }
-            catch(LinguisticVariableNameAlreadyExistsException)
-            {
-                MessageBox.Show((string)this.FindResource("mAdd"), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            
+            return addVariableWindow.Result;
         }
 
-        private void AddOutputButton_Click(object sender, RoutedEventArgs e)
-        {
-            mOutputsList.Items.Add(DateTime.Now.Ticks);
-        }
+        #endregion
+
+        #region Remove events
 
         private void RemoveOutputButton_Click(object sender, RoutedEventArgs e)
         {
-            RemoveSelectedItem(mOutputsList);
+            var item = mOutputsList.SelectedItem as LinguisticVariable;
+
+            if (item != null)
+                mLinguisticVariableService.OutputLinguisticVariables.Remove(item);
         }
 
         private void RemoveInputButton_Click(object sender, RoutedEventArgs e)
         {
             var item = mInputList.SelectedItem as LinguisticVariable;
 
-            if(item != null)
+            if (item != null)
                 mLinguisticVariableService.InputLinguisticVariables.Remove(item);
         }
 
-        public void RemoveSelectedItem(ListBoxWithHeader control)
+
+        #endregion
+
+        private void ShowLinguisticVariableNameAlreadyExistsException()
         {
-            if (control != null && control.SelectedItem != null)
-                control.Items.Remove(control.SelectedItem);
+            //TODO добавить список констант
+            MessageBox.Show((string)this.FindResource("cNameIsExist"),
+                    (string)this.FindResource("cError"),
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
         }
 
         private void EditRules_Click(object sender, RoutedEventArgs e)

@@ -31,6 +31,15 @@ namespace Alfheim.FuzzyLogic.Variables.Model
             OnPropertyChanged("Count");
         }
 
+        public new void Remove(T item)
+        {
+            var index = base.Items.IndexOf(item);
+            base.Remove(item);
+
+            NotifyChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, item, index));
+            OnPropertyChanged("Count");
+        }
+
         #region Protected methods
 
         protected void NotifyChanged(NotifyCollectionChangedEventArgs args)
