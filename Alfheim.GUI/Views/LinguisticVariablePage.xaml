@@ -93,10 +93,48 @@
                 </lvc:CartesianChart.AxisY>
             </lvc:CartesianChart>
 
-            <m:ListBoxWithHeader
+
+            <Border
                 Grid.Row="2"
-                Style="{StaticResource DefaultListBoxWithHeader}"
-                Title="{DynamicResource cTerms}" />
+                Grid.ColumnSpan="2"
+                Margin="6 3"
+                Style="{StaticResource DefaultBorder}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <DockPanel
+                        Grid.Row="0" 
+                        Style="{StaticResource HeaderDockPanel}">
+
+                        <TextBlock 
+                            DockPanel.Dock="Right"
+                            Style="{StaticResource HeaderWithoutBackground}"
+                            Text="{Binding ElementName=mTermList, Path=Items.Count}"/>
+
+                        <TextBlock
+                            Text="{DynamicResource cTerms}"
+                            Style="{StaticResource HeaderWithoutBackground}"/>
+                    </DockPanel>
+
+                    <ListBox
+                        x:Name="mTermList"
+                        Grid.Row="1"
+                        Style="{StaticResource ListBoxWithHeader}">
+
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock 
+                                    Text="{Binding Path=Name}"
+                                    MouseDown="OutputListBoxDoubleClick" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+
+                    </ListBox>
+                </Grid>
+            </Border>
 
             <DockPanel
                 Grid.Row="3"  >
@@ -113,17 +151,19 @@
                     FlowDirection="RightToLeft" >
 
                     <Button
-                    Style="{StaticResource BigFlatButton}">
+                        Style="{StaticResource BigFlatButton}"
+                        Click="RemoveTerm_Click">
 
                         <TextBlock
                         Text="{DynamicResource cRemove}" />
                     </Button>
 
                     <Button
-                    Style="{StaticResource BigFlatButton}">
+                        Style="{StaticResource BigFlatButton}"
+                        Click="AddTerm_Click">
 
                         <TextBlock
-                        Text="{DynamicResource cAdd}" />
+                            Text="{DynamicResource cAdd}" />
                     </Button>
                 </WrapPanel>
             </DockPanel>

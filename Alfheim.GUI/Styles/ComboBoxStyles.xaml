@@ -120,6 +120,10 @@
         x:Key="ComboBoxFlatStyle"  
         TargetType="{x:Type ComboBox}" >
 
+        <Setter
+            Property="Margin"
+            Value="6 3" />
+
         <Setter 
             Property="UIElement.SnapsToDevicePixels" 
             Value="True" />

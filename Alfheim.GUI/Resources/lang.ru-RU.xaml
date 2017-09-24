@@ -27,4 +27,8 @@
     <v:String x:Key="cMaxInputValue">Максимальное входное значение</v:String>
     <v:String x:Key="cError">Ошибка</v:String>
     <v:String x:Key="cNameIsExist">Данное имя уже существует</v:String>
+    <v:String x:Key="cAddTerm">Добавить терм</v:String>
+    <v:String x:Key="cTriangleFunction">Треугольная функция</v:String>
+    <v:String x:Key="cTrapezoidalFunction">Трапецеидальная функция</v:String>
+    <v:String x:Key="cGaussianFunction">Гауссова функция</v:String>
 </ResourceDictionary>

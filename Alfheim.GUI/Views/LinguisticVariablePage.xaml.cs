@@ -43,12 +43,58 @@ namespace Alfheim.GUI.Views
 
         private void Init()
         {
+            mTermList.ItemsSource = mThisVariable.Terms;
             mTitleTB.Text = mThisVariable.Name;
 
             mXAxis.MinValue = mThisVariable.MinValue;
             mXAxis.MaxValue = mThisVariable.MaxValue;
             mXAxis.Separator.Step = ((double)(mThisVariable.MinValue + mThisVariable.MaxValue) / 20.0);
             mXAxis.Separator.StrokeThickness = 2;
+        }
+
+        private void OutputListBoxDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void AddTerm_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var variable = CreateTerm();
+
+                if (variable != null)
+                {
+                    mThisVariable.Terms.Add(variable);
+                }
+            }
+            catch(TermNameAlreadyExistsException)
+            {
+                ShowLinguisticVariableNameAlreadyExistsException();
+            }
+        }
+
+        private void RemoveTerm_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ShowLinguisticVariableNameAlreadyExistsException()
+        {
+            //TODO добавить список констант
+            MessageBox.Show((string)this.FindResource("cNameIsExist"),
+                    (string)this.FindResource("cError"),
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+        }
+
+        private Term CreateTerm()
+        {
+            AddTermWindow addVariableWindow = new AddTermWindow();
+            addVariableWindow.Owner = Window.GetWindow(this);
+            addVariableWindow.ShowDialog();
+
+            return addVariableWindow.Result;
         }
     }
 }

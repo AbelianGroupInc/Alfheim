@@ -27,4 +27,8 @@
     <v:String x:Key="cMaxInputValue">Max input value</v:String>
     <v:String x:Key="cError">Error</v:String>
     <v:String x:Key="cNameIsExist">This name already exists</v:String>
+    <v:String x:Key="cAddTerm">Add term</v:String>
+    <v:String x:Key="cTriangleFunction">Triangle function</v:String>
+    <v:String x:Key="cTrapezoidalFunction">Trapezoidal function</v:String>
+    <v:String x:Key="cGaussianFunction">Gaussian function</v:String>
 </ResourceDictionary>

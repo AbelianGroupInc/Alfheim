@@ -88,6 +88,9 @@
     <Compile Include="AddLinguisticVariable.xaml.cs">
       <DependentUpon>AddLinguisticVariable.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddTermWindow.xaml.cs">
+      <DependentUpon>AddTermWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ListBoxWithHeader.xaml.cs">
       <DependentUpon>ListBoxWithHeader.xaml</DependentUpon>
     </Compile>
@@ -104,6 +107,10 @@
       <DependentUpon>StartPage.xaml</DependentUpon>
     </Compile>
     <Page Include="AddLinguisticVariable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddTermWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
