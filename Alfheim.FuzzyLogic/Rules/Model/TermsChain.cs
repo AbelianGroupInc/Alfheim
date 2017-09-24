@@ -8,10 +8,12 @@ using System.Collections;
 
 namespace Alfheim.FuzzyLogic.Rules.Model
 {
+
+    // TODO : Test
     class TermsChain : IEnumerable <TermsChainNode>
     {
         public int Length { get; set; }
-        private TermsChainNode Head { get; set; }
+        public TermsChainNode Head { get; set; }
         private TermsChainNode Tail { get; set; }
 
         public TermsChain(Term firstTerm)
@@ -74,17 +76,24 @@ namespace Alfheim.FuzzyLogic.Rules.Model
             NextRuleCondition currentNodeNextRuleCondition = current.ChainRuleNextCondition;
             NextRuleCondition nextNodeNextRuleCondition = current.ChainRuleNextCondition.Node.ChainRuleNextCondition;
 
-            while (currentNodeNextRuleCondition.Node != null)
+            if (term == Head.ThisTerm)
+                Head = currentNodeNextRuleCondition.Node;
+            else
             {
-                if (currentNodeNextRuleCondition.Node.ThisTerm == term)
+                while (currentNodeNextRuleCondition.Node != null)
                 {
-                    currentNodeNextRuleCondition.Operation = currentNodeNextRuleCondition.Operation;
-                    currentNodeNextRuleCondition.Node = nextNodeNextRuleCondition.Node;
-                    break;
+                    if (currentNodeNextRuleCondition.Node.ThisTerm == term)
+                    {
+                        currentNodeNextRuleCondition.Operation = currentNodeNextRuleCondition.Operation;
+                        currentNodeNextRuleCondition.Node = nextNodeNextRuleCondition.Node;
+                        break;
+                    }
+                    else
+                        current = currentNodeNextRuleCondition.Node;
                 }
-                else
-                    current = currentNodeNextRuleCondition.Node;
             }
+
+           
         }
         public void RemoveLast()
         {
@@ -104,12 +113,51 @@ namespace Alfheim.FuzzyLogic.Rules.Model
 
         public IEnumerator<TermsChainNode> GetEnumerator()
         {
-            throw new NotImplementedException();
+
+            return new TermsChainEnumerator(this);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return GetEnumerator();
+        }
+
+        public override string ToString()
+        {
+            StringBuilder builder = new StringBuilder();
+
+            IEnumerator<TermsChainNode> enumerator = GetEnumerator();
+            if (enumerator.Current != null)
+            {
+                builder.Append(enumerator.Current.ThisTerm.Name);
+
+                if (enumerator.Current.ChainRuleNextCondition != null)
+                {
+                    AppendNextConditionToStringBuilder(builder, enumerator.Current.ChainRuleNextCondition);
+
+                    while (enumerator.MoveNext() != false)
+                    {
+                        TermsChainNode node = enumerator.Current;
+                        AppendNextConditionToStringBuilder(builder, enumerator.Current.ChainRuleNextCondition);
+                    }
+
+                }
+
+            }
+
+             return builder.ToString();
+        }
+
+        private void AppendNextConditionToStringBuilder(StringBuilder builder, NextRuleCondition condition)
+        {
+            builder
+                .Append(" ")
+                .Append(condition.Operation.ToString())
+                .Append(" (")
+                .Append(condition.Node.ThisTerm.Variable.Name)
+                .Append(" is ")
+                .Append(condition.Node.ThisTerm.Name)
+                .Append(") ");
         }
     }
 }

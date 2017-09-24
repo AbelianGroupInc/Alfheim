@@ -10,7 +10,7 @@ namespace Alfheim.FuzzyLogic.Rules.Model
     public class Rule
     {
         private TermsChain leftSideRule;
-        public Term ResultingTerm { get; set; }
+        public Term OutputTerm { get; set; }
 
         public Rule(Term firstTerm)
         {
@@ -19,7 +19,7 @@ namespace Alfheim.FuzzyLogic.Rules.Model
 
         public Rule(Term firstTerm, Term resultingTerm) : this(firstTerm)
         {
-            this.ResultingTerm = resultingTerm;
+            this.OutputTerm = resultingTerm;
         }
         
         public void Add(OperationType operation, Term term)
@@ -44,7 +44,9 @@ namespace Alfheim.FuzzyLogic.Rules.Model
 
         public override string ToString()
         {
-            return "TODO";
+            string outputTermString = OutputTerm.Variable.Name + " is " + OutputTerm.Name;
+
+            return "If " + leftSideRule.ToString() + " then " + outputTermString;
         }
     }
 }

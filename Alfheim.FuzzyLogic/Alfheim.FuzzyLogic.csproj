@@ -64,6 +64,7 @@
     <Compile Include="Rules\Model\RulesDao.cs" />
     <Compile Include="Rules\Model\TermInRuleNotFoundException.cs" />
     <Compile Include="Rules\Model\TermsChain.cs" />
+    <Compile Include="Rules\Model\TermsChainEnumerator.cs" />
     <Compile Include="Rules\Model\TermsChainNode.cs" />
     <Compile Include="Rules\Services\IRulesService.cs" />
     <Compile Include="Rules\Services\RulesService.cs" />
