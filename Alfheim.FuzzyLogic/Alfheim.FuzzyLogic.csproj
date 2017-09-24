@@ -64,6 +64,7 @@
     <Compile Include="Variables\Model\LinguisticVariableAlreadyExistsException.cs" />
     <Compile Include="Variables\Model\LinguisticVariableDao.cs" />
     <Compile Include="Variables\Model\LinguisticVariable.cs" />
+    <Compile Include="Variables\Model\LinguisticVariableDomainRestrictionException.cs" />
     <Compile Include="Variables\Model\LinguisticVariableNotFoundException.cs" />
     <Compile Include="Variables\Model\Term.cs" />
     <Compile Include="Variables\Model\TermAlreadyExistsException.cs" />

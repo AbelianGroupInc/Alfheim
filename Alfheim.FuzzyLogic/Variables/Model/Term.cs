@@ -11,20 +11,11 @@
             Name = name;
             Variable = variable;
         }
-
-        /// <summary>
-        /// The common usage : 
-        /// Term term = new Term("term1", variable);
-        /// term.SetFunction<TrapezoidalFunction>();
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        public void SetFunction<T> ()
-            where T : IFuzzyFunction, new ()
+         
+        public void SetFunction(IFuzzyFunction fuzzyFunction)
         {
-            this.FuzzyFunction = new T();
-
-            FuzzyFunction.MaxInputValue = Variable.MaxValue;
-            FuzzyFunction.MinInputValue = Variable.MinValue;
+            fuzzyFunction.MaxInputValue = Variable.MaxValue;
+            fuzzyFunction.MinInputValue = Variable.MinValue;
         }
     }
 }

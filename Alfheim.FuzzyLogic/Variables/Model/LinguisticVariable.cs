@@ -27,6 +27,12 @@ namespace Alfheim.FuzzyLogic.Variables.Model
         public LinguisticVariable(string name, double minValue, double maxValue)
         {
             Name = name;
+
+            if(MinValue > MaxValue)
+            {
+                throw new LinguisticVariableDomainRestrictionException("Max value of a function is less then min value");
+            }
+
             MinValue = minValue;
             MaxValue = maxValue;
 
