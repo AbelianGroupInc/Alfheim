@@ -35,12 +35,12 @@
             <ListBox
                 x:Name="mListBox"
                 Grid.Row="1"
-                ItemsSource="{Binding ElementName=_this, Path=ItemSource}"
                 Style="{StaticResource ListBoxWithHeader}">
+                
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock 
-                                    Text="{Binding Path=Name}"/>
+                                Text="{Binding Path=Name}"/>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>

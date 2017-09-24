@@ -59,8 +59,7 @@
                 Grid.ColumnSpan="2"
                 Margin="6 3"
                 Style="{StaticResource DefaultBorder}">
-                <Grid
-                   x:Name="mGrid">
+                <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="*" />
@@ -89,7 +88,7 @@
                             <DataTemplate>
                                 <TextBlock 
                                     Text="{Binding Path=Name}"
-                                    MouseDown="ListBoxDoubleClick" />
+                                    MouseDown="InputListBoxDoubleClick" />
                             </DataTemplate>
                         </ListBox.ItemTemplate>
 
@@ -110,12 +109,48 @@
                 Style="{StaticResource DefaultListBoxWithHeader}"
                 Title="{DynamicResource cRules}" />
 
-            <m:ListBoxWithHeader
-                x:Name="mOutputsList"
+            <Border
                 Grid.Row="2" Grid.Column="1"
                 Grid.ColumnSpan="2"
-                Style="{StaticResource DefaultListBoxWithHeader}"
-                Title="{DynamicResource cOutputs}" />
+                Margin="6 3"
+                Style="{StaticResource DefaultBorder}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <DockPanel
+                        Grid.Row="0" 
+                        Style="{StaticResource HeaderDockPanel}">
+
+                        <TextBlock 
+                            DockPanel.Dock="Right"
+                            Style="{StaticResource HeaderWithoutBackground}"
+                            Text="{Binding ElementName=mInputList, Path=Items.Count}"/>
+
+                        <TextBlock
+                            Text="{DynamicResource cOutputs}"
+                            Style="{StaticResource HeaderWithoutBackground}"/>
+                    </DockPanel>
+
+                    <ListBox
+                        x:Name="mOutputsList"
+                        Grid.Row="1"
+                        Style="{StaticResource ListBoxWithHeader}">
+
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock 
+                                    Text="{Binding Path=Name}"
+                                    MouseDown="OutputListBoxDoubleClick" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+
+                    </ListBox>
+                </Grid>
+            </Border>
+           
 
             <Button
                 Grid.Row="1" Grid.Column="1"

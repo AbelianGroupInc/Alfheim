@@ -39,7 +39,6 @@ namespace Alfheim.FuzzyLogic.Variables.Model
         {
             mInputLinguisticVariables.ItemAdding += OnItemAdding;
             mOutputLinguisticVariables.ItemAdding += OnItemAdding;
-            mOutputLinguisticVariables.CollectionChanged += OnCollectionChanged;
         }
 
         #region Public methods
@@ -89,52 +88,6 @@ namespace Alfheim.FuzzyLogic.Variables.Model
 
             if (IsNameExist(item.Name))
                 throw new LinguisticVariableNameAlreadyExistsException("Linguistic variable name already exists;");
-        }
-
-        private void OnAdded(FuzzyLogicObservableCollection<LinguisticVariable> collection, 
-            IEnumerable<LinguisticVariable> newItems, IEnumerable<LinguisticVariable> oldItems)
-        {
-
-        }
-
-        private void OnRemoved(FuzzyLogicObservableCollection<LinguisticVariable> collection,
-            IEnumerable<LinguisticVariable> newItems, IEnumerable<LinguisticVariable> oldItems)
-        {
-
-        }
-
-        private void OnReplaced(FuzzyLogicObservableCollection<LinguisticVariable> collection,
-            IEnumerable<LinguisticVariable> newItems, IEnumerable<LinguisticVariable> oldItems)
-        {
-
-        }
-
-        private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            var collection = (sender as FuzzyLogicObservableCollection<LinguisticVariable>);
-
-            if (collection == null)
-                return;
-
-            switch (e.Action)
-            {
-                case NotifyCollectionChangedAction.Add:
-                    OnAdded(collection, 
-                        e.NewItems.Cast<LinguisticVariable>(),
-                        e.OldItems.Cast<LinguisticVariable>());
-                    break;
-                case NotifyCollectionChangedAction.Remove:
-                    OnRemoved(collection,
-                        e.NewItems.Cast<LinguisticVariable>(),
-                        e.OldItems.Cast<LinguisticVariable>());
-                    break;
-
-                case NotifyCollectionChangedAction.Replace:
-                    OnReplaced(collection,
-                        e.NewItems.Cast<LinguisticVariable>(),
-                        e.OldItems.Cast<LinguisticVariable>());
-                    break;
-            }
         }
 
         #endregion

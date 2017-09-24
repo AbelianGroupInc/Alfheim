@@ -30,6 +30,7 @@ namespace Alfheim.GUI.Views
         {
             InitializeComponent();
 
+            
             mOutputsList.ItemsSource = mLinguisticVariableService.OutputLinguisticVariables;
             mInputList.ItemsSource = mLinguisticVariableService.InputLinguisticVariables;
             mProjectNameTB.Text = ProjectName;
@@ -113,14 +114,28 @@ namespace Alfheim.GUI.Views
             
         }
 
-        private void ListBoxDoubleClick(object sender, MouseButtonEventArgs e)
+        private void InputListBoxDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var item = mInputList.SelectedItem as LinguisticVariable;
-
             if (e.ClickCount >= 2)
             {
-                (Window.GetWindow(this) as MainWindow).OpenPage(new LinguisticVariablePage(this, item));
+                EditLinguisticVariable(mInputList);
             }
+        }
+
+        private void OutputListBoxDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount >= 2)
+            {
+                EditLinguisticVariable(mOutputsList);
+            }
+        }
+
+
+        private void EditLinguisticVariable(ListBox listBox)
+        {
+            var item = listBox.SelectedItem as LinguisticVariable;
+
+            (Window.GetWindow(this) as MainWindow).OpenPage(new LinguisticVariablePage(this, item));
         }
     }
 }
