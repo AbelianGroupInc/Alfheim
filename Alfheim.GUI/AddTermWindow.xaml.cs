@@ -28,10 +28,7 @@ namespace Alfheim.GUI
         {
             try
             {
-                Term term = new Term(mNameTB.Text, mCurrentVariable);
-                term.SetFunction(GetSelectedFunction());
-
-                mCurrentVariable.Terms.Add(term);
+                TermsFactory.Instance.CreateTermForVariable(mNameTB.Text, mCurrentVariable, GetSelectedFunction());
 
                 Close();
             }
