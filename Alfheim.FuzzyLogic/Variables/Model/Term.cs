@@ -6,13 +6,7 @@
         public IFuzzyFunction FuzzyFunction { get; private set; }
         public LinguisticVariable Variable { get; set; }
         
-        public Term(string name, LinguisticVariable variable, IFuzzyFunction function)
-        {
-            Name = name;
-            Variable = variable;
-            SetFunction(function);
-        }
-
+        
         public Term(string name)
         {
             Name = name;
