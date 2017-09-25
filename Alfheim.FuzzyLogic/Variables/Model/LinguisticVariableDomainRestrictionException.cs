@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Alfheim.FuzzyLogic.Variables.Model
 {
-    class LinguisticVariableDomainRestrictionException : FuzzyLogicException
+    public class LinguisticVariableDomainRestrictionException : FuzzyLogicException
     {
         public LinguisticVariableDomainRestrictionException(string message) : base(message)
         {
