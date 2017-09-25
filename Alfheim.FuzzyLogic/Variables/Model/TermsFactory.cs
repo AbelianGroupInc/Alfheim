@@ -29,6 +29,8 @@ namespace Alfheim.FuzzyLogic.Variables.Model
             term.Variable = variable;
             term.SetFunction(function);
 
+            variable.Terms.Add(term);
+
             return term;
         }
     }
