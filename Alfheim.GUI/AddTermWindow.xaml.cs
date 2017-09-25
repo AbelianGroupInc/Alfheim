@@ -23,26 +23,34 @@ namespace Alfheim.GUI
     /// </summary>
     public partial class AddTermWindow : MetroWindow
     {
-        public AddTermWindow()
+        LinguisticVariable mCurrentVariable;
+
+        public AddTermWindow(LinguisticVariable linguisticVariable)
         {
             InitializeComponent();
-            InitListBox();
+            InitializeListBox();
+
+            mCurrentVariable = linguisticVariable;
         }
-
-        public bool ShowResult { get; private set; } = false;
-
-        public Term Result { get; private set; }
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            ShowResult = true;
+            try
+            {
+                Term term = new Term(mNameTB.Text, mCurrentVariable);
+                term.SetFunction(GetSelectedFunction());
 
-            Result = new Term(mNameTB.Text, null);
+                mCurrentVariable.Terms.Add(term);
+            }
+            catch (TermNameAlreadyExistsException)
+            {
+                ShowLinguisticVariableNameAlreadyExistsException();
+            }
 
             Close();
         }
 
-        private void InitListBox()
+        private void InitializeListBox()
         {
             mFunctionsCB.Items.Add(new KeyValuePair<string, IFuzzyFunction>(
                 (string)FindResource("cTriangleFunction"), new TriangleFunction()));
@@ -54,6 +62,20 @@ namespace Alfheim.GUI
                 (string)FindResource("cGaussianFunction"), new GaussianFunction()));
 
             mFunctionsCB.SelectedIndex = 0;
+        }
+
+        private void ShowLinguisticVariableNameAlreadyExistsException()
+        {
+            //TODO добавить список констант
+            MessageBox.Show((string)this.FindResource("cNameIsExist"),
+                    (string)this.FindResource("cError"),
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+        }
+
+        private IFuzzyFunction GetSelectedFunction()
+        {
+            return ((KeyValuePair<string, IFuzzyFunction>)mFunctionsCB.SelectedItem).Value;
         }
     }
 }

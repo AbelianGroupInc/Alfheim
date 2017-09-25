@@ -97,6 +97,7 @@
     <Compile Include="Controls\TextBlockWithTitle.xaml.cs">
       <DependentUpon>TextBlockWithTitle.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\PlotBindingService.cs" />
     <Compile Include="Views\LinguisticVariablePage.xaml.cs">
       <DependentUpon>LinguisticVariablePage.xaml</DependentUpon>
     </Compile>

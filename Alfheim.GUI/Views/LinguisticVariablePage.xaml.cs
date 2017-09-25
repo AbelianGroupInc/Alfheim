@@ -1,5 +1,9 @@
-﻿using Alfheim.FuzzyLogic.Variables.Model;
+﻿using Alfheim.FuzzyLogic;
+using Alfheim.FuzzyLogic.Functions;
+using Alfheim.FuzzyLogic.Variables.Model;
+using Alfheim.GUI.Services;
 using LiveCharts;
+using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
@@ -26,6 +30,8 @@ namespace Alfheim.GUI.Views
         private Page mOwner;
         private LinguisticVariable mThisVariable;
 
+        private PlotBindingService mPlotBindingService;
+
 
         public LinguisticVariablePage(Page owner, LinguisticVariable variable)
         {
@@ -43,12 +49,14 @@ namespace Alfheim.GUI.Views
 
         private void Init()
         {
+            mPlotBindingService = new PlotBindingService(mPlot, mThisVariable);
+
             mTermList.ItemsSource = mThisVariable.Terms;
             mTitleTB.Text = mThisVariable.Name;
 
             mXAxis.MinValue = mThisVariable.MinValue;
             mXAxis.MaxValue = mThisVariable.MaxValue;
-            mXAxis.Separator.Step = ((double)(mThisVariable.MinValue + mThisVariable.MaxValue) / 20.0);
+            mXAxis.Separator.Step = ((double)(mThisVariable.MinValue + mThisVariable.MaxValue) / 10.0);
             mXAxis.Separator.StrokeThickness = 2;
         }
 
@@ -59,19 +67,7 @@ namespace Alfheim.GUI.Views
 
         private void AddTerm_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                var variable = CreateTerm();
-
-                if (variable != null)
-                {
-                    mThisVariable.Terms.Add(variable);
-                }
-            }
-            catch(TermNameAlreadyExistsException)
-            {
-                ShowLinguisticVariableNameAlreadyExistsException();
-            }
+            CreateTerm();
         }
 
         private void RemoveTerm_Click(object sender, RoutedEventArgs e)
@@ -79,22 +75,11 @@ namespace Alfheim.GUI.Views
 
         }
 
-        private void ShowLinguisticVariableNameAlreadyExistsException()
+        private void CreateTerm()
         {
-            //TODO добавить список констант
-            MessageBox.Show((string)this.FindResource("cNameIsExist"),
-                    (string)this.FindResource("cError"),
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error);
-        }
-
-        private Term CreateTerm()
-        {
-            AddTermWindow addVariableWindow = new AddTermWindow();
+            AddTermWindow addVariableWindow = new AddTermWindow(mThisVariable);
             addVariableWindow.Owner = Window.GetWindow(this);
             addVariableWindow.ShowDialog();
-
-            return addVariableWindow.Result;
         }
     }
 }

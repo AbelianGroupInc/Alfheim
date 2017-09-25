@@ -31,4 +31,5 @@
     <v:String x:Key="cTriangleFunction">Triangle function</v:String>
     <v:String x:Key="cTrapezoidalFunction">Trapezoidal function</v:String>
     <v:String x:Key="cGaussianFunction">Gaussian function</v:String>
+    <v:String x:Key="cAnalysis">Analysis</v:String>
 </ResourceDictionary>
