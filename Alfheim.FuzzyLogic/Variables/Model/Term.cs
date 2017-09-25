@@ -19,8 +19,13 @@
 
         public void SetFunction(IFuzzyFunction fuzzyFunction)
         {
+            if (Variable == null)
+                throw new LinguisticVariableIsNotSpecifiedException("Linguistic variable was not specified for term");
+            
             fuzzyFunction.MaxInputValue = Variable.MaxValue;
             fuzzyFunction.MinInputValue = Variable.MinValue;
+
+            this.FuzzyFunction = fuzzyFunction;
         }
     }
 }
