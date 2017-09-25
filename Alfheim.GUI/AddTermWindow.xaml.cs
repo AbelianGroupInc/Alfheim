@@ -4,19 +4,8 @@ using Alfheim.FuzzyLogic.Variables.Model;
 using Alfheim.GUI.Resources;
 using Alfheim.GUI.Windows;
 using MahApps.Metro.Controls;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Alfheim.GUI
 {
@@ -43,13 +32,13 @@ namespace Alfheim.GUI
                 term.SetFunction(GetSelectedFunction());
 
                 mCurrentVariable.Terms.Add(term);
+
+                Close();
             }
             catch (TermNameAlreadyExistsException)
             {
                 ErrorBox.Show(ApplicationStringConstants.NameIsExist);
             }
-
-            Close();
         }
 
         private void InitializeListBox()
