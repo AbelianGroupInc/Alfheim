@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Alfheim.GUI.Resources;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
@@ -14,7 +15,10 @@ namespace Alfheim.GUI
     {
         private static List<CultureInfo> m_Languages = new List<CultureInfo>();
 
+        #region Properties
+
         public static event EventHandler LanguageChanged;
+
         public static List<CultureInfo> Languages
         {
             get
@@ -22,20 +26,6 @@ namespace Alfheim.GUI
                 return m_Languages;
             }
         }
-
-        public App()
-        {
-            InitializeComponent();
-            App.LanguageChanged += App_LanguageChanged;
-
-            m_Languages.Clear();
-
-            m_Languages.Add(new CultureInfo("en-US"));
-            m_Languages.Add(new CultureInfo("ru-RU"));
-
-            Language = Alfheim.GUI.Properties.Settings.Default.DefaultLanguage;
-        }
-
         public static CultureInfo Language
         {
             get
@@ -79,6 +69,28 @@ namespace Alfheim.GUI
 
                 LanguageChanged(Application.Current, new EventArgs());
             }
+        }
+
+        #endregion
+
+        public App()
+        {
+            InitializeComponent();
+
+            ApplicationStringResourcesController.Instance.Application = this;
+            App.LanguageChanged += App_LanguageChanged;
+
+            InitializeLanguages();
+        }
+
+        private void InitializeLanguages()
+        {
+            m_Languages.Clear();
+
+            m_Languages.Add(new CultureInfo("en-US"));
+            m_Languages.Add(new CultureInfo("ru-RU"));
+
+            Language = Alfheim.GUI.Properties.Settings.Default.DefaultLanguage;
         }
 
         private void App_LanguageChanged(Object sender, EventArgs e)

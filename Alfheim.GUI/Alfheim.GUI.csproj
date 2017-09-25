@@ -97,6 +97,8 @@
     <Compile Include="Controls\TextBlockWithTitle.xaml.cs">
       <DependentUpon>TextBlockWithTitle.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Resources\ApplicationStringConstants.cs" />
+    <Compile Include="Resources\ApplicationStringResourcesController.cs" />
     <Compile Include="Services\PlotBindingService.cs" />
     <Compile Include="Views\LinguisticVariablePage.xaml.cs">
       <DependentUpon>LinguisticVariablePage.xaml</DependentUpon>
@@ -107,6 +109,7 @@
     <Compile Include="Views\StartPage.xaml.cs">
       <DependentUpon>StartPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\ErrorBox.cs" />
     <Page Include="AddLinguisticVariable.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -1,6 +1,8 @@
 ﻿using Alfheim.FuzzyLogic;
 using Alfheim.FuzzyLogic.Functions;
 using Alfheim.FuzzyLogic.Variables.Model;
+using Alfheim.GUI.Resources;
+using Alfheim.GUI.Windows;
 using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
@@ -44,7 +46,7 @@ namespace Alfheim.GUI
             }
             catch (TermNameAlreadyExistsException)
             {
-                ShowLinguisticVariableNameAlreadyExistsException();
+                ErrorBox.Show(ApplicationStringConstants.NameIsExist);
             }
 
             Close();
@@ -53,24 +55,15 @@ namespace Alfheim.GUI
         private void InitializeListBox()
         {
             mFunctionsCB.Items.Add(new KeyValuePair<string, IFuzzyFunction>(
-                (string)FindResource("cTriangleFunction"), new TriangleFunction()));
+                ApplicationStringConstants.TriangleFunction, new TriangleFunction()));
 
             mFunctionsCB.Items.Add(new KeyValuePair<string, IFuzzyFunction>(
-                (string)FindResource("cTrapezoidalFunction"), new TrapezoidalFunction()));
+                ApplicationStringConstants.TrapezoidalFunction, new TrapezoidalFunction()));
 
             mFunctionsCB.Items.Add(new KeyValuePair<string, IFuzzyFunction>(
-                (string)FindResource("cGaussianFunction"), new GaussianFunction()));
+                ApplicationStringConstants.GaussianFunction, new GaussianFunction()));
 
             mFunctionsCB.SelectedIndex = 0;
-        }
-
-        private void ShowLinguisticVariableNameAlreadyExistsException()
-        {
-            //TODO добавить список констант
-            MessageBox.Show((string)this.FindResource("cNameIsExist"),
-                    (string)this.FindResource("cError"),
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error);
         }
 
         private IFuzzyFunction GetSelectedFunction()
