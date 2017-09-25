@@ -5,12 +5,35 @@ namespace Alfheim.FuzzyLogic.Variables.Model
     public class LinguisticVariable
     {
         private FuzzyLogicObservableCollection<Term> mTerms = new FuzzyLogicObservableCollection<Term>();
+        private double minValue;
+        private double maxValue;
 
         #region Properties
 
         public string Name { get; set; }
-        public double MinValue { get; set; }
-        public double MaxValue { get; set; }
+        public double MinValue {
+            get
+            {
+                return minValue;
+            }
+            set
+            {
+                CheckDomainRestriction(value, MaxValue);
+
+                minValue = value;
+            }
+        }
+        public double MaxValue {
+            get
+            {
+                return maxValue;
+            }
+            set
+            {
+                CheckDomainRestriction(MinValue, value);
+                maxValue = value;
+            }
+        }
 
         public FuzzyLogicObservableCollection<Term> Terms
         {
@@ -27,20 +50,17 @@ namespace Alfheim.FuzzyLogic.Variables.Model
         public LinguisticVariable(string name, double minValue, double maxValue)
         {
             Name = name;
+            CheckDomainRestriction(minValue, maxValue);
 
-            if(MinValue > MaxValue)
-            {
-                throw new LinguisticVariableDomainRestrictionException("Max value of a function is less then min value");
-            }
-
-            MinValue = minValue;
-            MaxValue = maxValue;
+            this.minValue = minValue;
+            this.maxValue = maxValue;
 
             mTerms.ItemAdding += OnItemAdding; ;
         }
 
+
         #endregion
-        
+
         public Term GetTermByName(string name)
         {
             var termByName = mTerms.FirstOrDefault(term => term.Name == name);
@@ -52,6 +72,13 @@ namespace Alfheim.FuzzyLogic.Variables.Model
         }
 
         #region Private methods
+        private void CheckDomainRestriction(double minValue, double maxValue)
+        {
+            if (minValue > maxValue)
+            {
+                throw new LinguisticVariableDomainRestrictionException("Max value of a function is less then min value");
+            }
+        }
 
         private bool IsTermNameExist(string name)
         {
