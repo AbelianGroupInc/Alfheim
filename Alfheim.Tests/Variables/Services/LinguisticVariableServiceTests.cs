@@ -187,7 +187,7 @@ namespace Alfheim.FuzzyLogic.Variables.Services.Tests
         {
             LinguisticVariable var = new LinguisticVariable("var", 1, 10);
 
-            Term term = new Term("term", var, new TriangleFunction());
+            Term term = TermsFactory.Instance.CreateTermForVariable("term", var, new TriangleFunction());
             Assert.AreEqual(term.FuzzyFunction.MinInputValue, 1);
             Assert.AreEqual(term.FuzzyFunction.MaxInputValue, 10);
         }
