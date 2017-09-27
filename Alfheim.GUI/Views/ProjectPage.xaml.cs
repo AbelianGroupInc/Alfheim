@@ -1,6 +1,8 @@
 ﻿using Alfheim.FuzzyLogic.Variables.Model;
 using Alfheim.FuzzyLogic.Variables.Services;
 using Alfheim.GUI.Controls;
+using Alfheim.GUI.Resources;
+using Alfheim.GUI.Windows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -49,7 +51,7 @@ namespace Alfheim.GUI.Views
             }
             catch(LinguisticVariableNameAlreadyExistsException)
             {
-                ShowLinguisticVariableNameAlreadyExistsException();
+                ErrorBox.Show(ApplicationStringConstants.NameIsExist);
             }          
         }
 
@@ -64,7 +66,7 @@ namespace Alfheim.GUI.Views
             }
             catch (LinguisticVariableNameAlreadyExistsException)
             {
-                ShowLinguisticVariableNameAlreadyExistsException();
+                ErrorBox.Show(ApplicationStringConstants.NameIsExist);
             }
         }
 
@@ -99,15 +101,6 @@ namespace Alfheim.GUI.Views
 
 
         #endregion
-
-        private void ShowLinguisticVariableNameAlreadyExistsException()
-        {
-            //TODO добавить список констант
-            MessageBox.Show((string)this.FindResource("cNameIsExist"),
-                    (string)this.FindResource("cError"),
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error);
-        }
 
         private void EditRules_Click(object sender, RoutedEventArgs e)
         {

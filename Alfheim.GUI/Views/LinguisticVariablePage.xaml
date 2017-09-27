@@ -23,12 +23,77 @@
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
-                    <RowDefinition Height="*" />
+                    <RowDefinition Height="4*" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="6*" />
                 </Grid.RowDefinitions>
 
                 <TextBlock
                     Style="{DynamicResource Header}"
                     Text="{DynamicResource cTermSettings}" />
+
+                <Border
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                Margin="6 3"
+                Style="{StaticResource DefaultBorder}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <DockPanel
+                        Grid.Row="0" 
+                        Style="{StaticResource HeaderDockPanel}">
+
+                            <TextBlock 
+                            DockPanel.Dock="Right"
+                            Style="{StaticResource HeaderWithoutBackground}"
+                            Text="{Binding ElementName=mTermList, Path=Items.Count}"/>
+
+                            <TextBlock
+                            Text="{DynamicResource cTerms}"
+                            Style="{StaticResource HeaderWithoutBackground}"/>
+                        </DockPanel>
+
+                        <ListBox
+                        x:Name="mTermList"
+                        Grid.Row="1"
+                        Style="{StaticResource ListBoxWithHeader}">
+
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock 
+                                    Text="{Binding Path=Name}"
+                                    MouseDown="OutputListBoxDoubleClick" />
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+
+                        </ListBox>
+                    </Grid>
+                </Border>
+
+                <Button
+                    Grid.Row="3"
+                    Margin="6 3"
+                    Style="{StaticResource BigFlatButton}"
+                    Click="RemoveTerm_Click">
+
+                    <TextBlock
+                        Text="{DynamicResource cRemove}" />
+                </Button>
+
+                <Button
+                    Grid.Row="2"
+                    Margin="6 3"
+                    Style="{StaticResource BigFlatButton}"
+                    Click="AddTerm_Click">
+
+                    <TextBlock
+                        Text="{DynamicResource cAdd}" />
+                </Button>
             </Grid>
         </Border>
 
@@ -36,7 +101,6 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="50" />
                 <RowDefinition Height="6*"/>
-                <RowDefinition Height="3*"/>
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
@@ -69,7 +133,8 @@
             <lvc:CartesianChart 
                 Style="{StaticResource DefaultPlot}"
                 x:Name="mPlot"
-                Grid.Row="1">
+                Grid.Row="1"
+                LegendLocation="Bottom">
 
                 <lvc:CartesianChart.AxisX>
                     <lvc:Axis 
@@ -77,7 +142,10 @@
                         Title="{DynamicResource cValue}">
                         
                         <lvc:Axis.Separator>
-                            <lvc:Separator 
+                            <lvc:Separator
+                                StrokeThickness="1" 
+                                Stroke="#8EFFFFFF" 
+                                StrokeDashArray="8"
                                 IsEnabled="False"
                                 Step="1" />
                         </lvc:Axis.Separator>
@@ -93,13 +161,13 @@
                 </lvc:CartesianChart.AxisY>
             </lvc:CartesianChart>
 
-            <m:ListBoxWithHeader
-                Grid.Row="2"
-                Style="{StaticResource DefaultListBoxWithHeader}"
-                Title="{DynamicResource cTerms}" />
 
-            <DockPanel
-                Grid.Row="3"  >
+
+
+            <WrapPanel
+                Grid.Row="3"
+                    Orientation="Horizontal"
+                    FlowDirection="RightToLeft" >
 
                 <Button
                     Style="{StaticResource BigFlatButton}">
@@ -108,25 +176,13 @@
                         Text="{DynamicResource cSettings}" />
                 </Button>
 
-                <WrapPanel
-                    Orientation="Horizontal"
-                    FlowDirection="RightToLeft" >
-
-                    <Button
+                <Button
                     Style="{StaticResource BigFlatButton}">
 
-                        <TextBlock
-                        Text="{DynamicResource cRemove}" />
-                    </Button>
-
-                    <Button
-                    Style="{StaticResource BigFlatButton}">
-
-                        <TextBlock
-                        Text="{DynamicResource cAdd}" />
-                    </Button>
-                </WrapPanel>
-            </DockPanel>
+                    <TextBlock
+                        Text="{DynamicResource cAnalysis}" />
+                </Button>
+            </WrapPanel>
         </Grid>
     </DockPanel>
 </Page>
