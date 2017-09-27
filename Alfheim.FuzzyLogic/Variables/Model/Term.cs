@@ -2,7 +2,24 @@
 {
     public class Term
     {
-        public string Name { get; set; }
+
+        private string name;
+        public string Name {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                if (Variable != null)
+                {
+                    if (Variable.DoesTermNameExist(this.name))
+                        throw new TermNameAlreadyExistsException("Term with name : " + name + " already exists");
+                }
+
+                this.name = value;
+            }
+        }
         public IFuzzyFunction FuzzyFunction { get; private set; }
         public LinguisticVariable Variable { get; set; }
         
