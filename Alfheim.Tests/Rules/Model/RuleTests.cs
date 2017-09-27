@@ -15,8 +15,7 @@ namespace Alfheim.FuzzyLogic.Rules.Model.Tests
         public void RuleTest()
         {
             Rule rule = new Rule();
-
-            rule.init()
+             
         }
         
     }
