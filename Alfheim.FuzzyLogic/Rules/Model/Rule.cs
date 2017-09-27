@@ -12,6 +12,19 @@ namespace Alfheim.FuzzyLogic.Rules.Model
         private TermsChain leftSideRule;
         public Term OutputTerm { get; set; }
 
+        public Rule()
+        {
+        }
+
+        /// <summary>
+        /// Chain begins with at least one term (condition). It is needed to add at least one term
+        /// </summary>
+        /// <param name="firstTerm"></param>
+        public void init(Term firstTerm)
+        {
+            this.leftSideRule = new TermsChain(firstTerm);
+        }
+
         public Rule(Term firstTerm)
         {
             this.leftSideRule = new TermsChain(firstTerm);
