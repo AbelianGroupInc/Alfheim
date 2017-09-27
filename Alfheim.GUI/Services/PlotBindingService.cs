@@ -10,6 +10,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace Alfheim.GUI.Services
 {
@@ -30,8 +31,15 @@ namespace Alfheim.GUI.Services
         {
             mPlot = plot;
             mVariable = variable;
-
+            
             InitHendlers();
+            InitTerms();
+        }
+
+        private void InitTerms()
+        {
+            foreach(var term in mVariable.Terms)
+                AddTermOnPlot(term);
         }
 
         #endregion
@@ -68,8 +76,8 @@ namespace Alfheim.GUI.Services
             mPlot.Series.Add(
                 new LineSeries
                 {
-                    LineSmoothness = 1,
-                    Values = GetFunctionResult(term.FuzzyFunction, (int)(mPlot.ActualWidth / 2)),
+                    LineSmoothness = 0,
+                    Values = GetFunctionResult(term.FuzzyFunction, 200),// (int)(mPlot.ActualWidth / 2)),
                     PointGeometry = null,
                     Title = term.Name
                 });

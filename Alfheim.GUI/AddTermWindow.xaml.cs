@@ -6,6 +6,7 @@ using Alfheim.GUI.Windows;
 using MahApps.Metro.Controls;
 using System.Collections.Generic;
 using System.Windows;
+using System.Linq;
 
 namespace Alfheim.GUI
 {

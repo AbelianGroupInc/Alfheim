@@ -97,9 +97,12 @@
     <Compile Include="Controls\TextBlockWithTitle.xaml.cs">
       <DependentUpon>TextBlockWithTitle.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\InRangePoint.cs" />
+    <Compile Include="Model\ReferencePoint.cs" />
     <Compile Include="Resources\ApplicationStringConstants.cs" />
     <Compile Include="Resources\ApplicationStringResourcesController.cs" />
     <Compile Include="Services\PlotBindingService.cs" />
+    <Compile Include="Services\TremPropertyViewService.cs" />
     <Compile Include="Views\LinguisticVariablePage.xaml.cs">
       <DependentUpon>LinguisticVariablePage.xaml</DependentUpon>
     </Compile>

@@ -61,7 +61,7 @@
                         <ListBox
                         x:Name="mTermList"
                         Grid.Row="1"
-                        Style="{StaticResource ListBoxWithHeader}">
+                        Style="{StaticResource ListBoxWithHeader}" SelectionChanged="TermList_SelectionChanged">
 
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
@@ -94,6 +94,15 @@
                     <TextBlock
                         Text="{DynamicResource cAdd}" />
                 </Button>
+
+                <StackPanel
+                    x:Name="mStackPanel"
+                    Grid.Row="4">
+                    
+                    <TextBlock
+                        Style="{StaticResource PropertyName}"
+                        Text="Name" />
+                </StackPanel>
             </Grid>
         </Border>
 

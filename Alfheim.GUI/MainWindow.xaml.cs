@@ -29,8 +29,7 @@ namespace Alfheim.GUI
             InitLanguageMenu();
 
             OpenPage(new StartPage());
-            App.LanguageChanged += LanguageChanged;
-            
+            App.LanguageChanged += LanguageChanged;   
         }
 
         private void LanguageChanged(Object sender, EventArgs e)
