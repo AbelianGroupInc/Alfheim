@@ -1,4 +1,9 @@
-﻿using LiveCharts;
+﻿using Alfheim.FuzzyLogic;
+using Alfheim.FuzzyLogic.Functions;
+using Alfheim.FuzzyLogic.Variables.Model;
+using Alfheim.GUI.Services;
+using LiveCharts;
+using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
@@ -23,27 +28,58 @@ namespace Alfheim.GUI.Views
     public partial class LinguisticVariablePage : Page
     {
         private Page mOwner;
+        private LinguisticVariable mThisVariable;
 
-        public LinguisticVariablePage(Page owner)
+        private PlotBindingService mPlotBindingService;
+
+
+        public LinguisticVariablePage(Page owner, LinguisticVariable variable)
         {
             InitializeComponent();
 
             mOwner = owner;
-
-            mPlot.Series = new SeriesCollection
-            {
-                new LineSeries
-                {
-                    LineSmoothness = 0,
-                    Values = new ChartValues<double> { 0, 0, 1, 0, 0 },
-                    PointGeometry = null
-                },
-            };  
+            mThisVariable = variable;
+            Init();
         }
 
         private void PreviousPage_Click(object sender, RoutedEventArgs e)
         {
             (Window.GetWindow(this) as MainWindow).OpenPage(mOwner);
+        }
+
+        private void Init()
+        {
+            mPlotBindingService = new PlotBindingService(mPlot, mThisVariable);
+
+            mTermList.ItemsSource = mThisVariable.Terms;
+            mTitleTB.Text = mThisVariable.Name;
+
+            mXAxis.MinValue = mThisVariable.MinValue;
+            mXAxis.MaxValue = mThisVariable.MaxValue;
+            mXAxis.Separator.Step = ((double)(mThisVariable.MinValue + mThisVariable.MaxValue) / 10.0);
+            mXAxis.Separator.StrokeThickness = 2;
+        }
+
+        private void OutputListBoxDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void AddTerm_Click(object sender, RoutedEventArgs e)
+        {
+            CreateTerm();
+        }
+
+        private void RemoveTerm_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CreateTerm()
+        {
+            AddTermWindow addVariableWindow = new AddTermWindow(mThisVariable);
+            addVariableWindow.Owner = Window.GetWindow(this);
+            addVariableWindow.ShowDialog();
         }
     }
 }

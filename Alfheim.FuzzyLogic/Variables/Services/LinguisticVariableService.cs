@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Alfheim.FuzzyLogic.Variables.Model;
+﻿using Alfheim.FuzzyLogic.Variables.Model;
+using System.Collections.ObjectModel;
 
 namespace Alfheim.FuzzyLogic.Variables.Services
 {
@@ -16,13 +12,13 @@ namespace Alfheim.FuzzyLogic.Variables.Services
             linguisticVariableDao = new LinguisticVariableDao();
         }
 
-        public IEnumerable<LinguisticVariable> InputLinguisticVariables {
+        public FuzzyLogicObservableCollection<LinguisticVariable> InputLinguisticVariables {
             get
             {
                 return linguisticVariableDao.InputLinguisticVariables;
             }
         }
-        public IEnumerable<LinguisticVariable> OutputLinguisticVariables
+        public FuzzyLogicObservableCollection<LinguisticVariable> OutputLinguisticVariables
         {
             get
             {
@@ -33,16 +29,6 @@ namespace Alfheim.FuzzyLogic.Variables.Services
         public LinguisticVariable GetLinguisticVariable(string name)
         {
             return linguisticVariableDao.GetLinguisticVariable(name);
-        }
-
-        public void RemoveLinguisticVariable(LinguisticVariable variable, LinguisticVariableType type)
-        {
-            linguisticVariableDao.RemoveLinguisticVariable(variable, type);
-        }
-
-        public void AddLinguisticVariable(LinguisticVariable variable, LinguisticVariableType type)
-        {
-            linguisticVariableDao.AddLinguisticVariable(variable, type);
         }
     }
 }

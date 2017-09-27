@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using Alfheim.FuzzyLogic.Variables.Model;
+using System.Collections;
+using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Alfheim.GUI.Controls
@@ -11,10 +14,17 @@ namespace Alfheim.GUI.Controls
         public ListBoxWithHeader()
         {
             InitializeComponent();
+            mListBox.ItemsSource = null;
+            mListBox.ItemsSource = this.ItemsSource;
+            
         }
 
         public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title", typeof(string),
             typeof(ListBoxWithHeader), new UIPropertyMetadata(string.Empty));
+    
+        public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register("ItemsSource",
+            typeof(IEnumerable), typeof(ListBoxWithHeader));
+
 
         public ItemCollection Items
         {
@@ -36,6 +46,7 @@ namespace Alfheim.GUI.Controls
             }
         }
 
+
         public string Title
         {
             get
@@ -45,6 +56,18 @@ namespace Alfheim.GUI.Controls
             set
             {
                 this.SetValue(TitleProperty, value);
+            }
+        }
+
+        public IEnumerable ItemsSource
+        {
+            get
+            {
+                return (IEnumerable)this.GetValue(ItemsSourceProperty);
+            }
+            set
+            {
+                this.SetValue(ItemsSourceProperty, value);
             }
         }
     }

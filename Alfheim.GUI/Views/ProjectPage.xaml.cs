@@ -1,6 +1,11 @@
-﻿using Alfheim.GUI.Controls;
+﻿using Alfheim.FuzzyLogic.Variables.Model;
+using Alfheim.FuzzyLogic.Variables.Services;
+using Alfheim.GUI.Controls;
+using Alfheim.GUI.Resources;
+using Alfheim.GUI.Windows;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,41 +26,109 @@ namespace Alfheim.GUI.Views
     /// </summary>
     public partial class ProjectPage : Page
     {
+        LinguisticVariableService mLinguisticVariableService = new LinguisticVariableService();
+
         public ProjectPage(string ProjectName)
         {
             InitializeComponent();
+
+            
+            mOutputsList.ItemsSource = mLinguisticVariableService.OutputLinguisticVariables;
+            mInputList.ItemsSource = mLinguisticVariableService.InputLinguisticVariables;
             mProjectNameTB.Text = ProjectName;
         }
 
+        #region Add events
+
         private void AddInputButton_Click(object sender, RoutedEventArgs e)
         {
-            mInputList.Items.Add(DateTime.Now.Ticks);
+            try
+            {
+                var variable = CreateLinguisticVariable();
+
+                if (variable != null)
+                    mLinguisticVariableService.InputLinguisticVariables.Add(variable);
+            }
+            catch(LinguisticVariableNameAlreadyExistsException)
+            {
+                ErrorBox.Show(ApplicationStringConstants.NameIsExist);
+            }          
         }
 
         private void AddOutputButton_Click(object sender, RoutedEventArgs e)
         {
-            mOutputsList.Items.Add(DateTime.Now.Ticks);
+            try
+            {
+                var variable = CreateLinguisticVariable();
+
+                if (variable != null)
+                    mLinguisticVariableService.OutputLinguisticVariables.Add(variable);
+            }
+            catch (LinguisticVariableNameAlreadyExistsException)
+            {
+                ErrorBox.Show(ApplicationStringConstants.NameIsExist);
+            }
         }
+
+        private LinguisticVariable CreateLinguisticVariable()
+        {
+            AddLinguisticVariableWindow addVariableWindow = new AddLinguisticVariableWindow();
+            addVariableWindow.Owner = Window.GetWindow(this);
+            addVariableWindow.ShowDialog();
+
+            return addVariableWindow.Result;
+        }
+
+        #endregion
+
+        #region Remove events
 
         private void RemoveOutputButton_Click(object sender, RoutedEventArgs e)
         {
-            RemoveSelectedItem(mOutputsList);
+            var item = mOutputsList.SelectedItem as LinguisticVariable;
+
+            if (item != null)
+                mLinguisticVariableService.OutputLinguisticVariables.Remove(item);
         }
 
         private void RemoveInputButton_Click(object sender, RoutedEventArgs e)
         {
-            RemoveSelectedItem(mInputList);
+            var item = mInputList.SelectedItem as LinguisticVariable;
+
+            if (item != null)
+                mLinguisticVariableService.InputLinguisticVariables.Remove(item);
         }
 
-        public void RemoveSelectedItem(ListBoxWithHeader control)
-        {
-            if (control != null && control.SelectedItem != null)
-                control.Items.Remove(control.SelectedItem);
-        }
+
+        #endregion
 
         private void EditRules_Click(object sender, RoutedEventArgs e)
         {
-            (Window.GetWindow(this) as MainWindow).OpenPage(new LinguisticVariablePage(this));
+            
+        }
+
+        private void InputListBoxDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount >= 2)
+            {
+                EditLinguisticVariable(mInputList);
+            }
+        }
+
+        private void OutputListBoxDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount >= 2)
+            {
+                EditLinguisticVariable(mOutputsList);
+            }
+        }
+
+
+        private void EditLinguisticVariable(ListBox listBox)
+        {
+            var item = listBox.SelectedItem as LinguisticVariable;
+
+            (Window.GetWindow(this) as MainWindow).OpenPage(new LinguisticVariablePage(this, item));
         }
     }
 }

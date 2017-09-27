@@ -1,65 +1,105 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 
 namespace Alfheim.FuzzyLogic.Variables.Model
 {
     public class LinguisticVariable
     {
-        private IList<Term> terms;
+        private FuzzyLogicObservableCollection<Term> mTerms = new FuzzyLogicObservableCollection<Term>();
+        private double minValue;
+        private double maxValue;
+
+        #region Properties
 
         public string Name { get; set; }
-        public double MinValue { get; set; }
-        public double MaxValue { get; set; }
-        public IEnumerable<Term> Terms {
-            get {
-                return terms;
+        public double MinValue {
+            get
+            {
+                return minValue;
+            }
+            set
+            {
+                CheckDomainRestriction(value, MaxValue);
+
+                minValue = value;
             }
         }
+        public double MaxValue {
+            get
+            {
+                return maxValue;
+            }
+            set
+            {
+                CheckDomainRestriction(MinValue, value);
+                maxValue = value;
+            }
+        }
+
+        public FuzzyLogicObservableCollection<Term> Terms
+        {
+            get
+            {
+                return mTerms;
+            }
+        }
+
+        #endregion
+
+        #region Constructors
 
         public LinguisticVariable(string name, double minValue, double maxValue)
         {
             Name = name;
-            MinValue = minValue;
-            MaxValue = maxValue;
-            terms = new List<Term>();
+            CheckDomainRestriction(minValue, maxValue);
+
+            this.minValue = minValue;
+            this.maxValue = maxValue;
+
+            mTerms.ItemAdding += OnItemAdding; ;
         }
 
-        public LinguisticVariable(string name, double minValue, double maxValue, IList<Term> terms)
+
+        #endregion
+
+        public Term GetTermByName(string name)
         {
-            Name = name;
-            MinValue = minValue;
-            MaxValue = maxValue;
-            this.terms = terms;
-        }
-
-        public void AddTerm(Term term)
-        {
-            bool isExist = terms
-                .Where(curTerm => curTerm.Name == term.Name)
-                .Any();
-
-            if (isExist)
-                throw new TermNameAlreadyExistsException("Term name already exists;");
-
-            terms.Add(term);
-        }
-
-        public void RemoveTerm(Term term)
-        {
-            terms.Remove(term);
-        }
-
-        public Term GetTerm(String name)
-        {
-            var termByName = terms.FirstOrDefault(term => term.Name == name);
+            var termByName = mTerms.FirstOrDefault(term => term.Name == name);
 
             if (termByName == null)
                 throw new TermNotFoundException("Term not found");
 
             return termByName;
         }
+
+        #region Private methods
+        private void CheckDomainRestriction(double minValue, double maxValue)
+        {
+            if (minValue > maxValue)
+            {
+                throw new LinguisticVariableDomainRestrictionException("Max value of a function is less then min value");
+            }
+        }
+
+        private bool IsTermNameExist(string name)
+        {
+            return mTerms
+                .Where(term => term.Name == name)
+                .Any();
+        }
+
+        #region Event handlers
+
+        private void OnItemAdding(object sender, ItemAddingEventArgs e)
+        {
+            Term item = (e.NewItem as Term);
+
+            if (IsTermNameExist(item.Name))
+                throw new TermNameAlreadyExistsException("Term name already exists;");
+
+            item.Variable = this;
+        }
+
+        #endregion
+        #endregion
     }
 }

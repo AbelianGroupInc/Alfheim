@@ -27,6 +27,32 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="BorderForTextBoxAndButton"
+        TargetType="Border">
+
+        <Style.Setters>
+            <Setter
+                Property="BorderBrush"
+                Value="#FFC7C7C7" />
+
+            <Setter
+                Property="BorderThickness"
+                Value="1" />
+        </Style.Setters>
+
+        <Style.Triggers>
+            <Trigger
+                Property="IsMouseOver"
+                Value="True">
+
+                <Setter
+                    Property="BorderBrush"
+                    Value="#FFB55A86"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
     <Style
         x:Key="DefaultBorder"
         TargetType="Border">

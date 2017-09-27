@@ -31,11 +31,19 @@
                     Text="{Binding ElementName=_this, Path=Title}"
                     Style="{StaticResource HeaderWithoutBackground}"/>
             </DockPanel>
-            
+
             <ListBox
                 x:Name="mListBox"
                 Grid.Row="1"
-                Style="{StaticResource ListBoxWithHeader}" />
+                Style="{StaticResource ListBoxWithHeader}">
+                
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock 
+                                Text="{Binding Path=Name}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Grid>
     </Border>
 </UserControl>

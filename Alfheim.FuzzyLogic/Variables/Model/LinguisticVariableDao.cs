@@ -1,43 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections;
+using System.Collections.Specialized;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Alfheim.FuzzyLogic.Variables.Model
 {
-    class LinguisticVariableDao
+    internal class LinguisticVariableDao
     {
-        Dictionary<LinguisticVariableType, IList<LinguisticVariable>> linguisticVariables;
-        public IEnumerable<LinguisticVariable> InputLinguisticVariables
+        #region Members
+
+        FuzzyLogicObservableCollection<LinguisticVariable> mInputLinguisticVariables =
+            new FuzzyLogicObservableCollection<LinguisticVariable>();
+        FuzzyLogicObservableCollection<LinguisticVariable> mOutputLinguisticVariables = 
+            new FuzzyLogicObservableCollection<LinguisticVariable>();
+
+        #endregion
+
+        #region Properties
+
+        public FuzzyLogicObservableCollection<LinguisticVariable> InputLinguisticVariables
         {
             get
             {
-                return linguisticVariables[LinguisticVariableType.Input];
+                return mInputLinguisticVariables;
             }
         }
-        public IEnumerable<LinguisticVariable> OutputLinguisticVariables
+        public FuzzyLogicObservableCollection<LinguisticVariable> OutputLinguisticVariables
         {
             get
             {
-                return linguisticVariables[LinguisticVariableType.Output];
+                return mOutputLinguisticVariables;
             }
         }
 
-        public object outputLinguisticVariables { get; private set; }
+        #endregion
 
         public LinguisticVariableDao()
         {
-            linguisticVariables = new Dictionary<LinguisticVariableType, IList<LinguisticVariable>>();
-
-            this.linguisticVariables[LinguisticVariableType.Input] = new List<LinguisticVariable>();
-            this.linguisticVariables[LinguisticVariableType.Output] = new List<LinguisticVariable>();
+            mInputLinguisticVariables.ItemAdding += OnItemAdding;
+            mOutputLinguisticVariables.ItemAdding += OnItemAdding;
         }
+
+        #region Public methods
+
         public LinguisticVariable GetLinguisticVariable(String name)
         {
-            LinguisticVariable inputVariableByName = InputVariableByName(name);
-            LinguisticVariable outputVariableByName = OutputVariableByName(name);
+            LinguisticVariable inputVariableByName = GetInputVariableByName(name);
+            LinguisticVariable outputVariableByName = GetOutputVariableByName(name);
 
             if (inputVariableByName != null)
                 return inputVariableByName;
@@ -47,35 +56,41 @@ namespace Alfheim.FuzzyLogic.Variables.Model
                 throw new LinguisticVariableNotFoundException("Linguistic variable not found");
         }
 
-        private LinguisticVariable OutputVariableByName(string name)
+        #endregion
+
+        #region Private methods
+
+        private bool IsNameExist(string name)
+        {
+            bool isInputVariableExist = (GetInputVariableByName(name) != null);
+            bool isOutputVariableExist = (GetOutputVariableByName(name) != null);
+
+            return isInputVariableExist || isOutputVariableExist;
+        }
+
+        private LinguisticVariable GetOutputVariableByName(string name)
         {
             return OutputLinguisticVariables
-                            .FirstOrDefault(variable => variable.Name == name);
+                .FirstOrDefault(variable => variable.Name == name);
         }
 
-        private LinguisticVariable InputVariableByName(string name)
+        private LinguisticVariable GetInputVariableByName(string name)
         {
             return InputLinguisticVariables
-                            .FirstOrDefault(variable => variable.Name == name);
+                .FirstOrDefault(variable => variable.Name == name);
         }
 
-        public void AddLinguisticVariable(LinguisticVariable variable, LinguisticVariableType type)
+        #region Event handlers
+
+        private void OnItemAdding(object sender, ItemAddingEventArgs e)
         {
-            IList<LinguisticVariable> variables = linguisticVariables[type];
+            var item = (e.NewItem as LinguisticVariable);
 
-            LinguisticVariable inputVariableByName = InputVariableByName(variable.Name);
-            LinguisticVariable outputVariableByName = OutputVariableByName(variable.Name);
-
-            if (inputVariableByName != null || outputVariableByName != null)
+            if (IsNameExist(item.Name))
                 throw new LinguisticVariableNameAlreadyExistsException("Linguistic variable name already exists;");
-
-            variables.Add(variable);
         }
 
-        public void RemoveLinguisticVariable(LinguisticVariable variable, LinguisticVariableType type)
-        {
-            IList<LinguisticVariable> variables = linguisticVariables[type];
-            variables.Remove(variable);
-        }
+        #endregion
+        #endregion
     }
 }
