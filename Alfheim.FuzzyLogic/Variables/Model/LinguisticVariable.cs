@@ -80,7 +80,7 @@ namespace Alfheim.FuzzyLogic.Variables.Model
             }
         }
 
-        private bool IsTermNameExist(string name)
+        public bool DoesTermNameExist(string name)
         {
             return mTerms
                 .Where(term => term.Name == name)
@@ -93,7 +93,7 @@ namespace Alfheim.FuzzyLogic.Variables.Model
         {
             Term item = (e.NewItem as Term);
 
-            if (IsTermNameExist(item.Name))
+            if (DoesTermNameExist(item.Name))
                 throw new TermNameAlreadyExistsException("Term name already exists;");
 
             item.Variable = this;
