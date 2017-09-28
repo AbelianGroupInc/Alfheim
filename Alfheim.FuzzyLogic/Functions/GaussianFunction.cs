@@ -25,10 +25,10 @@ namespace Alfheim.FuzzyLogic.Functions
 
         #region Properties
 
-        [InRangePoint("LeftPoint", "MinInputValue", "MaxInputValue")]
+        [InRangePoint("MinInputValue", "MaxInputValue")]
         public double Center { get; set; }
 
-        [ReferencePoint("Steepness")]
+        [ReferencePoint()]
         public double Steepness { get; set; }
 
         #endregion

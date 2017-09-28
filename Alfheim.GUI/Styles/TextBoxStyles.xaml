@@ -13,4 +13,17 @@
             Property="Margin"
             Value="1" />
     </Style>
+
+    <Style x:Key="DefaultTextBox"
+           TargetType="TextBox"
+           BasedOn="{StaticResource MetroTextBox}">
+
+        <Setter
+            Property="BorderThickness"
+            Value="1" />
+
+        <Setter
+            Property="Margin"
+            Value="3" />
+    </Style>
 </ResourceDictionary>

@@ -98,11 +98,12 @@
       <DependentUpon>TextBlockWithTitle.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\InRangePoint.cs" />
+    <Compile Include="Model\InRangePointParser.cs" />
     <Compile Include="Model\ReferencePoint.cs" />
     <Compile Include="Resources\ApplicationStringConstants.cs" />
     <Compile Include="Resources\ApplicationStringResourcesController.cs" />
     <Compile Include="Services\PlotBindingService.cs" />
-    <Compile Include="Services\TremPropertyViewService.cs" />
+    <Compile Include="Services\TermPropertyViewService.cs" />
     <Compile Include="Views\LinguisticVariablePage.xaml.cs">
       <DependentUpon>LinguisticVariablePage.xaml</DependentUpon>
     </Compile>
@@ -192,6 +193,10 @@
     <Page Include="Styles\ListBoxStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\SliderStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\StackPanelStyles.xaml">
       <Generator>MSBuild:Compile</Generator>

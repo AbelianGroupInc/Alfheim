@@ -32,4 +32,6 @@
     <v:String x:Key="cTrapezoidalFunction">Трапецеидальная функция</v:String>
     <v:String x:Key="cGaussianFunction">Гауссова функция</v:String>
     <v:String x:Key="cAnalysis">Анализ</v:String>
+    <v:String x:Key="cTermName">Имя терма</v:String>
+    <v:String x:Key="cFunctions">Функция</v:String>
 </ResourceDictionary>

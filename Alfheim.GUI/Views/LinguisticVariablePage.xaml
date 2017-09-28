@@ -95,14 +95,14 @@
                         Text="{DynamicResource cAdd}" />
                 </Button>
 
-                <StackPanel
-                    x:Name="mStackPanel"
-                    Grid.Row="4">
+                <ScrollViewer
+                    Grid.Row="4"
+                    VerticalScrollBarVisibility="Auto">
                     
-                    <TextBlock
-                        Style="{StaticResource PropertyName}"
-                        Text="Name" />
-                </StackPanel>
+                    <StackPanel
+                        x:Name="mStackPanel">
+                    </StackPanel>
+                </ScrollViewer>
             </Grid>
         </Border>
 

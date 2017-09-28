@@ -32,4 +32,6 @@
     <v:String x:Key="cTrapezoidalFunction">Trapezoidal function</v:String>
     <v:String x:Key="cGaussianFunction">Gaussian function</v:String>
     <v:String x:Key="cAnalysis">Analysis</v:String>
+    <v:String x:Key="cTermName">Term name</v:String>
+    <v:String x:Key="cFunctions">Term function</v:String>
 </ResourceDictionary>

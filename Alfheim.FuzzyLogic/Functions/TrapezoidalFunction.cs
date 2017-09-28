@@ -24,16 +24,16 @@ namespace Alfheim.FuzzyLogic.Functions
 
         #region Properties
 
-        [InRangePoint("LeftBottomPoint", "MinInputValue", "LeftTopPoint")]
+        [InRangePoint("MinInputValue", "LeftTopPoint")]
         public double LeftBottomPoint { get; set; }
 
-        [InRangePoint("LeftTopPoint", "LeftBottomPoint", "RightTopPoint")]
+        [InRangePoint("LeftBottomPoint", "RightTopPoint")]
         public double LeftTopPoint { get; set; }
 
-        [InRangePoint("RightBottomPoint", "RightTopPoint", "MaxInputValue")]
+        [InRangePoint("RightTopPoint", "MaxInputValue")]
         public double RightBottomPoint { get; set; }
 
-        [InRangePoint("RightTopPoint", "LeftTopPoint", "RightBottomPoint")]
+        [InRangePoint("LeftTopPoint", "RightBottomPoint")]
         public double RightTopPoint { get; set; }
 
         #endregion

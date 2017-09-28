@@ -2,7 +2,7 @@
 {
     public class InRangePoint
     {
-        public InRangePoint(string name, double value, string leftPoint, string rightPoint)
+        public InRangePoint(string name, string leftPoint, string rightPoint)
         {
             Name = name;
             LeftPointName = leftPoint;
@@ -10,6 +10,7 @@
         }
 
         public string Name { get; set; }
+
         public string LeftPointName { get; set; }
 
         public string RightPointName { get; set; }

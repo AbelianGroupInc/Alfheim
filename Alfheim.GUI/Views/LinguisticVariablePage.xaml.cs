@@ -35,7 +35,7 @@ namespace Alfheim.GUI.Views
         private LinguisticVariable mThisVariable;
 
         private PlotBindingService mPlotBindingService;
-
+        private TermPropertyViewService mTermPropertyViewService;
 
         public LinguisticVariablePage(Page owner, LinguisticVariable variable)
         {
@@ -62,6 +62,7 @@ namespace Alfheim.GUI.Views
             mXAxis.Separator.StrokeThickness = 2;
 
             mPlotBindingService = new PlotBindingService(mPlot, mThisVariable);
+            mTermPropertyViewService = new TermPropertyViewService(mStackPanel);
         }
 
         private void OutputListBoxDoubleClick(object sender, MouseButtonEventArgs e)
@@ -88,31 +89,12 @@ namespace Alfheim.GUI.Views
 
         private void TermList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //var term = (mTermList.SelectedItem as Term);
+            var term = (mTermList.SelectedItem as Term);
 
-            //if (term == null)
-            //    return;
+            if (term == null)
+                return;
 
-            //mStackPanel.Children.Clear();
-
-            //mStackPanel.Children.Add(CreatePropertyTextBlock("Name"));
-            //mStackPanel.Children.Add(CreatePropertyTextBox(term.Name));
-
-            //mStackPanel.Children.Add(CreatePropertyTextBlock("Function"));
-            //mStackPanel.Children.Add(CreateFunctionComboBox(term.FuzzyFunction));
-
-            //var properties = term.FuzzyFunction.GetType()
-            //    .GetProperties()
-            //    .Where(property => property.GetCustomAttributes(typeof(InRangePointAttribute))
-            //    .Any());
-
-            //foreach (var property in properties)
-            //{
-            //    InRangePointAttribute inRangePoint = property.GetCustomAttribute<InRangePointAttribute>();
-
-            //    mStackPanel.Children.Add(CreatePropertyTextBlock(inRangePoint.Name));
-            //    mStackPanel.Children.Add(CreatePropertySlider(term.FuzzyFunction, inRangePoint, (double)property.GetValue(term.FuzzyFunction)));
-            //}
+            mTermPropertyViewService.ShowTermProperties(term);
         }
     }
 }

@@ -27,6 +27,7 @@
                 <ResourceDictionary Source="Styles/StackPanelStyles.xaml" />
                 <ResourceDictionary Source="Styles/TextBlockStyles.xaml" />
                 <ResourceDictionary Source="Styles/GridStyles.xaml" />
+                <ResourceDictionary Source="Styles/SliderStyles.xaml" />
                 <ResourceDictionary Source="Styles/ComboBoxStyles.xaml" />
                 <ResourceDictionary Source="Styles/ButtonStyles.xaml" />
                 <ResourceDictionary Source="Styles/TextBoxStyles.xaml" />
