@@ -4,6 +4,7 @@ namespace Alfheim.FuzzyLogic.Variables.Model
 {
     public class LinguisticVariable
     {
+        // TODO : input/output
         private FuzzyLogicObservableCollection<Term> mTerms = new FuzzyLogicObservableCollection<Term>();
         private double minValue;
         private double maxValue;

@@ -4,160 +4,89 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Collections;
 
 namespace Alfheim.FuzzyLogic.Rules.Model
 {
-
-    // TODO : Test
-    class TermsChain : IEnumerable <TermsChainNode>
+    public class TermsChain
     {
-        public int Length { get; set; }
-        public TermsChainNode Head { get; set; }
-        private TermsChainNode Tail { get; set; }
+        private List<TermsChainNode> nodes; 
 
-        public TermsChain(Term firstTerm)
+        public IEnumerable<TermsChainNode> Nodes
         {
-            TermsChainNode newNode = new TermsChainNode(firstTerm);
-
-            Head = newNode;
-            Length = 1;
-        }
-
-        public void Add(OperationType operation, Term term)
-        {
-            TermsChainNode newNode = new TermsChainNode(term);
-
-            NextRuleCondition condition = Tail.ChainRuleNextCondition; 
-
-            condition.Node = newNode;
-            condition.Operation = operation;
-            Tail = newNode;
-
-            Length++;
-        }
-
-        public TermsChainNode FindNode(Term term)
-        {
-            TermsChainNode current = Head;
-            while (current != null)
+            get
             {
-                if (current.ThisTerm == term)
-                    return current;
-                else
-                    current = current.ChainRuleNextCondition.Node;
+                return nodes;
             }
-
-            return current;
         }
 
-        public void InsertAfter(OperationType operation, Term term, Term newTerm)
-        {
-            TermsChainNode newNode = new TermsChainNode(newTerm);
-            TermsChainNode node = FindNode(term);
-            if (node != null)
-            {
-                newNode.ChainRuleNextCondition.Node = node.ChainRuleNextCondition.Node;
-                NextRuleCondition nodeNextRuleCondition = node.ChainRuleNextCondition;
+        public Rule ThisRule { get; }
 
-                nodeNextRuleCondition.Operation = operation;
-                nodeNextRuleCondition.Node = newNode;
-            }
-            else
-            {
+        public OperationType Type { get; set; }
+
+        public TermsChain(OperationType type, Rule rule)
+        {
+            nodes = new List<TermsChainNode>();
+            Type = type;
+            this.ThisRule = rule;
+        }
+
+        public TermsChain Add(ConditionSign sign,Term term)
+        {
+            TermsChainNode node = new TermsChainNode(sign, term);
+            this.nodes.Add(node);
+
+            return this;
+        }
+
+        public TermsChain Remove(Term term)
+        {
+            TermsChainNode node = null;
+            foreach (TermsChainNode curNode in nodes)
+                if (curNode.ThisTerm == term)
+                    node = curNode;
+
+            if (node == null)
                 throw new TermInRuleNotFoundException("Term with name : " + term.Name + " not found");
-            }
+
+            this.nodes.Remove(node);
+
+            return this;
         }
 
-        public void Remove(Term term)
+        public TermsChain Insert(int index, ConditionSign sign, Term term)
         {
-            TermsChainNode current = Head;
+            TermsChainNode node = new TermsChainNode(sign, term); 
+            this.nodes.Insert(index, node);
 
-            NextRuleCondition currentNodeNextRuleCondition = current.ChainRuleNextCondition;
-            NextRuleCondition nextNodeNextRuleCondition = current.ChainRuleNextCondition.Node.ChainRuleNextCondition;
-
-            if (term == Head.ThisTerm)
-                Head = currentNodeNextRuleCondition.Node;
-            else
-            {
-                while (currentNodeNextRuleCondition.Node != null)
-                {
-                    if (currentNodeNextRuleCondition.Node.ThisTerm == term)
-                    {
-                        currentNodeNextRuleCondition.Operation = currentNodeNextRuleCondition.Operation;
-                        currentNodeNextRuleCondition.Node = nextNodeNextRuleCondition.Node;
-                        break;
-                    }
-                    else
-                        current = currentNodeNextRuleCondition.Node;
-                }
-            }
-
-           
-        }
-        public void RemoveLast()
-        {
-            TermsChainNode current = Head;
-            while (current.ChainRuleNextCondition.Node != null)
-            {
-                if (current.ChainRuleNextCondition.Node == Tail)
-                {
-                    Tail = current;
-                    current.ChainRuleNextCondition = null;
-                    break;
-                }
-                else
-                    current = current.ChainRuleNextCondition.Node;
-            }
+            return this;
         }
 
-        public IEnumerator<TermsChainNode> GetEnumerator()
+        public int IndexOf(ConditionSign sign, Term term)
         {
-
-            return new TermsChainEnumerator(this);
+            TermsChainNode node = new TermsChainNode(sign, term);
+            return this.nodes.IndexOf(node);
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        public Rule And()
         {
-            return GetEnumerator();
+            return this.ThisRule;
         }
 
         public override string ToString()
         {
             StringBuilder builder = new StringBuilder();
 
-            IEnumerator<TermsChainNode> enumerator = GetEnumerator();
-            if (enumerator.Current != null)
-            {
-                builder.Append(enumerator.Current.ThisTerm.Name);
+            for (int i = 0; i < nodes.Count - 1; i++)
+                builder
+                    .Append(nodes[i])
+                    .Append(" ")
+                    .Append(Type.ToString().ToLower())
+                    .Append(" ");
 
-                if (enumerator.Current.ChainRuleNextCondition != null)
-                {
-                    AppendNextConditionToStringBuilder(builder, enumerator.Current.ChainRuleNextCondition);
-
-                    while (enumerator.MoveNext() != false)
-                    {
-                        TermsChainNode node = enumerator.Current;
-                        AppendNextConditionToStringBuilder(builder, enumerator.Current.ChainRuleNextCondition);
-                    }
-
-                }
-
-            }
-
-             return builder.ToString();
-        }
-
-        private void AppendNextConditionToStringBuilder(StringBuilder builder, NextRuleCondition condition)
-        {
             builder
-                .Append(" ")
-                .Append(condition.Operation.ToString())
-                .Append(" (")
-                .Append(condition.Node.ThisTerm.Variable.Name)
-                .Append(" is ")
-                .Append(condition.Node.ThisTerm.Name)
-                .Append(") ");
+                .Append(nodes[nodes.Count - 1]);
+
+            return builder.ToString();
         }
     }
 }

@@ -7,18 +7,40 @@ using System.Threading.Tasks;
 
 namespace Alfheim.FuzzyLogic.Rules.Model
 {
-    class TermsChainNode
+    public class TermsChainNode
     {
+        public ConditionSign Sign { get; set; }
         public Term ThisTerm { get; set; }
-        public NextRuleCondition ChainRuleNextCondition { get; set; }
 
-        public TermsChainNode()
+        public TermsChainNode(ConditionSign type, Term thisTerm)
         {
+            Sign = type;
+            ThisTerm = thisTerm;
         }
 
         public TermsChainNode(Term thisTerm)
         {
+            Sign = ConditionSign.Identity;
             ThisTerm = thisTerm;
+        }
+
+        public override string ToString()
+        {
+            StringBuilder builder = new StringBuilder();
+            builder
+                .Append("(")
+                .Append(ThisTerm.Variable.Name)
+                .Append(" is ");
+
+            if (Sign == ConditionSign.Negation)
+                builder
+                    .Append("not ");
+
+            builder
+                .Append(ThisTerm.Name)
+                .Append(")");
+
+            return builder.ToString();
         }
     }
 }

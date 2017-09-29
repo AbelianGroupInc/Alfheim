@@ -58,7 +58,7 @@
     <Compile Include="IFunction.cs" />
     <Compile Include="IFuzzyFunction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rules\Model\NextRuleCondition.cs" />
+    <Compile Include="Rules\Model\ConditionSign.cs" />
     <Compile Include="Rules\Model\OperationType.cs" />
     <Compile Include="Rules\Model\Rule.cs" />
     <Compile Include="Rules\Model\RulesDao.cs" />

@@ -9,57 +9,45 @@ namespace Alfheim.FuzzyLogic.Rules.Model
 {
     public class Rule
     {
-        private TermsChain leftSideRule;
-        public Term OutputTerm { get; set; }
+        private TermsChain ruleLeftSide;
+        private Term outputTerm;
 
-        public Rule()
+        public TermsChain RuleLeftSide {
+            get
+            {
+                return ruleLeftSide;
+            }
+        }
+        public Term OutputTerm
         {
+            get
+            {
+                return outputTerm;
+            }
         }
 
-        /// <summary>
-        /// Chain begins with at least one term (condition). It is needed to add at least one term
-        /// </summary>
-        /// <param name="firstTerm"></param>
-        public void init(Term firstTerm)
+        public Rule(OperationType type)
         {
-            this.leftSideRule = new TermsChain(firstTerm);
-        }
-
-        public Rule(Term firstTerm)
-        {
-            this.leftSideRule = new TermsChain(firstTerm);
-        }
-
-        public Rule(Term firstTerm, Term resultingTerm) : this(firstTerm)
-        {
-            this.OutputTerm = resultingTerm;
+            ruleLeftSide = new TermsChain(type, this);
         }
         
-        public void Add(OperationType operation, Term term)
+
+        public Rule(OperationType type, Term outputTerm) : this(type)
         {
-            leftSideRule.Add(operation, term);
+            this.outputTerm = outputTerm;
         }
 
-
-        public void InsertAfter(OperationType operation, Term term, Term newTerm)
+        public Rule SetOutputTerm(Term term)
         {
-            leftSideRule.InsertAfter(operation, term, newTerm);
-        }
-        public void Remove(Term term)
-        {
-            leftSideRule.Remove(term);
-        }
-
-        public void RemoveLast()
-        {
-            leftSideRule.RemoveLast();
-        }
+            this.outputTerm = term;
+            return this;
+        }        
 
         public override string ToString()
         {
             string outputTermString = OutputTerm.Variable.Name + " is " + OutputTerm.Name;
 
-            return "If " + leftSideRule.ToString() + " then " + outputTermString;
+            return "If " + ruleLeftSide.ToString() + " then " + outputTermString;
         }
     }
 }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Alfheim.FuzzyLogic.Rules.Model
 {
-    public enum OperationType
+    public enum ConditionSign
     {
-        Or, 
-        And
+        Negation,
+        Identity
     }
 }
