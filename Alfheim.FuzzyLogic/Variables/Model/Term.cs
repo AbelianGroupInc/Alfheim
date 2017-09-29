@@ -13,8 +13,8 @@
             {
                 if (Variable != null)
                 {
-                    if (Variable.DoesTermNameExist(this.name))
-                        throw new TermNameAlreadyExistsException("Term with name : " + name + " already exists");
+                    if (Variable.DoesTermNameExist(value))
+                        throw new TermNameAlreadyExistsException("Term with name : " + value + " already exists");
                 }
 
                 this.name = value;
