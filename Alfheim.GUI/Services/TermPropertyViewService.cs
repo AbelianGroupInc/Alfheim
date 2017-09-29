@@ -63,9 +63,30 @@ namespace Alfheim.GUI.Services
             slider.TickFrequency = (slider.Minimum + slider.Maximum) / 20.0;
 
             slider.Value = (double)GetFuzzyFunctionProperty(inRangePoint.Name);
+            slider.ValueChanged += SliderValueChanged;
 
             return slider;
         }
+
+        private void SliderValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            var slider = (sender as Slider);
+
+            if (slider == null)
+                return;
+
+            if (e.NewValue < slider.SelectionStart
+                || e.NewValue > slider.SelectionEnd)
+            {
+                slider.Value = e.OldValue;
+            }
+        }
+
+        #region Events
+
+        public event EventHandler TermChanged;
+
+        #endregion
 
         #region Private methods
 
@@ -127,6 +148,8 @@ namespace Alfheim.GUI.Services
             textBlock.Title = propertyName;
             textBlock.Style = Application.Current.FindResource("DefaultTextBlockWithTitle") as Style;
 
+            textBlock.TextChanged += OnNameChanged;
+
             return textBlock;
         }
 
@@ -148,6 +171,18 @@ namespace Alfheim.GUI.Services
         {
             if(mThisTerm != null)
                 ShowTermProperties(mThisTerm);
+        }
+
+        public void OnNameChanged(object sender, TextChangedEventArgs e)
+        {
+            var textBox = (sender as TextBox);
+
+            if (textBox == null)
+                return;
+
+            mThisTerm.Name = textBox.Text;
+
+            TermChanged(mThisTerm, new EventArgs());
         }
 
         #endregion

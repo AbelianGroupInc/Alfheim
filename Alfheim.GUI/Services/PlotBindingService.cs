@@ -2,15 +2,11 @@
 using Alfheim.FuzzyLogic.Variables.Model;
 using LiveCharts;
 using LiveCharts.Defaults;
-using LiveCharts.Definitions.Series;
 using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media;
 
 namespace Alfheim.GUI.Services
 {
@@ -19,7 +15,7 @@ namespace Alfheim.GUI.Services
 
         #region Members
 
-        private Dictionary<Term, ISeriesView> mTermDictionary = new Dictionary<Term, ISeriesView>();
+        private Dictionary<Term, LineSeries> mTermDictionary = new Dictionary<Term, LineSeries>();
         private CartesianChart mPlot;
         private LinguisticVariable mVariable;
 
@@ -36,15 +32,23 @@ namespace Alfheim.GUI.Services
             InitTerms();
         }
 
-        private void InitTerms()
+        public void UpdateTerm(Term term)
         {
-            foreach(var term in mVariable.Terms)
-                AddTermOnPlot(term);
+            if (!mTermDictionary.ContainsKey(term))
+                throw new ArgumentException();
+
+            mTermDictionary[term].Title = term.Name;
         }
 
         #endregion
 
         #region Private methods
+
+        private void InitTerms()
+        {
+            foreach (var term in mVariable.Terms)
+                AddTermOnPlot(term);
+        }
 
         private ChartValues<ObservablePoint> GetFunctionResult(IFuzzyFunction func, int smooth)
         {
@@ -82,7 +86,7 @@ namespace Alfheim.GUI.Services
                     Title = term.Name
                 });
 
-            mTermDictionary.Add(term, mPlot.Series.Last());
+            mTermDictionary.Add(term, (mPlot.Series.Last() as LineSeries));
         }
 
         private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

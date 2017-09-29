@@ -62,7 +62,9 @@ namespace Alfheim.GUI.Views
             mXAxis.Separator.StrokeThickness = 2;
 
             mPlotBindingService = new PlotBindingService(mPlot, mThisVariable);
+
             mTermPropertyViewService = new TermPropertyViewService(mStackPanel);
+            mTermPropertyViewService.TermChanged += OnTermChanged;
         }
 
         private void OutputListBoxDoubleClick(object sender, MouseButtonEventArgs e)
@@ -95,6 +97,16 @@ namespace Alfheim.GUI.Views
                 return;
 
             mTermPropertyViewService.ShowTermProperties(term);
+        }
+
+        private void OnTermChanged(object sender, EventArgs e)
+        {
+            Term term = (sender as Term);
+
+            if (term == null)
+                return;
+
+            mPlotBindingService.UpdateTerm(term);
         }
     }
 }
