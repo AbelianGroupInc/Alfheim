@@ -9,6 +9,7 @@ namespace Alfheim.FuzzyLogic.Variables.Model
     public enum LinguisticVariableType
     {
         Input,
-        Output
+        Output,
+        Undefined
     }
 }

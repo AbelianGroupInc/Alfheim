@@ -1,16 +1,31 @@
-﻿using System.Linq;
+﻿using Alfheim.FuzzyLogic.Variables.Services;
+using System.Linq;
 
 namespace Alfheim.FuzzyLogic.Variables.Model
 {
     public class LinguisticVariable
     {
         private FuzzyLogicObservableCollection<Term> mTerms = new FuzzyLogicObservableCollection<Term>();
+        private string name;
         private double minValue;
         private double maxValue;
+        private LinguisticVariableType type;
 
         #region Properties
 
-        public string Name { get; set; }
+        public string Name {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                if (LinguisticVariableService.Instance.IsNameExist(value))
+                    throw new LinguisticVariableNameAlreadyExistsException("Variable with name : " + value + " already exists");
+
+                this.name = value;
+            }
+        }
         public double MinValue {
             get
             {
@@ -43,17 +58,46 @@ namespace Alfheim.FuzzyLogic.Variables.Model
             }
         }
 
+        public LinguisticVariableType Type {
+            get
+            {
+                return type;
+            }
+            set
+            {
+                LinguisticVariableType initType = this.type;
+                if(value == LinguisticVariableType.Undefined)
+                {
+                    this.type = value;
+                    LinguisticVariableService.Instance.Remove(this);
+                }
+                else if (type != LinguisticVariableType.Undefined && type != value)
+                {
+                    LinguisticVariableService.Instance.Remove(this);
+                    this.type = initType;
+                    LinguisticVariableService.Instance.Add(this, value);
+                    this.type = value;
+                }
+                else
+                {
+                    this.type = value;
+                    LinguisticVariableService.Instance.Add(this, this.type);
+                }
+            }
+        }
+
         #endregion
 
         #region Constructors
 
         public LinguisticVariable(string name, double minValue, double maxValue)
         {
-            Name = name;
+            this.name = name;
             CheckDomainRestriction(minValue, maxValue);
 
             this.minValue = minValue;
             this.maxValue = maxValue;
+            this.type = LinguisticVariableType.Undefined;
 
             mTerms.ItemAdding += OnItemAdding; ;
         }

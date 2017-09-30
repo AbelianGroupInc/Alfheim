@@ -7,12 +7,25 @@ namespace Alfheim.FuzzyLogic.Variables.Services
     {
         private LinguisticVariableDao linguisticVariableDao;
 
-        public LinguisticVariableService()
+        private static LinguisticVariableService instance;
+
+        public static LinguisticVariableService Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new LinguisticVariableService();
+                return instance;
+            }
+        }
+
+        private LinguisticVariableService()
         {
             linguisticVariableDao = new LinguisticVariableDao();
         }
 
-        public FuzzyLogicObservableCollection<LinguisticVariable> InputLinguisticVariables {
+        public FuzzyLogicObservableCollection<LinguisticVariable> InputLinguisticVariables
+        {
             get
             {
                 return linguisticVariableDao.InputLinguisticVariables;
@@ -30,5 +43,37 @@ namespace Alfheim.FuzzyLogic.Variables.Services
         {
             return linguisticVariableDao.GetLinguisticVariable(name);
         }
+
+        public bool IsNameExist(string name)
+        {
+            return linguisticVariableDao.IsNameExist(name);
+        }
+
+        public LinguisticVariable GetInputVariableByName(string name)
+        {
+            return linguisticVariableDao.GetInputVariableByName(name);
+        }
+
+        public LinguisticVariable GetOutputVariableByName(string name)
+        {
+            return linguisticVariableDao.GetOutputVariableByName(name);
+        }
+
+        public void Remove(LinguisticVariable variable)
+        {
+            linguisticVariableDao.Remove(variable);
+            if(variable.Type != LinguisticVariableType.Undefined)
+                variable.Type = LinguisticVariableType.Undefined;
+        }
+
+        public void Add(LinguisticVariable variable, LinguisticVariableType type)
+        {
+            if (type == LinguisticVariableType.Input && variable.Type != LinguisticVariableType.Input)
+                InputLinguisticVariables.Add(variable);
+            else if (type == LinguisticVariableType.Output && variable.Type != LinguisticVariableType.Output)
+                OutputLinguisticVariables.Add(variable);
+
+        }
+
     }
 }
