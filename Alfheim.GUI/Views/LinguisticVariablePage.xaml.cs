@@ -107,6 +107,8 @@ namespace Alfheim.GUI.Views
                 return;
 
             mPlotBindingService.UpdateTerm(term);
+
+            mTermList.Items.Refresh();
         }
     }
 }
