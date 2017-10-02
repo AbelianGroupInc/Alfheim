@@ -51,7 +51,7 @@ namespace Alfheim.FuzzyLogic.Rules.Model
         public override string ToString()
         {
             if (OutputTerm == null)
-                throw new OutputTermIsNotSpecified("Output term is not specified");
+                throw new OutputTermIsNotSpecifiedException("Output term is not specified");
 
             string outputTermString = OutputTerm.Variable.Name + " is " + OutputTerm.Name;
 

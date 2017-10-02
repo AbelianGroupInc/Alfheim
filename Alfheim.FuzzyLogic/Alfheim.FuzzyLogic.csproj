@@ -61,7 +61,7 @@
     <Compile Include="Rules\Model\ConditionsChainIsEmptyException.cs" />
     <Compile Include="Rules\Model\ConditionSign.cs" />
     <Compile Include="Rules\Model\OperationType.cs" />
-    <Compile Include="Rules\Model\OutputTermIsNotSpecified.cs" />
+    <Compile Include="Rules\Model\OutputTermIsNotSpecifiedException.cs" />
     <Compile Include="Rules\Model\Rule.cs" />
     <Compile Include="Rules\Model\RuleBuilder.cs" />
     <Compile Include="Rules\Model\RulesDao.cs" />

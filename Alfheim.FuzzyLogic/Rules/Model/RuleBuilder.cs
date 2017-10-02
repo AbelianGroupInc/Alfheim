@@ -67,7 +67,7 @@ namespace Alfheim.FuzzyLogic.Rules.Model
                 throw new ConditionsChainIsEmptyException("Conditions chain must not be empty");
 
             if (this.currentRule.OutputTerm == null)
-                throw new OutputTermIsNotSpecified("Output term is not specified");
+                throw new OutputTermIsNotSpecifiedException("Output term is not specified");
         }
         
 

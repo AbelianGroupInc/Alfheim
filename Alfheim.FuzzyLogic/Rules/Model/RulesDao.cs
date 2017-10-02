@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Alfheim.FuzzyLogic.Variables.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Alfheim.FuzzyLogic.Rules.Model
 {
-    class RulesDao
+    public class RulesDao
     {
-        private List<Rule> rules;
+        private FuzzyLogicObservableCollection<Rule> rules;
 
-        public IEnumerable<Rule> Rules
+        public FuzzyLogicObservableCollection<Rule> Rules
         {
             get
             {
@@ -18,14 +19,16 @@ namespace Alfheim.FuzzyLogic.Rules.Model
             }
         }
 
-        public void AddRule(Rule rule)
+        public RulesDao()
         {
-            rules.Add(rule);
-        } 
+            rules = new FuzzyLogicObservableCollection<Rule>();
+            rules.ItemAdding += OnItemAdding;
+        }
+         
 
-        public void RemoveRule(Rule rule)
+        private void OnItemAdding(object sender, ItemAddingEventArgs e)
         {
-            rules.Remove(rule);
+            var item = (e.NewItem as LinguisticVariable);
         }
     }
 }
