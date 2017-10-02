@@ -34,4 +34,14 @@
     <v:String x:Key="cAnalysis">Analysis</v:String>
     <v:String x:Key="cTermName">Term name</v:String>
     <v:String x:Key="cFunctions">Term function</v:String>
+    <v:String x:Key="Name">Term name</v:String>
+    <v:String x:Key="FuzzyFunction">Membership function</v:String>
+    <v:String x:Key="LeftPoint">Left point</v:String>
+    <v:String x:Key="MiddlePoint">Middle point</v:String>
+    <v:String x:Key="RightPoint">Right point</v:String>
+    <v:String x:Key="LeftTopPoint">Left top point</v:String>
+    <v:String x:Key="RightTopPoint">Right top point</v:String>
+    <v:String x:Key="RightBottomPoint">Right bottom point</v:String>
+    <v:String x:Key="LeftBottomPoint">Left bottom point</v:String>
+    <v:String x:Key="Center">Center</v:String>
 </ResourceDictionary>

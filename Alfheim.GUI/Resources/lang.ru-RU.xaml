@@ -34,4 +34,14 @@
     <v:String x:Key="cAnalysis">Анализ</v:String>
     <v:String x:Key="cTermName">Имя терма</v:String>
     <v:String x:Key="cFunctions">Функция</v:String>
+    <v:String x:Key="Name">Имя терма</v:String>
+    <v:String x:Key="FuzzyFunction">Функция принадлежности</v:String>
+    <v:String x:Key="LeftPoint">Левая точка</v:String>
+    <v:String x:Key="MiddlePoint">Средняя точка</v:String>
+    <v:String x:Key="RightPoint">Правая точка</v:String>
+    <v:String x:Key="LeftTopPoint">Левая верхняя точка</v:String>
+    <v:String x:Key="RightTopPoint">Правая верхняя точка</v:String>
+    <v:String x:Key="RightBottomPoint">Правая нижняя точка</v:String>
+    <v:String x:Key="LeftBottomPoint">Левая нижняя точка</v:String>
+    <v:String x:Key="Center">Центр</v:String>
 </ResourceDictionary>

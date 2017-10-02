@@ -23,6 +23,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro;
+using System.ComponentModel;
 
 namespace Alfheim.GUI.Views
 {
@@ -99,14 +100,14 @@ namespace Alfheim.GUI.Views
             mTermPropertyViewService.ShowTermProperties(term);
         }
 
-        private void OnTermChanged(object sender, EventArgs e)
+        private void OnTermChanged(object sender, PropertyChangedEventArgs e)
         {
             Term term = (sender as Term);
 
             if (term == null)
                 return;
 
-            mPlotBindingService.UpdateTerm(term);
+            mPlotBindingService.UpdateTerm(term, e.PropertyName);
 
             mTermList.Items.Refresh();
         }

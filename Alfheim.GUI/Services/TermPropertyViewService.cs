@@ -12,6 +12,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Alfheim.GUI.Controls;
 using Alfheim.GUI.Model;
+using System.ComponentModel;
 
 namespace Alfheim.GUI.Services
 {
@@ -19,10 +20,15 @@ namespace Alfheim.GUI.Services
     {
         StackPanel mPanel;
         Term mThisTerm;
+        IPropertyEditor mNameEditor;
+        IPropertyEditor mFunctionEditor;
+        TermFuzzyFunctionSliderEditor sliders = new TermFuzzyFunctionSliderEditor();
 
         public TermPropertyViewService(StackPanel panel)
         {
             mPanel = panel;
+
+            InitEditors();
             App.LanguageChanged += AppLanguageChanged;
         }
 
@@ -31,158 +37,61 @@ namespace Alfheim.GUI.Services
             mThisTerm = term;
 
             mPanel.Children.Clear();
+  
+            mNameEditor.Target = term;
+            mFunctionEditor.Target = term;
 
-            GenerateNameProperty();
-            GenerateFunctionProperty();
+            foreach (var element in mNameEditor.GenerateUIElements())
+                mPanel.Children.Add(element);
 
-            var points = InRangePointParser.Parse(mThisTerm);
+            foreach (var element in mFunctionEditor.GenerateUIElements())
+                mPanel.Children.Add(element);
 
-            foreach (var point in points)
-            {
-                mPanel.Children.Add(GeneratePropertTextBlock(point.Name));
-                mPanel.Children.Add(CreatePropertySlider(point));
-            }
+            sliders.Target = term;
+
+            foreach (var element in sliders.GenerateUIElements())
+                mPanel.Children.Add(element);
         }
 
-        private Slider CreatePropertySlider(InRangePoint inRangePoint)
+        private void InitEditors()
         {
-            Slider slider = new Slider();
+            mNameEditor = new TextBoxPropertyEditor("Name");
+            mNameEditor.PropertyChanged += OnTermPropertyChanged;
 
-            slider.Style = Application.Current.FindResource("SliderFlatStyle") as Style;
-            slider.Minimum = mThisTerm.FuzzyFunction.MinInputValue;
-            slider.Maximum = mThisTerm.FuzzyFunction.MaxInputValue;
+            mFunctionEditor = new ComboBoxPropertyEditor("FuzzyFunction", GenerateFuzzyFunctionsDictionary());
+            mFunctionEditor.PropertyChanged += OnTermPropertyChanged;
 
-            slider.IsSelectionRangeEnabled = true;
-            slider.SelectionStart = (double)GetFuzzyFunctionProperty(inRangePoint.LeftPointName);
-            slider.SelectionEnd = (double)GetFuzzyFunctionProperty(inRangePoint.RightPointName);
+            sliders.PropertyChanged += OnTermPropertyChanged;
+        }    
 
-            slider.AutoToolTipPlacement = System.Windows.Controls.Primitives.AutoToolTipPlacement.TopLeft;
-            slider.AutoToolTipPrecision = 2;
-            slider.IsSnapToTickEnabled = false;
-            slider.TickPlacement = System.Windows.Controls.Primitives.TickPlacement.BottomRight;
-            slider.TickFrequency = (slider.Minimum + slider.Maximum) / 20.0;
-
-            slider.Value = (double)GetFuzzyFunctionProperty(inRangePoint.Name);
-            slider.ValueChanged += SliderValueChanged;
-
-            return slider;
-        }
-
-        private void SliderValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private static Dictionary<string, object> GenerateFuzzyFunctionsDictionary()
         {
-            var slider = (sender as Slider);
+            Dictionary<string, object> result = new Dictionary<string, object>();
 
-            if (slider == null)
-                return;
+            result[ApplicationStringConstants.TriangleFunction] = new TriangleFunction();
+            result[ApplicationStringConstants.TrapezoidalFunction] = new TrapezoidalFunction();
+            result[ApplicationStringConstants.GaussianFunction] = new GaussianFunction();
 
-            if (e.NewValue < slider.SelectionStart
-                || e.NewValue > slider.SelectionEnd)
-            {
-                slider.Value = e.OldValue;
-            }
+            return result;
         }
 
         #region Events
 
-        public event EventHandler TermChanged;
-
-        #endregion
-
-        #region Private methods
-
-        private ComboBox CreateFunctionComboBox(IFuzzyFunction termFunction)
-        {
-            ComboBox comboBox = new ComboBox();
-
-            comboBox.Style = Application.Current.FindResource("ComboBoxFlatStyle") as Style;
-
-            comboBox.Items.Add(new KeyValuePair<string, IFuzzyFunction>(
-                ApplicationStringConstants.TriangleFunction, new TriangleFunction()));
-
-            comboBox.Items.Add(new KeyValuePair<string, IFuzzyFunction>(
-                ApplicationStringConstants.TrapezoidalFunction, new TrapezoidalFunction()));
-
-            comboBox.Items.Add(new KeyValuePair<string, IFuzzyFunction>(
-                ApplicationStringConstants.GaussianFunction, new GaussianFunction()));
-
-
-            foreach (var function in comboBox.Items)
-                if (((KeyValuePair<string, IFuzzyFunction>)function).Value.GetType() == termFunction.GetType())
-                {
-                    comboBox.SelectedItem = function;
-                    break;
-                }
-
-            comboBox.DisplayMemberPath = "Key";
-
-            return comboBox;
-        }
-
-        private void GenerateFunctionProperty()
-        {
-            mPanel.Children.Add(GeneratePropertTextBlock((string)Application.Current.FindResource("cFunctions")));
-            mPanel.Children.Add(CreateFunctionComboBox(mThisTerm.FuzzyFunction));
-        }
-
-        private void GenerateNameProperty()
-        {
-            mPanel.Children.Add(GeneratePropertTextBlock((string)Application.Current.FindResource("cTermName")));
-            mPanel.Children.Add(GeneratePropertTextBox("Name"));
-        }
-
-        private TextBlock GeneratePropertTextBlock(string propertyName)
-        {
-            TextBlock textBlock = new TextBlock();
-
-            textBlock.Text = propertyName;
-            textBlock.Style = Application.Current.FindResource("PropertyName") as Style;
-
-            return textBlock;
-        }
-
-        private TextBlockWithTitle GeneratePropertTextBox(string propertyName)
-        {
-            TextBlockWithTitle textBlock = new TextBlockWithTitle();
-
-            textBlock.Text = (string)GetTermProperty(propertyName);
-            textBlock.Title = propertyName;
-            textBlock.Style = Application.Current.FindResource("DefaultTextBlockWithTitle") as Style;
-
-            textBlock.TextChanged += OnNameChanged;
-
-            return textBlock;
-        }
-
-        private object GetTermProperty(string propertyName)
-        {
-            return mThisTerm.GetType().GetProperty(propertyName).GetValue(mThisTerm);
-        }
-
-        private object GetFuzzyFunctionProperty(string propertyName)
-        {
-            return mThisTerm.FuzzyFunction.GetType().GetProperty(propertyName).GetValue(mThisTerm.FuzzyFunction);
-        }
+        public event PropertyChangedEventHandler TermChanged;
 
         #endregion
 
         #region Hendlers
 
+        private void OnTermPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            TermChanged(sender, e);
+        }
+
         private void AppLanguageChanged(object sender, EventArgs e)
         {
             if(mThisTerm != null)
                 ShowTermProperties(mThisTerm);
-        }
-
-        public void OnNameChanged(object sender, TextChangedEventArgs e)
-        {
-            var textBox = (sender as TextBox);
-
-            if (textBox == null)
-                return;
-
-            mThisTerm.Name = textBox.Text;
-
-            TermChanged(mThisTerm, new EventArgs());
         }
 
         #endregion

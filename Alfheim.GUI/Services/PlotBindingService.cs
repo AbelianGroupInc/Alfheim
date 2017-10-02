@@ -32,17 +32,28 @@ namespace Alfheim.GUI.Services
             InitTerms();
         }
 
-        public void UpdateTerm(Term term)
+        public void UpdateTerm(Term term, string updatingProperty)
         {
             if (!mTermDictionary.ContainsKey(term))
                 throw new ArgumentException();
 
-            mTermDictionary[term].Title = term.Name;
+            if (updatingProperty == "Name")
+                mTermDictionary[term].Title = term.Name;
+            else
+                UpdateValues(term);
         }
 
         #endregion
 
         #region Private methods
+
+        private void UpdateValues(Term term)
+        {
+            var points = (mTermDictionary[term].Values as ChartValues<ObservablePoint>);
+
+            foreach (var point in points)
+                point.Y = term.FuzzyFunction.GetValue(point.X);
+        }
 
         private void InitTerms()
         {
