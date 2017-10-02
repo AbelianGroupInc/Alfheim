@@ -20,6 +20,7 @@ namespace Alfheim.GUI.Services
 
         public override UIElement[] GenerateUIElements()
         {
+            mSliders.Clear();
             List<UIElement> elements = new List<UIElement>();
 
             var function = (Target as Term).FuzzyFunction;
@@ -67,6 +68,7 @@ namespace Alfheim.GUI.Services
         private object GetFuzzyFunctionProperty(string propertyName)
         {
             var function = (Target as Term).FuzzyFunction;
+
             return function.GetType().GetProperty(propertyName).GetValue(function);
 
         }
