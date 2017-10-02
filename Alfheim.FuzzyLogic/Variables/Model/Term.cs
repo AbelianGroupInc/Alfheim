@@ -11,21 +11,25 @@
             }
             set
             {
+                CheckDoesNameEmtpy(value);
+
                 if (Variable != null)
                 {
-                    if (Variable.DoesTermNameExist(this.name))
-                        throw new TermNameAlreadyExistsException("Term with name : " + name + " already exists");
+                    if (Variable.DoesTermNameExist(value))
+                        throw new TermNameAlreadyExistsException("Term with name : " + value + " already exists");
                 }
 
                 this.name = value;
             }
         }
+
         public IFuzzyFunction FuzzyFunction { get; private set; }
         public LinguisticVariable Variable { get; set; }
         
         
         public Term(string name)
         {
+            CheckDoesNameEmtpy(name);
             Name = name;
         }
 
@@ -38,6 +42,11 @@
             fuzzyFunction.MinInputValue = Variable.MinValue;
 
             this.FuzzyFunction = fuzzyFunction;
+        }
+        private void CheckDoesNameEmtpy(string value)
+        {
+            if (value.Equals(""))
+                throw new NameIsEmptyException("Name can not be empty");
         }
     }
 }
