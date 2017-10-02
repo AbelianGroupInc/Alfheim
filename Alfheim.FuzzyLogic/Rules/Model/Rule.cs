@@ -9,13 +9,13 @@ namespace Alfheim.FuzzyLogic.Rules.Model
 {
     public class Rule
     {
-        private TermsChain ruleLeftSide;
+        private TermsChain ruleConditions;
         private Term outputTerm;
-
-        public TermsChain RuleLeftSide {
+        
+        public TermsChain RuleConditions {
             get
             {
-                return ruleLeftSide;
+                return ruleConditions;
             }
         }
         public Term OutputTerm
@@ -26,9 +26,14 @@ namespace Alfheim.FuzzyLogic.Rules.Model
             }
         }
 
+        public Rule()
+        {
+            ruleConditions = new TermsChain();
+        }
+
         public Rule(OperationType type)
         {
-            ruleLeftSide = new TermsChain(type, this);
+            ruleConditions = new TermsChain(type);
         }
         
 
@@ -45,9 +50,12 @@ namespace Alfheim.FuzzyLogic.Rules.Model
 
         public override string ToString()
         {
+            if (OutputTerm == null)
+                throw new OutputTermIsNotSpecified("Output term is not specified");
+
             string outputTermString = OutputTerm.Variable.Name + " is " + OutputTerm.Name;
 
-            return "If " + ruleLeftSide.ToString() + " then " + outputTermString;
+            return "If " + ruleConditions.ToString() + " then " + outputTermString;
         }
     }
 }

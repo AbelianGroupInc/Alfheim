@@ -19,15 +19,18 @@ namespace Alfheim.FuzzyLogic.Rules.Model
             }
         }
 
-        public Rule ThisRule { get; }
-
         public OperationType Type { get; set; }
 
-        public TermsChain(OperationType type, Rule rule)
+        public TermsChain()
         {
             nodes = new List<TermsChainNode>();
-            Type = type;
-            this.ThisRule = rule;
+            Type = OperationType.Undefined;
+        }
+
+        public TermsChain(OperationType type)
+        {
+            nodes = new List<TermsChainNode>();
+            Type = type; 
         }
 
         public TermsChain Add(ConditionSign sign,Term term)
@@ -65,15 +68,21 @@ namespace Alfheim.FuzzyLogic.Rules.Model
         {
             TermsChainNode node = new TermsChainNode(sign, term);
             return this.nodes.IndexOf(node);
-        }
+        } 
 
-        public Rule And()
+        private void TypeIsNotUndefinedCheck()
         {
-            return this.ThisRule;
+            if (Type == OperationType.Undefined)
+                throw new UndefinedOperationTypeException("Type was not specified");
         }
 
         public override string ToString()
         {
+            TypeIsNotUndefinedCheck();
+
+            if (Nodes.Count() == 0)
+                throw new ConditionsChainIsEmptyException("Conditions chain must not be empty");
+
             StringBuilder builder = new StringBuilder();
 
             for (int i = 0; i < nodes.Count - 1; i++)

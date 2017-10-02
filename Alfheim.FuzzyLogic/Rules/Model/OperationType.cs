@@ -9,6 +9,7 @@ namespace Alfheim.FuzzyLogic.Rules.Model
     public enum OperationType
     {
         Or, 
-        And
+        And,
+        Undefined
     }
 }
