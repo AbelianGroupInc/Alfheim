@@ -20,12 +20,15 @@ namespace Alfheim.FuzzyLogic.Variables.Model
             }
             set
             {
+                CheckDoesNameEmtpy(value);
+
                 if (LinguisticVariableService.Instance.IsNameExist(value))
                     throw new LinguisticVariableNameAlreadyExistsException("Variable with name : " + value + " already exists");
 
                 this.name = value;
             }
         }
+
         public double MinValue {
             get
             {
@@ -93,6 +96,7 @@ namespace Alfheim.FuzzyLogic.Variables.Model
         public LinguisticVariable(string name, double minValue, double maxValue)
         {
             this.name = name;
+            CheckDoesNameEmtpy(name);
             CheckDomainRestriction(minValue, maxValue);
 
             this.minValue = minValue;
@@ -141,6 +145,11 @@ namespace Alfheim.FuzzyLogic.Variables.Model
                 throw new TermNameAlreadyExistsException("Term name already exists;");
 
             item.Variable = this;
+        }
+        private static void CheckDoesNameEmtpy(string value)
+        {
+            if (value.Equals(""))
+                throw new NameIsEmptyException("Name can not be empty");
         }
 
         #endregion

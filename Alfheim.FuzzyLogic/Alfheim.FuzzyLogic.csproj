@@ -67,6 +67,7 @@
     <Compile Include="Variables\Model\LinguisticVariableDomainRestrictionException.cs" />
     <Compile Include="Variables\Model\LinguisticVariableIsNotSpecifiedException.cs" />
     <Compile Include="Variables\Model\LinguisticVariableNotFoundException.cs" />
+    <Compile Include="Variables\Model\NameIsEmptyException.cs" />
     <Compile Include="Variables\Model\Term.cs" />
     <Compile Include="Variables\Model\TermAlreadyExistsException.cs" />
     <Compile Include="Variables\Model\TermNotFoundException.cs" />

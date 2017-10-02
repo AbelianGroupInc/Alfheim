@@ -74,6 +74,10 @@ namespace Alfheim.FuzzyLogic.Variables.Services
                 OutputLinguisticVariables.Add(variable);
 
         }
-
+        
+        public static void Clear()
+        {
+            instance = new LinguisticVariableService();
+        }
     }
 }
