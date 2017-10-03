@@ -1,4 +1,6 @@
-﻿using Alfheim.FuzzyLogic.Variables.Model;
+﻿using Alfheim.FuzzyLogic.Rules.Model;
+using Alfheim.FuzzyLogic.Rules.Services;
+using Alfheim.FuzzyLogic.Variables.Model;
 using System.Collections.ObjectModel;
 
 namespace Alfheim.FuzzyLogic.Variables.Services
@@ -66,6 +68,21 @@ namespace Alfheim.FuzzyLogic.Variables.Services
 
         public void Remove(LinguisticVariable variable)
         {
+            foreach(Rule rule in RulesService.Instance.Rules)
+            {
+                foreach(Term term in variable.Terms)
+                {
+                    if ((variable.Type == LinguisticVariableType.Input && rule.RuleConditions.Contains(term)) ||
+                        (variable.Type == LinguisticVariableType.Output && rule.OutputTerm.Equals(term)))
+                        throw new TermIsDefinedInRuleException(
+                                "Term with name : " +
+                                term.Name +
+                                " cannot be moved until it is defined in rule: " +
+                                rule.Stringify()
+                            );
+                }
+            }
+
             linguisticVariableDao.Remove(variable);
         }
 

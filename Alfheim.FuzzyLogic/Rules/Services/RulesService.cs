@@ -7,11 +7,13 @@ using Alfheim.FuzzyLogic.Rules.Model;
 
 namespace Alfheim.FuzzyLogic.Rules.Services
 {
-    public class RulesService : IRulesService
+    public class RulesService
     {
         RulesDao rulesDao;
 
-        public IEnumerable<Rule> LinguisticVariables
+        private static RulesService instance;
+
+        public IEnumerable<Rule> Rules
         {
             get
             {
@@ -19,7 +21,17 @@ namespace Alfheim.FuzzyLogic.Rules.Services
             }
         }
 
-        public RulesService()
+        public static RulesService Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new RulesService();
+                return instance;
+            }
+        }
+
+        private RulesService()
         {
             rulesDao = new RulesDao();
         }
@@ -32,6 +44,11 @@ namespace Alfheim.FuzzyLogic.Rules.Services
         public void RemoveRule(Rule rule)
         {
             rulesDao.Remove(rule);
+        }
+
+        public static void Clear()
+        {
+            instance = new RulesService(); 
         }
     }
 }

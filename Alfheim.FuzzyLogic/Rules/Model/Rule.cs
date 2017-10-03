@@ -60,20 +60,33 @@ namespace Alfheim.FuzzyLogic.Rules.Model
                     " must be specified"
                     );
 
-            LinguisticVariable variable = term.Variable;
-            
-
-            //TODO Is Variable specified
+            if (term.Variable.Type == LinguisticVariableType.Input)
+                throw new WrongLinguisticVariableTypeException(
+                        "Linguistic variable with name: " +
+                        term.Variable.Name +
+                        "must have output type"
+                    );
         }
 
-        public override string ToString()
+        public string Stringify()
         {
             if (OutputTerm == null)
                 throw new OutputTermIsNotSpecifiedException("Output term is not specified");
 
             string outputTermString = OutputTerm.Variable.Name + " is " + OutputTerm.Name;
 
-            return "If " + ruleConditions.ToString() + " then " + outputTermString;
+            return "If " + ruleConditions.Stringify() + " then " + outputTermString;
+        }
+
+        public override string ToString()
+        {
+            return "[" +
+                GetType() +
+                "\n\tRuleConditions: " +
+                RuleConditions.ToString() +
+                "\n\tOutputTerm: " +
+                OutputTerm.ToString() +
+                "]";
         }
     }
 }

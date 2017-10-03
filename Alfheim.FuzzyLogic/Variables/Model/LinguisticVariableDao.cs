@@ -116,7 +116,7 @@ namespace Alfheim.FuzzyLogic.Variables.Model
             var item = (e.NewItem as LinguisticVariable);
 
             if (IsNameExist(item.Name))
-                throw new LinguisticVariableNameAlreadyExistsException("Linguistic variable name already exists;");
+                throw new LinguisticVariableNameAlreadyExistsException("Linguistic variable name: " + item.Name + " already exists;");
         }
 
         #endregion

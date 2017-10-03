@@ -45,9 +45,15 @@ namespace Alfheim.FuzzyLogic.Rules.Model
 
         public void TermVariableIsInputCheck(Term term)
         {
-            //TODO Is Variable specified
+            if (term.Variable == null)
+                throw new LinguisticVariableIsNotSpecifiedException("Variable for term + " + term.Name + " must be specified");
 
-            //throw new NotImplementedException();
+            if (term.Variable.Type == LinguisticVariableType.Output)
+                throw new WrongLinguisticVariableTypeException(
+                        "Linguistic variable with name: " + 
+                        term.Variable.Name + 
+                        "must have input type"
+                    );
         }
 
         public TermsChain Remove(Term term)
@@ -85,7 +91,7 @@ namespace Alfheim.FuzzyLogic.Rules.Model
                 throw new UndefinedOperationTypeException("Type was not specified");
         }
 
-        public override string ToString()
+        public string Stringify()
         {
             TypeIsNotUndefinedCheck();
 
@@ -105,6 +111,22 @@ namespace Alfheim.FuzzyLogic.Rules.Model
                 .Append(nodes[nodes.Count - 1]);
 
             return builder.ToString();
+        }
+
+        public bool Contains(Term term)
+        {
+            return Nodes.FirstOrDefault(curNode => curNode.ThisTerm.Equals(term)) != null;
+        }
+
+        public override string ToString()
+        {
+            return "[" +
+                GetType() +
+                "\n\t Type: " +
+                this.Type.ToString() +
+                "\n\t Nodes: " +
+                this.Nodes.ToString() +
+                "]";
         }
     }
 }

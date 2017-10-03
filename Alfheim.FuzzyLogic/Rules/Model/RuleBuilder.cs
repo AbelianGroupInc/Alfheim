@@ -24,8 +24,6 @@ namespace Alfheim.FuzzyLogic.Rules.Model
     {
         private Rule currentRule;
         private TermsChainBuilder conditionsBuilder;
-        //public Rule CurrentRule { get; set; }
-        //public TermsChainBuilder ConditionsBuilder { get; set; }
 
         private RuleBuilder()
         {
