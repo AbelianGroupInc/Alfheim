@@ -26,12 +26,12 @@ namespace Alfheim.FuzzyLogic.Rules.Services
 
         public void AddRule(Rule rule)
         {
-            rulesDao.Rules.Add(rule);
+            rulesDao.Add(rule);
         }
 
         public void RemoveRule(Rule rule)
         {
-            rulesDao.Rules.Remove(rule);
+            rulesDao.Remove(rule);
         }
     }
 }

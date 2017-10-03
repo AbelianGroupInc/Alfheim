@@ -1,4 +1,5 @@
 ﻿using Alfheim.FuzzyLogic.Variables.Model;
+using Alfheim.FuzzyLogic.Variables.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,9 +45,26 @@ namespace Alfheim.FuzzyLogic.Rules.Model
 
         public Rule SetOutputTerm(Term term)
         {
+            TermVariableIsOutputCheck(term);
+
             this.outputTerm = term;
             return this;
-        }        
+        }
+        
+        public void TermVariableIsOutputCheck(Term term)
+        {
+            if (term.Variable == null)
+                throw new LinguisticVariableIsNotSpecifiedException(
+                    "Variable of term with name: " +
+                    term.Name +
+                    " must be specified"
+                    );
+
+            LinguisticVariable variable = term.Variable;
+            
+
+            //TODO Is Variable specified
+        }
 
         public override string ToString()
         {

@@ -38,7 +38,16 @@ namespace Alfheim.FuzzyLogic.Rules.Model
             TermsChainNode node = new TermsChainNode(sign, term);
             this.nodes.Add(node);
 
+            TermVariableIsInputCheck(term);
+
             return this;
+        }
+
+        public void TermVariableIsInputCheck(Term term)
+        {
+            //TODO Is Variable specified
+
+            //throw new NotImplementedException();
         }
 
         public TermsChain Remove(Term term)

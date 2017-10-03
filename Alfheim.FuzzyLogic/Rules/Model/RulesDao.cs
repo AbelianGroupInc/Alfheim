@@ -25,6 +25,14 @@ namespace Alfheim.FuzzyLogic.Rules.Model
             rules.ItemAdding += OnItemAdding;
         }
          
+        public void Add(Rule rule)
+        {
+            rules.Add(rule);
+        }
+        public void Remove(Rule rule)
+        {
+            rules.Remove(rule);
+        }
 
         private void OnItemAdding(object sender, ItemAddingEventArgs e)
         {
