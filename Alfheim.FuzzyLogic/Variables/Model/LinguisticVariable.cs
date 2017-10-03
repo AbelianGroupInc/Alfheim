@@ -10,9 +10,7 @@ namespace Alfheim.FuzzyLogic.Variables.Model
         private string name;
         private double minValue;
         private double maxValue;
-        private LinguisticVariableType type;
-
-        #region Properties
+        
 
         public string Name {
             get
@@ -65,32 +63,27 @@ namespace Alfheim.FuzzyLogic.Variables.Model
         public LinguisticVariableType Type {
             get
             {
-                return type;
+                return LinguisticVariableService.Instance.GetLinguisticVariableType(this);
             }
             set
             {
-                LinguisticVariableType initType = this.type;
-                if(value == LinguisticVariableType.Undefined)
-                {
-                    this.type = value;
-                    LinguisticVariableService.Instance.Remove(this);
-                }
-                else if (type != LinguisticVariableType.Undefined && type != value)
-                {
-                    LinguisticVariableService.Instance.Remove(this);
-                    this.type = initType;
+                LinguisticVariableType currentVarType = this.Type;
+
+                if (currentVarType == LinguisticVariableType.Undefined)
                     LinguisticVariableService.Instance.Add(this, value);
-                    this.type = value;
-                }
-                else
+                else if (value != currentVarType)
                 {
-                    this.type = value;
-                    LinguisticVariableService.Instance.Add(this, this.type);
+                    LinguisticVariableService.Instance.Remove(this);
+                    LinguisticVariableService.Instance.Add(this, value);
+                    
+                }
+                else if(value == LinguisticVariableType.Undefined)
+                {
+                    LinguisticVariableService.Instance.Remove(this);
                 }
             }
         }
-
-        #endregion
+        
 
         #region Constructors
 
@@ -102,7 +95,6 @@ namespace Alfheim.FuzzyLogic.Variables.Model
 
             this.minValue = minValue;
             this.maxValue = maxValue;
-            this.type = LinguisticVariableType.Undefined;
 
             mTerms.ItemAdding += OnItemAdding; ;
         }
@@ -120,6 +112,27 @@ namespace Alfheim.FuzzyLogic.Variables.Model
             return termByName;
         }
 
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
+
+            if (obj == this)
+                return true;
+
+            LinguisticVariable variable = obj as LinguisticVariable;
+            if ((System.Object) variable == null)
+            {
+                return false;
+            }
+
+            
+            return this.MaxValue == variable.MaxValue &&
+                this.MinValue == variable.MinValue &&
+                this.Name.Equals(variable.Name) &&
+                this.Terms.SequenceEqual(variable.Terms);
+        }
         #region Private methods
         private void CheckDomainRestriction(double minValue, double maxValue)
         {
