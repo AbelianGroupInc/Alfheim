@@ -87,6 +87,23 @@ namespace Alfheim.FuzzyLogic.Variables.Model
                 OutputLinguisticVariables.Remove(variable);
             }
         }
+
+        public LinguisticVariableType GetLinguisticVariableType(LinguisticVariable variable)
+        {
+            LinguisticVariable variableInInputList = InputLinguisticVariables
+                .FirstOrDefault(curVariable => curVariable.Equals(variable));
+
+            if (variableInInputList != null)
+                return LinguisticVariableType.Input;
+
+            LinguisticVariable variableInOutputList = OutputLinguisticVariables
+                .FirstOrDefault(curVariable => curVariable.Equals(variable));
+
+            if (variableInOutputList != null)
+                return LinguisticVariableType.Output;
+
+            return LinguisticVariableType.Undefined;
+        }
         #endregion
 
         #region Private methods

@@ -119,6 +119,27 @@ namespace Alfheim.FuzzyLogic.Variables.Model
             return termByName;
         }
 
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
+
+            if (obj == this)
+                return true;
+
+            LinguisticVariable variable = obj as LinguisticVariable;
+            if ((System.Object) variable == null)
+            {
+                return false;
+            }
+
+            
+            return this.MaxValue == variable.MaxValue &&
+                this.MinValue == variable.MinValue &&
+                this.Name.Equals(variable.Name) &&
+                this.Terms.SequenceEqual(variable.Terms);
+        }
         #region Private methods
         private void CheckDomainRestriction(double minValue, double maxValue)
         {

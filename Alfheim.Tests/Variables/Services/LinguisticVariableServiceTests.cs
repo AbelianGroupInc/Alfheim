@@ -186,5 +186,50 @@ namespace Alfheim.FuzzyLogic.Variables.Services.Tests
 
             var.Name = "";
         }
+
+        [TestMethod()]
+        public void LinguisticVariableEqualsTest()
+        {
+            LinguisticVariable variable = new LinguisticVariable("var", 1, 10);
+            LinguisticVariable equalVariable = new LinguisticVariable("var", 1, 10);
+
+            Term term = TermsFactory.Instance.CreateTermForVariable("term", variable, new TrapezoidalFunction());
+            Term term2 = TermsFactory.Instance.CreateTermForVariable("term2", variable, new TriangleFunction());
+            Term term3 = TermsFactory.Instance.CreateTermForVariable("term3", variable, new GaussianFunction());
+
+            Term equalTerm = TermsFactory.Instance.CreateTermForVariable("term", equalVariable, new TrapezoidalFunction());
+            Term equalTerm2 = TermsFactory.Instance.CreateTermForVariable("term2", equalVariable, new TriangleFunction());
+            Term equalTerm3 = TermsFactory.Instance.CreateTermForVariable("term3", equalVariable, new GaussianFunction());
+
+            Assert.IsTrue(variable.Equals(equalVariable));
+            
+            LinguisticVariable notEqualVariable = new LinguisticVariable("var", 1, 10);
+            Term notEqualTerm = TermsFactory.Instance.CreateTermForVariable("term", notEqualVariable, new TrapezoidalFunction());
+            Term notEqualTerm2 = TermsFactory.Instance.CreateTermForVariable("term2", notEqualVariable, new TriangleFunction());
+            Term notEqualTerm3 = TermsFactory.Instance.CreateTermForVariable("term4", notEqualVariable, new GaussianFunction());
+
+            Assert.IsFalse(variable.Equals(notEqualVariable));
+        }
+
+        [TestMethod()]
+        public void GetLinguisticVariableTypeTest()
+        {
+            LinguisticVariable variable = new LinguisticVariable("var", 1, 10);
+            LinguisticVariable variable2 = new LinguisticVariable("var2", 1, 10);
+            LinguisticVariable variable3 = new LinguisticVariable("var3", 1, 10);
+            Term term = TermsFactory.Instance.CreateTermForVariable("term", variable, new TrapezoidalFunction());
+            Term term2 = TermsFactory.Instance.CreateTermForVariable("term2", variable, new TrapezoidalFunction());
+            Term term3 = TermsFactory.Instance.CreateTermForVariable("term3", variable2, new TrapezoidalFunction());
+            Term term4 = TermsFactory.Instance.CreateTermForVariable("term4", variable3, new TrapezoidalFunction());
+
+            LinguisticVariableService.Instance.Add(variable, LinguisticVariableType.Input);
+            LinguisticVariableService.Instance.Add(variable2, LinguisticVariableType.Input);
+
+            LinguisticVariableService.Instance.Add(variable3, LinguisticVariableType.Output);
+
+            Assert.AreEqual(LinguisticVariableService.Instance.GetLinguisticVariableType(variable), LinguisticVariableType.Input);
+            Assert.AreEqual(LinguisticVariableService.Instance.GetLinguisticVariableType(variable2), LinguisticVariableType.Input);
+            Assert.AreEqual(LinguisticVariableService.Instance.GetLinguisticVariableType(variable3), LinguisticVariableType.Output);
+        }
     }
 }
