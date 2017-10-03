@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Functions\CroppedFunction.cs" />
+    <Compile Include="Functions\FuzzyFunctionType.cs" />
     <Compile Include="Functions\GaussianFunction.cs" />
     <Compile Include="Functions\LinearFunction.cs" />
     <Compile Include="Functions\Point.cs" />
