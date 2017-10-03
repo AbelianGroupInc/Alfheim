@@ -49,28 +49,13 @@ namespace Alfheim.GUI.Services
 
         private void UpdateValues(Term term)
         {
-            var points = (mTermDictionary[term].Values as ChartValues<ObservablePoint>);
-
-            foreach (var point in points)
-                point.Y = term.FuzzyFunction.GetValue(point.X);
+            mTermDictionary[term].Values = FuzzyFunctionToChartValuesConvertor.GetValues(term.FuzzyFunction);
         }
 
         private void InitTerms()
         {
             foreach (var term in mVariable.Terms)
                 AddTermOnPlot(term);
-        }
-
-        private ChartValues<ObservablePoint> GetFunctionResult(IFuzzyFunction func, int smooth)
-        {
-            var result = new ChartValues<ObservablePoint>();
-
-            double step = (func.MinInputValue + func.MaxInputValue) / (double)smooth;
-
-            for (double x = func.MinInputValue; x <= func.MaxInputValue; x += step)
-                result.Add(new ObservablePoint(x, func.GetValue(x)));
-
-            return result;
         }
 
         private void InitHendlers()
@@ -88,14 +73,7 @@ namespace Alfheim.GUI.Services
 
         private void AddTermOnPlot(Term term)
         {
-            mPlot.Series.Add(
-                new LineSeries
-                {
-                    LineSmoothness = 0,
-                    Values = GetFunctionResult(term.FuzzyFunction, 200),// (int)(mPlot.ActualWidth / 2)),
-                    PointGeometry = null,
-                    Title = term.Name
-                });
+            mPlot.Series.Add(LineSeriesBuilder.CreateLineSeries(term));
 
             mTermDictionary.Add(term, (mPlot.Series.Last() as LineSeries));
         }
