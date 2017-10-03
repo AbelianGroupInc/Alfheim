@@ -40,6 +40,8 @@ namespace Alfheim.FuzzyLogic.Functions
 
         protected override void InitProperties()
         {
+            Type = FuzzyFunctionType.Smoothness;
+
             Center = cDefaultIndentation * (MinInputValue + MaxInputValue);
             Steepness = cDefaultSteepness;
         }

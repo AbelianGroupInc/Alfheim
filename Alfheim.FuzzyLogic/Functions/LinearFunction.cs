@@ -12,11 +12,18 @@
 
         public Point RightPoint { get; set; }
 
+        FuzzyFunctionType IFunction.Type { get; } = FuzzyFunctionType.PiecewiseLinear;
+
         public double GetValue(double x)
         {
             return ((RightPoint.X * LeftPoint.Y - LeftPoint.X *
                 RightPoint.Y - x * (LeftPoint.Y - RightPoint.Y))) / 
                 (RightPoint.X - LeftPoint.X);
+        }
+
+        double IFunction.GetValue(double x)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
