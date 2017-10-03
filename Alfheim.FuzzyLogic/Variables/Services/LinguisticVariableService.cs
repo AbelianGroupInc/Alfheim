@@ -67,15 +67,13 @@ namespace Alfheim.FuzzyLogic.Variables.Services
         public void Remove(LinguisticVariable variable)
         {
             linguisticVariableDao.Remove(variable);
-            if(variable.Type != LinguisticVariableType.Undefined)
-                variable.Type = LinguisticVariableType.Undefined;
         }
 
         public void Add(LinguisticVariable variable, LinguisticVariableType type)
         {
-            if (type == LinguisticVariableType.Input && variable.Type != LinguisticVariableType.Input)
+            if (type == LinguisticVariableType.Input)
                 InputLinguisticVariables.Add(variable);
-            else if (type == LinguisticVariableType.Output && variable.Type != LinguisticVariableType.Output)
+            else if (type == LinguisticVariableType.Output)
                 OutputLinguisticVariables.Add(variable);
 
         }

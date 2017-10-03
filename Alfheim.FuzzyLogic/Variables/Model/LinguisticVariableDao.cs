@@ -117,13 +117,6 @@ namespace Alfheim.FuzzyLogic.Variables.Model
 
             if (IsNameExist(item.Name))
                 throw new LinguisticVariableNameAlreadyExistsException("Linguistic variable name already exists;");
-
-            var collection = (sender as FuzzyLogicObservableCollection<LinguisticVariable>);
-
-            if (collection == mInputLinguisticVariables && item.Type == LinguisticVariableType.Undefined)
-                item.Type = LinguisticVariableType.Input;
-            else if (collection == mOutputLinguisticVariables && item.Type == LinguisticVariableType.Undefined)
-                item.Type = LinguisticVariableType.Output;
         }
 
         #endregion
