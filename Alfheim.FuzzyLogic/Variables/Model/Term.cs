@@ -2,13 +2,34 @@
 {
     public class Term
     {
-        public string Name { get; set; }
+
+        private string name;
+        public string Name {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                CheckDoesNameEmtpy(value);
+
+                if (Variable != null)
+                {
+                    if (Variable.DoesTermNameExist(value))
+                        throw new TermNameAlreadyExistsException("Term with name : " + value + " already exists");
+                }
+
+                this.name = value;
+            }
+        }
+
         public IFuzzyFunction FuzzyFunction { get; private set; }
         public LinguisticVariable Variable { get; set; }
         
         
         public Term(string name)
         {
+            CheckDoesNameEmtpy(name);
             Name = name;
         }
 
@@ -22,5 +43,30 @@
 
             this.FuzzyFunction = fuzzyFunction;
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
+
+            if (obj == this)
+                return true;
+
+            Term term = obj as Term;
+            if ((System.Object)term == null)
+            {
+                return false;
+            }
+
+            return this.Name == term.Name;
+                //TODO : this.FuzzyFunction.Equals(term.FuzzyFunction);
+        }
+
+        private void CheckDoesNameEmtpy(string value)
+        {
+            if (value.Equals(""))
+                throw new NameIsEmptyException("Name can not be empty");
+        }
+        
     }
 }

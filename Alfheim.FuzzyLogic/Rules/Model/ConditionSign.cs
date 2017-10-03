@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Alfheim.FuzzyLogic.Variables.Model
+namespace Alfheim.FuzzyLogic.Rules.Model
 {
-    public enum LinguisticVariableType
+    public enum ConditionSign
     {
-        Input,
-        Output,
-        Undefined
+        Negation,
+        Identity
     }
 }

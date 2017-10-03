@@ -56,11 +56,7 @@ namespace Alfheim.FuzzyLogic.Variables.Model
                 throw new LinguisticVariableNotFoundException("Linguistic variable not found");
         }
 
-        #endregion
-
-        #region Private methods
-
-        private bool IsNameExist(string name)
+        public bool IsNameExist(string name)
         {
             bool isInputVariableExist = (GetInputVariableByName(name) != null);
             bool isOutputVariableExist = (GetOutputVariableByName(name) != null);
@@ -68,17 +64,50 @@ namespace Alfheim.FuzzyLogic.Variables.Model
             return isInputVariableExist || isOutputVariableExist;
         }
 
-        private LinguisticVariable GetOutputVariableByName(string name)
+        public LinguisticVariable GetOutputVariableByName(string name)
         {
             return OutputLinguisticVariables
                 .FirstOrDefault(variable => variable.Name == name);
         }
 
-        private LinguisticVariable GetInputVariableByName(string name)
+        public LinguisticVariable GetInputVariableByName(string name)
         {
             return InputLinguisticVariables
                 .FirstOrDefault(variable => variable.Name == name);
+        } 
+
+        public void Remove(LinguisticVariable variable)
+        {
+            if (variable.Type == LinguisticVariableType.Input)
+            {
+                InputLinguisticVariables.Remove(variable);
+            }
+            else if (variable.Type == LinguisticVariableType.Output)
+            {
+                OutputLinguisticVariables.Remove(variable);
+            }
         }
+
+        public LinguisticVariableType GetLinguisticVariableType(LinguisticVariable variable)
+        {
+            LinguisticVariable variableInInputList = InputLinguisticVariables
+                .FirstOrDefault(curVariable => curVariable.Equals(variable));
+
+            if (variableInInputList != null)
+                return LinguisticVariableType.Input;
+
+            LinguisticVariable variableInOutputList = OutputLinguisticVariables
+                .FirstOrDefault(curVariable => curVariable.Equals(variable));
+
+            if (variableInOutputList != null)
+                return LinguisticVariableType.Output;
+
+            return LinguisticVariableType.Undefined;
+        }
+        #endregion
+
+        #region Private methods
+
 
         #region Event handlers
 
@@ -87,7 +116,7 @@ namespace Alfheim.FuzzyLogic.Variables.Model
             var item = (e.NewItem as LinguisticVariable);
 
             if (IsNameExist(item.Name))
-                throw new LinguisticVariableNameAlreadyExistsException("Linguistic variable name already exists;");
+                throw new LinguisticVariableNameAlreadyExistsException("Linguistic variable name: " + item.Name + " already exists;");
         }
 
         #endregion

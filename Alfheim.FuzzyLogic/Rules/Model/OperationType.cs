@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Alfheim.FuzzyLogic.Variables.Model
+namespace Alfheim.FuzzyLogic.Rules.Model
 {
-    public enum LinguisticVariableType
+    public enum OperationType
     {
-        Input,
-        Output,
+        Or, 
+        And,
         Undefined
     }
 }
