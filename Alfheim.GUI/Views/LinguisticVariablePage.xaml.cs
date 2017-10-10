@@ -66,6 +66,13 @@ namespace Alfheim.GUI.Views
 
             mTermPropertyViewService = new TermPropertyViewService(mStackPanel);
             mTermPropertyViewService.TermChanged += OnTermChanged;
+
+            App.ChartQualityChanged += ChartQualityChanged;
+        }
+
+        private void ChartQualityChanged(object sender, EventArgs e)
+        {
+            mPlotBindingService.Update();
         }
 
         private void OutputListBoxDoubleClick(object sender, MouseButtonEventArgs e)

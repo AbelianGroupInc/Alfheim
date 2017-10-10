@@ -8,5 +8,8 @@
     <Setting Name="HelpSite" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://abeliangroup.kl.com.ua/alfheim/</Value>
     </Setting>
+    <Setting Name="ChartQuality" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -99,6 +99,9 @@
     </Compile>
     <Compile Include="Model\InRangePoint.cs" />
     <Compile Include="Model\InRangePointParser.cs" />
+    <Compile Include="Model\IQualitySettings.cs" />
+    <Compile Include="Model\QualityPreset.cs" />
+    <Compile Include="Model\QualitySettings.cs" />
     <Compile Include="Model\ReferencePoint.cs" />
     <Compile Include="Resources\ApplicationStringConstants.cs" />
     <Compile Include="Resources\ApplicationStringResourcesController.cs" />
@@ -108,6 +111,7 @@
     <Compile Include="Services\LineSeriesBuilder.cs" />
     <Compile Include="Services\PlotBindingService.cs" />
     <Compile Include="Services\PropertyEditor.cs" />
+    <Compile Include="Services\QualitySettingsByPresetService.cs" />
     <Compile Include="Services\TermFuzzyFunctionSliderEditor.cs" />
     <Compile Include="Services\SliderPropertyEditor.cs" />
     <Compile Include="Services\TermPropertyViewService.cs" />
@@ -300,6 +304,9 @@
       <Project>{8ed10668-b80e-4b3d-a091-66b64f9f7013}</Project>
       <Name>Alfheim.FuzzyLogic</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\CQ_ICO.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

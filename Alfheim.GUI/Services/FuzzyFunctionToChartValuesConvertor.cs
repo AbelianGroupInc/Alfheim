@@ -1,5 +1,6 @@
 ﻿using Alfheim.FuzzyLogic;
 using Alfheim.FuzzyLogic.Functions;
+using Alfheim.GUI.Model;
 using LiveCharts;
 using LiveCharts.Defaults;
 using System;
@@ -10,10 +11,15 @@ namespace Alfheim.GUI.Services
 {
     public static class FuzzyFunctionToChartValuesConvertor
     {
-        private const int cNumberOfSmoothnessFuzzyFunctionPoints = 50;
-        private const int cNumberOfPiecewiseLinearFuzzyFunctionPoints = 2000;
-        private const int cNumberOfHybridFuzzyFunctionPoints = 200;
         private const double cEps = 1E-7;
+
+        private static  IQualitySettings Quality
+        {
+            get
+            {
+                return QualitySettingsByPresetService.GetSettings(App.ChartQuality);
+            }
+        }
 
         private static ChartValues<ObservablePoint> GetFunctionResult(IFuzzyFunction func)
         {
@@ -44,17 +50,17 @@ namespace Alfheim.GUI.Services
 
         private static ObservablePoint[] GetHybridFunctionValues(IFuzzyFunction function)
         {
-            return GetValues(function, cNumberOfHybridFuzzyFunctionPoints);
+            return GetValues(function, Quality.HybridQuality);
         }
 
         private static ObservablePoint[] GetPiecewiseLinearFunctionValues(IFuzzyFunction function)
         {
-            return OptimazeValues(GetValues(function, cNumberOfPiecewiseLinearFuzzyFunctionPoints));
+            return OptimazeValues(GetValues(function, Quality.PiecewiseLinearQuality));
         }
 
         private static ObservablePoint[] GetSmoothnessFunctionValues(IFuzzyFunction function)
         {
-            return GetValues(function, cNumberOfSmoothnessFuzzyFunctionPoints);
+            return GetValues(function, Quality.SmoothnessQuality);
         }
 
         private static ObservablePoint[] GetValues(IFuzzyFunction function, int numberOfPoints)

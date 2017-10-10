@@ -32,6 +32,12 @@ namespace Alfheim.GUI.Services
             InitTerms();
         }
 
+        public void Update()
+        {
+            foreach (var term in mTermDictionary)
+                UpdateTerm(term.Key, null);
+        }
+
         public void UpdateTerm(Term term, string updatingProperty)
         {
             if (!mTermDictionary.ContainsKey(term))
@@ -91,11 +97,11 @@ namespace Alfheim.GUI.Services
                     OnAdded(e.NewItems.Cast<Term>());
                     break;
                 case NotifyCollectionChangedAction.Remove:
-                    
+
                     break;
 
                 case NotifyCollectionChangedAction.Replace:
-                    
+
                     break;
             }
         }

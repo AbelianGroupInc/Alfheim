@@ -34,6 +34,9 @@
     <v:String x:Key="cAnalysis">Анализ</v:String>
     <v:String x:Key="cTermName">Имя терма</v:String>
     <v:String x:Key="cFunctions">Функция</v:String>
+    <v:String x:Key="cChartQualitySettings">Качество графиков</v:String>
+    <v:String x:Key="Low">Низкое</v:String>
+    <v:String x:Key="High">Высокое</v:String>
     <v:String x:Key="Name">Имя терма</v:String>
     <v:String x:Key="FuzzyFunction">Функция принадлежности</v:String>
     <v:String x:Key="LeftPoint">Левая точка</v:String>

@@ -1,4 +1,6 @@
-﻿using Alfheim.GUI.Resources;
+﻿using Alfheim.GUI.Model;
+using Alfheim.GUI.Resources;
+using Alfheim.GUI.Services;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,9 +17,18 @@ namespace Alfheim.GUI
     {
         private static List<CultureInfo> m_Languages = new List<CultureInfo>();
 
+        public static event EventHandler LanguageChanged;
+        public static event EventHandler ChartQualityChanged;
+
         #region Properties
 
-        public static event EventHandler LanguageChanged;
+        public static QualityPreset ChartQuality
+        {
+            get
+            {
+                return (QualityPreset)GUI.Properties.Settings.Default.ChartQuality;
+            }
+        }
 
         public static List<CultureInfo> Languages
         {
@@ -83,6 +94,14 @@ namespace Alfheim.GUI
             InitializeLanguages();
         }
 
+        public static void SetChartQuality(QualityPreset preset)
+        {
+            GUI.Properties.Settings.Default.ChartQuality = (int)preset;
+            ChartQualityChanged(Application.Current, new EventArgs());
+        }
+
+        #region Public methods
+
         private void InitializeLanguages()
         {
             m_Languages.Clear();
@@ -98,5 +117,7 @@ namespace Alfheim.GUI
             Alfheim.GUI.Properties.Settings.Default.DefaultLanguage = Language;
             Alfheim.GUI.Properties.Settings.Default.Save();
         }
+
+        #endregion
     }
 }
