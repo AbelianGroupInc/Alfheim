@@ -1,4 +1,5 @@
-﻿using Alfheim.GUI.Views;
+﻿using Alfheim.GUI.Model;
+using Alfheim.GUI.Views;
 using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
@@ -27,10 +28,22 @@ namespace Alfheim.GUI
         {
             InitializeComponent();
             InitLanguageMenu();
+            InitChartsQuality();
 
             OpenPage(new StartPage());
-            App.LanguageChanged += LanguageChanged;
-            
+            App.ChartQualityChanged += ChartQualityChanged;
+            App.LanguageChanged += LanguageChanged;   
+        }
+
+        private void ChartQualityChanged(object sender, EventArgs e)
+        {
+            QualityPreset preset = App.ChartQuality;
+
+            foreach (MenuItem i in mQualitySettings.Items)
+            {
+                QualityPreset p = (QualityPreset)i.Tag;
+                i.IsChecked = p.Equals(preset);
+            }
         }
 
         private void LanguageChanged(Object sender, EventArgs e)
@@ -54,6 +67,31 @@ namespace Alfheim.GUI
 
                 if (lang != null)
                     App.Language = lang;
+            }
+        }
+
+        private void InitChartsQuality()
+        {
+            foreach (QualityPreset preset in Enum.GetValues(typeof(QualityPreset)))
+            {
+                MenuItem menu = new MenuItem();
+
+                menu.Header = Application.Current.FindResource(preset.ToString());
+                menu.Tag = preset;
+                menu.IsChecked = preset.Equals(App.ChartQuality);
+                menu.Click += ChartQualityClick;
+                mQualitySettings.Items.Add(menu);
+            }
+        }
+
+        private void ChartQualityClick(object sender, RoutedEventArgs e)
+        {
+            MenuItem mi = sender as MenuItem;
+
+            if (mi != null)
+            {
+                QualityPreset quality = (QualityPreset)mi.Tag;
+                App.SetChartQuality(quality);
             }
         }
 

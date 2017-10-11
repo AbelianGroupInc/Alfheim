@@ -61,7 +61,7 @@
                         <ListBox
                         x:Name="mTermList"
                         Grid.Row="1"
-                        Style="{StaticResource ListBoxWithHeader}">
+                        Style="{StaticResource ListBoxWithHeader}" SelectionChanged="TermList_SelectionChanged">
 
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
@@ -94,6 +94,15 @@
                     <TextBlock
                         Text="{DynamicResource cAdd}" />
                 </Button>
+
+                <ScrollViewer
+                    Grid.Row="4"
+                    VerticalScrollBarVisibility="Auto">
+                    
+                    <StackPanel
+                        x:Name="mStackPanel">
+                    </StackPanel>
+                </ScrollViewer>
             </Grid>
         </Border>
 
@@ -156,7 +165,7 @@
                     
                     <lvc:Axis 
                         MinValue="0"
-                        MaxValue="1"
+                        MaxValue="1.03"
                         Title="{DynamicResource cMembership}"/>
                 </lvc:CartesianChart.AxisY>
             </lvc:CartesianChart>

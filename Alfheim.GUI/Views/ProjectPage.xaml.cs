@@ -26,7 +26,7 @@ namespace Alfheim.GUI.Views
     /// </summary>
     public partial class ProjectPage : Page
     {
-        LinguisticVariableService mLinguisticVariableService = new LinguisticVariableService();
+        LinguisticVariableService mLinguisticVariableService = LinguisticVariableService.Instance;
 
         public ProjectPage(string ProjectName)
         {

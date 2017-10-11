@@ -1,6 +1,8 @@
 ﻿using Alfheim.FuzzyLogic;
 using Alfheim.FuzzyLogic.Functions;
+using Alfheim.FuzzyLogic.FuzzyFunctionAttributes;
 using Alfheim.FuzzyLogic.Variables.Model;
+using Alfheim.GUI.Resources;
 using Alfheim.GUI.Services;
 using LiveCharts;
 using LiveCharts.Defaults;
@@ -8,6 +10,7 @@ using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,6 +22,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MahApps.Metro;
+using System.ComponentModel;
 
 namespace Alfheim.GUI.Views
 {
@@ -31,7 +36,7 @@ namespace Alfheim.GUI.Views
         private LinguisticVariable mThisVariable;
 
         private PlotBindingService mPlotBindingService;
-
+        private TermPropertyViewService mTermPropertyViewService;
 
         public LinguisticVariablePage(Page owner, LinguisticVariable variable)
         {
@@ -49,8 +54,6 @@ namespace Alfheim.GUI.Views
 
         private void Init()
         {
-            mPlotBindingService = new PlotBindingService(mPlot, mThisVariable);
-
             mTermList.ItemsSource = mThisVariable.Terms;
             mTitleTB.Text = mThisVariable.Name;
 
@@ -58,6 +61,18 @@ namespace Alfheim.GUI.Views
             mXAxis.MaxValue = mThisVariable.MaxValue;
             mXAxis.Separator.Step = ((double)(mThisVariable.MinValue + mThisVariable.MaxValue) / 10.0);
             mXAxis.Separator.StrokeThickness = 2;
+
+            mPlotBindingService = new PlotBindingService(mPlot, mThisVariable);
+
+            mTermPropertyViewService = new TermPropertyViewService(mStackPanel);
+            mTermPropertyViewService.TermChanged += OnTermChanged;
+
+            App.ChartQualityChanged += ChartQualityChanged;
+        }
+
+        private void ChartQualityChanged(object sender, EventArgs e)
+        {
+            mPlotBindingService.Update();
         }
 
         private void OutputListBoxDoubleClick(object sender, MouseButtonEventArgs e)
@@ -80,6 +95,28 @@ namespace Alfheim.GUI.Views
             AddTermWindow addVariableWindow = new AddTermWindow(mThisVariable);
             addVariableWindow.Owner = Window.GetWindow(this);
             addVariableWindow.ShowDialog();
+        }
+
+        private void TermList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var term = (mTermList.SelectedItem as Term);
+
+            if (term == null)
+                return;
+
+            mTermPropertyViewService.ShowTermProperties(term);
+        }
+
+        private void OnTermChanged(object sender, PropertyChangedEventArgs e)
+        {
+            Term term = (sender as Term);
+
+            if (term == null)
+                return;
+
+            mPlotBindingService.UpdateTerm(term, e.PropertyName);
+
+            mTermList.Items.Refresh();
         }
     }
 }
