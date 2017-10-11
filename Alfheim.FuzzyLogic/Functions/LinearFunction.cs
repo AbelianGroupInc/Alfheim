@@ -20,10 +20,5 @@
                 RightPoint.Y - x * (LeftPoint.Y - RightPoint.Y))) / 
                 (RightPoint.X - LeftPoint.X);
         }
-
-        double IFunction.GetValue(double x)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }
