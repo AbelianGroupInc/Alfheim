@@ -52,8 +52,8 @@ namespace Alfheim.GUI.Services
             if (slider == null)
                 return;
 
-            if (e.NewValue < slider.SelectionStart
-                || e.NewValue > slider.SelectionEnd)
+            if (slider.IsSelectionRangeEnabled && (e.NewValue < slider.SelectionStart
+                || e.NewValue > slider.SelectionEnd))
                 slider.Value = e.OldValue;
 
             TargetProperty = slider.Value;

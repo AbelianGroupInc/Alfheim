@@ -22,7 +22,7 @@ namespace Alfheim.GUI.Services
         Term mThisTerm;
         IPropertyEditor mNameEditor;
         IPropertyEditor mFunctionEditor;
-        TermFuzzyFunctionSliderEditor sliders = new TermFuzzyFunctionSliderEditor();
+        TermFuzzyFunctionSliderEditor mSliders = new TermFuzzyFunctionSliderEditor();
 
         public TermPropertyViewService(StackPanel panel)
         {
@@ -40,17 +40,9 @@ namespace Alfheim.GUI.Services
   
             mNameEditor.Target = term;
             mFunctionEditor.Target = term;
+            mSliders.Target = term;
 
-            foreach (var element in mNameEditor.GenerateUIElements())
-                mPanel.Children.Add(element);
-
-            foreach (var element in mFunctionEditor.GenerateUIElements())
-                mPanel.Children.Add(element);
-
-            sliders.Target = term;
-
-            foreach (var element in sliders.GenerateUIElements())
-                mPanel.Children.Add(element);
+            UpdateUIElements();
         }
 
         private void InitEditors()
@@ -61,7 +53,7 @@ namespace Alfheim.GUI.Services
             mFunctionEditor = new ComboBoxPropertyEditor("FuzzyFunction", GenerateFuzzyFunctionsDictionary());
             mFunctionEditor.PropertyChanged += OnTermPropertyChanged;
 
-            sliders.PropertyChanged += OnTermPropertyChanged;
+            mSliders.PropertyChanged += OnTermPropertyChanged;
         }    
 
         private static Dictionary<string, object> GenerateFuzzyFunctionsDictionary()
@@ -75,6 +67,20 @@ namespace Alfheim.GUI.Services
             return result;
         }
 
+        private void UpdateUIElements()
+        {
+            mPanel.Children.Clear();
+
+            foreach (var element in mNameEditor.GenerateUIElements())
+                mPanel.Children.Add(element);
+
+            foreach (var element in mFunctionEditor.GenerateUIElements())
+                mPanel.Children.Add(element);
+
+            foreach (var element in mSliders.GenerateUIElements())
+                mPanel.Children.Add(element);
+        }
+
         #region Events
 
         public event PropertyChangedEventHandler TermChanged;
@@ -85,6 +91,9 @@ namespace Alfheim.GUI.Services
 
         private void OnTermPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            if (e.PropertyName == "FuzzyFunction")
+                UpdateUIElements();
+
             TermChanged(sender, e);
         }
 

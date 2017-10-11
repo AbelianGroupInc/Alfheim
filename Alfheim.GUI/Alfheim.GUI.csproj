@@ -100,12 +100,14 @@
     <Compile Include="Model\InRangePoint.cs" />
     <Compile Include="Model\InRangePointParser.cs" />
     <Compile Include="Model\ReferencePoint.cs" />
+    <Compile Include="Model\ReferencePointParser.cs" />
     <Compile Include="Resources\ApplicationStringConstants.cs" />
     <Compile Include="Resources\ApplicationStringResourcesController.cs" />
     <Compile Include="Services\ComboBoxPropertyEditor.cs" />
     <Compile Include="Services\IPropertyEditor.cs" />
     <Compile Include="Services\PlotBindingService.cs" />
     <Compile Include="Services\PropertyEditor.cs" />
+    <Compile Include="Services\SliderWithTextBoxPropertyEditor.cs" />
     <Compile Include="Services\TermFuzzyFunctionSliderEditor.cs" />
     <Compile Include="Services\SliderPropertyEditor.cs" />
     <Compile Include="Services\TermPropertyViewService.cs" />

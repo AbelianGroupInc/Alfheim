@@ -44,4 +44,5 @@
     <v:String x:Key="RightBottomPoint">Right bottom point</v:String>
     <v:String x:Key="LeftBottomPoint">Left bottom point</v:String>
     <v:String x:Key="Center">Center</v:String>
+    <v:String x:Key="Steepness">Steepness</v:String>
 </ResourceDictionary>

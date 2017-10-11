@@ -20,16 +20,16 @@ namespace Alfheim.GUI
         public AddTermWindow(LinguisticVariable linguisticVariable)
         {
             InitializeComponent();
-            InitializeListBox();
 
             mCurrentVariable = linguisticVariable;
+            InitializeListBox();
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                TermsFactory.Instance.CreateTermForVariable(mNameTB.Text, mCurrentVariable, GetSelectedFunction());
+                var term = TermsFactory.Instance.CreateTermForVariable(mNameTB.Text, mCurrentVariable, GetSelectedFunction());
 
                 Close();
             }
@@ -42,13 +42,13 @@ namespace Alfheim.GUI
         private void InitializeListBox()
         {
             mFunctionsCB.Items.Add(new KeyValuePair<string, IFuzzyFunction>(
-                ApplicationStringConstants.TriangleFunction, new TriangleFunction()));
+                ApplicationStringConstants.TriangleFunction, new TriangleFunction(mCurrentVariable.MinValue, mCurrentVariable.MaxValue)));
 
             mFunctionsCB.Items.Add(new KeyValuePair<string, IFuzzyFunction>(
-                ApplicationStringConstants.TrapezoidalFunction, new TrapezoidalFunction()));
+                ApplicationStringConstants.TrapezoidalFunction, new TrapezoidalFunction(mCurrentVariable.MinValue, mCurrentVariable.MaxValue)));
 
             mFunctionsCB.Items.Add(new KeyValuePair<string, IFuzzyFunction>(
-                ApplicationStringConstants.GaussianFunction, new GaussianFunction()));
+                ApplicationStringConstants.GaussianFunction, new GaussianFunction(mCurrentVariable.MinValue, mCurrentVariable.MaxValue)));
 
             mFunctionsCB.SelectedIndex = 0;
         }

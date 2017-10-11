@@ -44,4 +44,5 @@
     <v:String x:Key="RightBottomPoint">Правая нижняя точка</v:String>
     <v:String x:Key="LeftBottomPoint">Левая нижняя точка</v:String>
     <v:String x:Key="Center">Центр</v:String>
+    <v:String x:Key="Steepness">Крутизна</v:String>
 </ResourceDictionary>

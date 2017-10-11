@@ -7,6 +7,6 @@
             Name = name;
         }
 
-        string Name;
+        public string Name { get; set; }
     }
 }
