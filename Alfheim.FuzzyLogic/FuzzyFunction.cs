@@ -1,4 +1,5 @@
 ﻿using System;
+using Alfheim.FuzzyLogic.Functions;
 
 namespace Alfheim.FuzzyLogic
 {
@@ -19,6 +20,8 @@ namespace Alfheim.FuzzyLogic
         public FuzzyFunction(double minInputValue, double maxInputValue, 
             double minOutputValue, double maxOutputValue)
         {
+            Type = FuzzyFunctionType.Undefined;
+
             MinInputValue = minInputValue;
             MaxInputValue = maxInputValue;
 
@@ -39,6 +42,8 @@ namespace Alfheim.FuzzyLogic
         public double MinOutputValue { get; set; }
 
         public double MaxOutputValue { get; set; }
+
+        public FuzzyFunctionType Type { get; protected set; }
 
         #endregion
 

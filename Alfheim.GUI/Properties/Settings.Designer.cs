@@ -43,5 +43,17 @@ namespace Alfheim.GUI.Properties {
                 return ((string)(this["HelpSite"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int ChartQuality {
+            get {
+                return ((int)(this["ChartQuality"]));
+            }
+            set {
+                this["ChartQuality"] = value;
+            }
+        }
     }
 }

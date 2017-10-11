@@ -41,6 +41,8 @@ namespace Alfheim.FuzzyLogic.Functions
 
         protected override void InitProperties()
         {
+            Type = FuzzyFunctionType.PiecewiseLinear;
+
             MiddlePoint = cDefaultIndentation * (MinInputValue + MaxInputValue);
             LeftPoint = cDefaultIndentation * (MinInputValue + MiddlePoint);
             RightPoint = cDefaultIndentation * (MiddlePoint + MaxInputValue);

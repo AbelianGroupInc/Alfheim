@@ -25,6 +25,23 @@
                     Header="{DynamicResource cHome}"/>
 
                 <MenuItem  
+                    x:Name="mSettingsMenu"
+                    Style="{StaticResource TopMenuItem}"                                      
+                    Header="{DynamicResource cSettings}">
+
+                    <MenuItem
+                        x:Name="mQualitySettings"
+                        Header="{DynamicResource cChartQualitySettings}">
+
+                        <MenuItem.Icon>
+                            <Image 
+                                Style="{StaticResource MenuItemIcon}"
+                                Source="Resources/CQ_ICO.ico"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                
+                <MenuItem  
                     x:Name="mLanguageMenu"
                     Style="{StaticResource TopMenuItem}"                                      
                     Header="{DynamicResource cLanguage}"/>

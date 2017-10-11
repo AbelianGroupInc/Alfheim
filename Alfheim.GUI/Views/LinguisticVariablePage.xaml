@@ -165,7 +165,7 @@
                     
                     <lvc:Axis 
                         MinValue="0"
-                        MaxValue="1"
+                        MaxValue="1.03"
                         Title="{DynamicResource cMembership}"/>
                 </lvc:CartesianChart.AxisY>
             </lvc:CartesianChart>
