@@ -91,6 +91,23 @@ namespace Alfheim.FuzzyLogic.Rules.Model
                 throw new UndefinedOperationTypeException("Type was not specified");
         }
 
+        public double getMembershipDegree(Dictionary<Term, double> fuzzificatedValues)
+        {
+            double result = Type == OperationType.And ? 1.0 : 0.0;
+            foreach (var node in nodes)
+            {
+                if (!fuzzificatedValues.ContainsKey(node.ThisTerm))
+                    throw new RulesException("Term with name " + node.ThisTerm.Name + " was not specified");
+
+                var membershipDegreeForCurrentValue = fuzzificatedValues[node.ThisTerm];
+                if ((Type == OperationType.And && membershipDegreeForCurrentValue < result) ||
+                    (Type == OperationType.Or && membershipDegreeForCurrentValue > result))
+                    result = membershipDegreeForCurrentValue;
+            }
+
+            return result;
+        }
+
         public string Stringify()
         {
             TypeIsNotUndefinedCheck();

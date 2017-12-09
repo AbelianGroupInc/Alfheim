@@ -68,6 +68,11 @@ namespace Alfheim.FuzzyLogic.Rules.Model
                     );
         }
 
+        public double getMembershipDegree(Dictionary<Term, double> fuzzificatedValues)
+        {
+            return ruleConditions.getMembershipDegree(fuzzificatedValues);
+        }
+
         public string Stringify()
         {
             if (OutputTerm == null)

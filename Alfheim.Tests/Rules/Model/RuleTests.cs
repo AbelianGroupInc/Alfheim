@@ -28,8 +28,8 @@ namespace Alfheim.FuzzyLogic.Rules.Model.Tests
             LinguisticVariable outputVariable = new LinguisticVariable("outputVar", 1, 10);
 
             Term term1 = TermsFactory.Instance.CreateTermForVariable("term1", inputVariable1, new TrapezoidalFunction());
-            Term term2 = TermsFactory.Instance.CreateTermForVariable("term2", inputVariable1, new TrapezoidalFunction());
-            Term term3 = TermsFactory.Instance.CreateTermForVariable("term3", inputVariable1, new TrapezoidalFunction());
+            Term term2 = TermsFactory.Instance.CreateTermForVariable("term2", inputVariable2, new TrapezoidalFunction());
+            Term term3 = TermsFactory.Instance.CreateTermForVariable("term3", inputVariable3, new TrapezoidalFunction());
 
             Term outputTerm = TermsFactory.Instance.CreateTermForVariable("outputTerm", outputVariable, new TrapezoidalFunction());
 
@@ -53,7 +53,7 @@ namespace Alfheim.FuzzyLogic.Rules.Model.Tests
 
             string ruleString = rule.Stringify();
 
-            Assert.AreEqual(ruleString, "If (var1 is not term1) and (var1 is term2) and (var1 is not term3) then outputVar is outputTerm");
+            Assert.AreEqual(ruleString, "If (var1 is not term1) and (var2 is term2) and (var3 is not term3) then outputVar is outputTerm");
         }
 
         [TestMethod()]

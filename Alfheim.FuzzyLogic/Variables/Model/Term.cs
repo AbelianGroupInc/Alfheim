@@ -44,6 +44,11 @@
             this.FuzzyFunction = fuzzyFunction;
         }
 
+        public double GetMembershipDegree(double explicitValue)
+        {
+            return FuzzyFunction.GetValue(explicitValue);
+        }
+
         public override bool Equals(object obj)
         {
             if (obj == null)
