@@ -55,6 +55,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Fis\FisParser.cs" />
+    <Compile Include="Fis\FisWriter.cs" />
+    <Compile Include="Functions\ConstantFunction.cs" />
     <Compile Include="Functions\CroppedFunction.cs" />
     <Compile Include="Functions\FuzzyFunctionType.cs" />
     <Compile Include="Functions\GaussianFunction.cs" />
@@ -74,6 +77,7 @@
     </Compile>
     <Compile Include="FuzzyLogicException.cs" />
     <Compile Include="FuzzyLogicQuery.cs" />
+    <Compile Include="FuzzyProject.cs" />
     <Compile Include="IFunction.cs" />
     <Compile Include="IFuzzyFunction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

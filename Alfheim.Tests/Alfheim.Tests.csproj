@@ -57,6 +57,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Fis\FisParserTests.cs" />
+    <Compile Include="Fis\FisWriterTests.cs" />
     <Compile Include="FuzzyLogicLifecycle\IntegrationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rules\Model\RuleTests.cs" />
