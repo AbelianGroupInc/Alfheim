@@ -116,58 +116,61 @@ namespace Alfheim.FuzzyLogic.Fis
 
         private static void WriteRules(StringBuilder stringBuilder)
         {
-            stringBuilder.AppendLine("[Rules]");
-            foreach (var rule in RulesService.Instance.Rules)
+            if (RulesService.Instance.Rules.Count() != 0)
             {
-                StringBuilder inputIndeces = new StringBuilder();
-                foreach (var var in LinguisticVariableService.Instance.InputLinguisticVariables)
+                stringBuilder.AppendLine("[Rules]");
+                foreach (var rule in RulesService.Instance.Rules)
                 {
-                    Term curTerm = rule.RuleConditions
-                        .Nodes
-                        .FirstOrDefault(n => n.ThisTerm.Variable.Equals(var))
-                        .ThisTerm;
-
-                    if (inputIndeces.Length != 0)
+                    StringBuilder inputIndeces = new StringBuilder();
+                    foreach (var var in LinguisticVariableService.Instance.InputLinguisticVariables)
                     {
-                        inputIndeces.Append(" ");
+                        Term curTerm = rule.RuleConditions
+                            .Nodes
+                            .FirstOrDefault(n => n.ThisTerm.Variable.Equals(var))
+                            .ThisTerm;
+
+                        if (inputIndeces.Length != 0)
+                        {
+                            inputIndeces.Append(" ");
+                        }
+
+                        if (curTerm == null)
+                        {
+                            inputIndeces.Append("0");
+                        }
+                        else
+                        {
+                            inputIndeces.Append(
+                                (var.Terms.ToList().FindIndex(t => t == curTerm) + 1).ToString()
+                                );
+                        }
+
                     }
 
-                    if (curTerm == null)
+                    stringBuilder
+                        .Append(inputIndeces.ToString())
+                        .Append(", ");
+
+                    StringBuilder outputIndeces = new StringBuilder();
+
+                    foreach (var var in LinguisticVariableService.Instance.OutputLinguisticVariables)
                     {
-                        inputIndeces.Append("0");
-                    }
-                    else
-                    {
-                        inputIndeces.Append(
-                            (var.Terms.ToList().FindIndex(t => t == curTerm) + 1).ToString()
-                            );
+
+                        if (rule.OutputTerm.Variable.Equals(var))
+                        {
+
+                            outputIndeces.Append(
+                                (var.Terms.ToList().FindIndex(t => t == rule.OutputTerm) + 1).ToString()
+                                );
+                            outputIndeces.Append(" ");
+                        }
+
                     }
 
+                    stringBuilder
+                        .Append(outputIndeces)
+                        .Append("(1) : 1\n");
                 }
-
-                stringBuilder
-                    .Append(inputIndeces.ToString())
-                    .Append(", ");
-
-                StringBuilder outputIndeces = new StringBuilder();
-
-                foreach (var var in LinguisticVariableService.Instance.OutputLinguisticVariables)
-                {
-
-                    if (rule.OutputTerm.Variable.Equals(var))
-                    {
-
-                        outputIndeces.Append(
-                            (var.Terms.ToList().FindIndex(t => t == rule.OutputTerm) + 1).ToString()
-                            );
-                        outputIndeces.Append(" ");
-                    }
-
-                }
-
-                stringBuilder
-                    .Append(outputIndeces)
-                    .Append("(1) : 1\n");
             }
         }
     }

@@ -69,11 +69,11 @@ namespace Alfheim.Tests.Fis
         [TestMethod]
         public void FisWriterTest()
         {
-            FisParser.Parse("D:\\Study\\Projects\\5.1\\Крапивный\\!FIS\\Lab4-my.fis");
+            FisParser.Parse("D:\\Study\\Projects\\5.1\\Крапивный\\!FIS\\Ttt.fis");
             
             Assert.IsNotNull(FuzzyProject.Instance.Name);
 
-            FisWriter.Write("D:\\Study\\Projects\\5.1\\Крапивный\\!FIS\\testWrite");
+            FisWriter.Write("D:\\Study\\Projects\\5.1\\Крапивный\\!FIS\\TttOut");
         }
 
 
