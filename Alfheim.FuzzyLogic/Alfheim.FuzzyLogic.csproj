@@ -63,6 +63,7 @@
     <Compile Include="Functions\GaussianFunction.cs" />
     <Compile Include="Functions\JointFunction.cs" />
     <Compile Include="Functions\LinearFunction.cs" />
+    <Compile Include="Functions\PartiallyDefinedMultidimensionalFunction.cs" />
     <Compile Include="Functions\Point.cs" />
     <Compile Include="Functions\TrapezoidalFunction.cs" />
     <Compile Include="Functions\TriangleFunction.cs" />
