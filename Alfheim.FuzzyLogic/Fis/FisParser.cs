@@ -48,48 +48,51 @@ namespace Alfheim.FuzzyLogic.Fis
                 );
 
             MatchCollection matches = rgx.Matches(fisTextFileText);
-            string rules = matches[0].Value;
-
-            Regex singleRuleRegex =
-                new Regex("([^,\\n]+), ([\\d\\s]+)",
-                RegexOptions.IgnoreCase
-                );
-
-            MatchCollection singleRuleRegexMatches = singleRuleRegex.Matches(fisTextFileText);
-            foreach (Match match in singleRuleRegexMatches)
+            if (matches.Count != 0)
             {
-                // Correct
-                string inputArrayString = match.Groups[1].Value;
-                string outputArrayString = match.Groups[2].Value;
+                string rules = matches[0].Value;
 
-                string[] inputArray = inputArrayString.Split(' ');
-                string[] outputArray = outputArrayString.Split(' ');
+                Regex singleRuleRegex =
+                    new Regex("([^,\\n]+), ([\\d\\s]+)",
+                    RegexOptions.IgnoreCase
+                    );
 
-                RuleBuilder builder = RuleBuilder.CreateBuilder();
-                RuleBuilder.TermsChainBuilder tcb = builder
-                    .Conditions()
-                        .ConditionsOperation(OperationType.And); // IMPORTANT
-
-                for (int i = 0; i < inputArray.Length; i++)
+                MatchCollection singleRuleRegexMatches = singleRuleRegex.Matches(fisTextFileText);
+                foreach (Match match in singleRuleRegexMatches)
                 {
-                    int currentLinguisticVariableTermIndex = 1;
-                    Int32.TryParse(inputArray[i], out currentLinguisticVariableTermIndex);
-                    tcb
-                        .Add(ConditionSign.Identity, InputNamesToIndeces[i][currentLinguisticVariableTermIndex - 1]);
+                    // Correct
+                    string inputArrayString = match.Groups[1].Value;
+                    string outputArrayString = match.Groups[2].Value;
 
-                    //.And()
+                    string[] inputArray = inputArrayString.Split(' ');
+                    string[] outputArray = outputArrayString.Split(' ');
+
+                    RuleBuilder builder = RuleBuilder.CreateBuilder();
+                    RuleBuilder.TermsChainBuilder tcb = builder
+                        .Conditions()
+                            .ConditionsOperation(OperationType.And); // IMPORTANT
+
+                    for (int i = 0; i < inputArray.Length; i++)
+                    {
+                        int currentLinguisticVariableTermIndex = 1;
+                        Int32.TryParse(inputArray[i], out currentLinguisticVariableTermIndex);
+                        tcb
+                            .Add(ConditionSign.Identity, InputNamesToIndeces[i][currentLinguisticVariableTermIndex - 1]);
+
+                        //.And()
+                    }
+
+                    int outputTermIndex = 1;
+                    Int32.TryParse(outputArray[0], out outputTermIndex);
+                    Term outputTerm = OutputNamesToIndeces[0][outputTermIndex - 1];
+
+                    Rule newRule = tcb
+                        .And()
+                        .OutputTerm(outputTerm)
+                        .Build();
+
+                    RulesService.Instance.AddRule(newRule);
                 }
-
-                int outputTermIndex = 1;
-                Int32.TryParse(outputArray[0], out outputTermIndex);
-                Term outputTerm = OutputNamesToIndeces[0][outputTermIndex - 1];
-
-                Rule newRule = tcb
-                    .And()
-                    .OutputTerm(outputTerm)
-                    .Build();
-
-                RulesService.Instance.AddRule(newRule);
             }
         }
 
