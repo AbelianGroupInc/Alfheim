@@ -48,4 +48,8 @@
     <v:String x:Key="LeftBottomPoint">Left bottom point</v:String>
     <v:String x:Key="Center">Center</v:String>
     <v:String x:Key="Steepness">Steepness</v:String>
+    <v:String x:Key="NewProject">New project</v:String>
+    <v:String x:Key="cVersion">Version</v:String>
+    <v:String x:Key="cProjectName">Name</v:String>
+    <v:String x:Key="cBack">Back</v:String>
 </ResourceDictionary>

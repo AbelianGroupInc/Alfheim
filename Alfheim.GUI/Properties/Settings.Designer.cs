@@ -55,5 +55,17 @@ namespace Alfheim.GUI.Properties {
                 this["ChartQuality"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Projects")]
+        public string ProjectsFolder {
+            get {
+                return ((string)(this["ProjectsFolder"]));
+            }
+            set {
+                this["ProjectsFolder"] = value;
+            }
+        }
     }
 }

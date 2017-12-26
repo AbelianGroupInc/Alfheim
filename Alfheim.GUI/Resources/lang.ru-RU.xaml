@@ -48,4 +48,8 @@
     <v:String x:Key="LeftBottomPoint">Левая нижняя точка</v:String>
     <v:String x:Key="Center">Центр</v:String>
     <v:String x:Key="Steepness">Крутизна</v:String>
+    <v:String x:Key="NewProject">Новый проект</v:String>
+    <v:String x:Key="cVersion">Версия</v:String>
+    <v:String x:Key="cProjectName">Имя</v:String>
+    <v:String x:Key="cBack">Назад</v:String>
 </ResourceDictionary>

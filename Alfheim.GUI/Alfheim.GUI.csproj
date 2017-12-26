@@ -100,6 +100,8 @@
     <Compile Include="Model\InRangePoint.cs" />
     <Compile Include="Model\InRangePointParser.cs" />
     <Compile Include="Model\IQualitySettings.cs" />
+    <Compile Include="Model\PorjectCreator.cs" />
+    <Compile Include="Model\ProjectParameters.cs" />
     <Compile Include="Model\QualityPreset.cs" />
     <Compile Include="Model\QualitySettings.cs" />
     <Compile Include="Model\ReferencePoint.cs" />
@@ -119,6 +121,9 @@
     <Compile Include="Services\TermPropertyViewService.cs" />
     <Compile Include="Services\TextBlockGenerator.cs" />
     <Compile Include="Services\TextBoxPropertyEditor.cs" />
+    <Compile Include="Views\CreateProjectPage.xaml.cs">
+      <DependentUpon>CreateProjectPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LinguisticVariablePage.xaml.cs">
       <DependentUpon>LinguisticVariablePage.xaml</DependentUpon>
     </Compile>
@@ -232,6 +237,10 @@
     <Page Include="Styles\WrapPanelStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\CreateProjectPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\LinguisticVariablePage.xaml">
       <SubType>Designer</SubType>

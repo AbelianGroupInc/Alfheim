@@ -18,6 +18,7 @@
             Style="{StaticResource FlatStackPanel}">
             
             <Button
+                Click="CreateNewProject_Click"
                 Style="{StaticResource BigFlatButton}">
                 
                 <TextBlock 
