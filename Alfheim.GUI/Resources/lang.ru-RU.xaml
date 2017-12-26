@@ -52,4 +52,5 @@
     <v:String x:Key="cVersion">Версия</v:String>
     <v:String x:Key="cProjectName">Имя</v:String>
     <v:String x:Key="cBack">Назад</v:String>
+    <v:String x:Key="cBrowse">Обзор</v:String>
 </ResourceDictionary>

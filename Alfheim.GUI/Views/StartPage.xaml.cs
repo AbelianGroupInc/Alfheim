@@ -32,7 +32,8 @@ namespace Alfheim.GUI.Views
 
         private void OpenProject_Click(object sender, RoutedEventArgs e)
         {
-            (Window.GetWindow(this) as MainWindow).OpenPage(new ProjectPage("Test Project"));
+            (Window.GetWindow(this) as MainWindow).OpenPage(new OpenProjectPage(this));
+            //(Window.GetWindow(this) as MainWindow).OpenPage(new ProjectPage("Test Project"));
         }
 
         private void CreateNewProject_Click(object sender, RoutedEventArgs e)

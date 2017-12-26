@@ -25,21 +25,14 @@
                     Style="{StaticResource BigTextStyle}"
                     Text="{DynamicResource cCreateProject}" />
             </Button>
-            
+
             <Button
                 Style="{StaticResource BigFlatButton}"
                 Click="OpenProject_Click">
-                
+
                 <TextBlock 
                     Style="{StaticResource BigTextStyle}"
                     Text="{DynamicResource cOpenProject}" />
-            </Button>
-            
-            <Button
-                Style="{StaticResource BigFlatButton}">
-                <TextBlock 
-                    Style="{StaticResource BigTextStyle}"
-                    Text="{DynamicResource cImportFIS}" />
             </Button>
 
             <Button

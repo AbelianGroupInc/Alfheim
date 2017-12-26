@@ -5,9 +5,9 @@ using System.IO;
 
 namespace Alfheim.GUI.Model
 {
-    public static class PorjectCreator
+    public static class ProjectService
     {
-        public static void Create(ProjectParameters parameters)
+        public static void CreateProject(ProjectParameters parameters)
         {
             string dirPath = $"{Properties.Settings.Default.ProjectsFolder}/{parameters.Name}";
 
@@ -20,6 +20,11 @@ namespace Alfheim.GUI.Model
             FuzzyProject.Instance.Version = parameters.Version;
 
             FisWriter.Write($"{dirPath}/{parameters.Name}");
+        }
+
+        public static void OpenProject(string fileName)
+        {
+            FisParser.Parse(fileName);
         }
     }
 }

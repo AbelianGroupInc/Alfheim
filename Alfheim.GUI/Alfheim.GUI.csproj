@@ -100,7 +100,7 @@
     <Compile Include="Model\InRangePoint.cs" />
     <Compile Include="Model\InRangePointParser.cs" />
     <Compile Include="Model\IQualitySettings.cs" />
-    <Compile Include="Model\PorjectCreator.cs" />
+    <Compile Include="Model\ProjectService.cs" />
     <Compile Include="Model\ProjectParameters.cs" />
     <Compile Include="Model\QualityPreset.cs" />
     <Compile Include="Model\QualitySettings.cs" />
@@ -126,6 +126,9 @@
     </Compile>
     <Compile Include="Views\LinguisticVariablePage.xaml.cs">
       <DependentUpon>LinguisticVariablePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OpenProjectPage.xaml.cs">
+      <DependentUpon>OpenProjectPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProjectPage.xaml.cs">
       <DependentUpon>ProjectPage.xaml</DependentUpon>
@@ -243,6 +246,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\LinguisticVariablePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OpenProjectPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

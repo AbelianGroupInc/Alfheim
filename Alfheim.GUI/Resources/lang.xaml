@@ -52,4 +52,5 @@
     <v:String x:Key="cVersion">Version</v:String>
     <v:String x:Key="cProjectName">Name</v:String>
     <v:String x:Key="cBack">Back</v:String>
+    <v:String x:Key="cBrowse">Browse</v:String>
 </ResourceDictionary>

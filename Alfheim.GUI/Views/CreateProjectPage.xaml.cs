@@ -39,7 +39,7 @@ namespace Alfheim.GUI.Views
                 var @params = new ProjectParameters(ctrNameTB.Text,
                     Convert.ToDouble(ctrVersionTB.Text, CultureInfo.InvariantCulture));
 
-                PorjectCreator.Create(@params);
+                ProjectService.CreateProject(@params);
                 (Window.GetWindow(this) as MainWindow).OpenPage(new ProjectPage(@params.Name));
             }
             catch(Exception exp)
