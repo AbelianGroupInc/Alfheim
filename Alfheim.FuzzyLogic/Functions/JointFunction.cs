@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Alfheim.FuzzyLogic.Functions
 {
-    class JointFunction : FuzzyFunction
+    public class JointFunction : FuzzyFunction
     {
         public List<IFuzzyFunction> JointFunctions { get; set; }
 
