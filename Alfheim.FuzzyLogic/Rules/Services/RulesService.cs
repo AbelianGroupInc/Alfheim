@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Alfheim.FuzzyLogic.Rules.Model;
+using Alfheim.FuzzyLogic.Variables.Model;
 
 namespace Alfheim.FuzzyLogic.Rules.Services
 {
@@ -13,7 +14,7 @@ namespace Alfheim.FuzzyLogic.Rules.Services
 
         private static RulesService instance;
 
-        public IEnumerable<Rule> Rules
+        public FuzzyLogicObservableCollection<Rule> Rules
         {
             get
             {
