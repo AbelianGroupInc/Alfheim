@@ -102,10 +102,11 @@ namespace Alfheim.FuzzyLogic
             double min = JointFunctions.MinInputValue;
 
             // Integrate!
-            double numerator = TrapezoidalRule.Integrate(numeratorSubFunction, min, max, steps: 1000);
-            double denumerator = TrapezoidalRule.Integrate(denumeratorSubFunction, min, max, steps: 1000);
+            double numerator = TrapezoidalRule.Integrate(numeratorSubFunction, min, max, steps: 100);
+            double denumerator = TrapezoidalRule.Integrate(denumeratorSubFunction, min, max, steps: 100);
 
             Output = numerator / denumerator;
+            
         }
     }
 }
