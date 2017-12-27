@@ -53,4 +53,9 @@
     <v:String x:Key="cProjectName">Name</v:String>
     <v:String x:Key="cBack">Back</v:String>
     <v:String x:Key="cBrowse">Browse</v:String>
+    <v:String x:Key="cLinguisticVariables">Linguistic variables</v:String>
+    <v:String x:Key="cAddRule">Add rule</v:String>
+    <v:String x:Key="cNewLinguisticVariable">Add Linguistic variable</v:String>
+    <v:String x:Key="cInputLinguisticVariables">Input linguistic variables</v:String>
+    <v:String x:Key="cOutputLinguisticVariables">Output linguistic variable</v:String>
 </ResourceDictionary>

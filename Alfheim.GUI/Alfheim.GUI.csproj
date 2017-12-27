@@ -106,12 +106,16 @@
     <Compile Include="Model\QualitySettings.cs" />
     <Compile Include="Model\ReferencePoint.cs" />
     <Compile Include="Model\ReferencePointParser.cs" />
+    <Compile Include="NewRuleWindow.xaml.cs">
+      <DependentUpon>NewRuleWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Resources\ApplicationStringConstants.cs" />
     <Compile Include="Resources\ApplicationStringResourcesController.cs" />
     <Compile Include="Services\ComboBoxPropertyEditor.cs" />
     <Compile Include="Services\FuzzyFunctionToChartValuesConvertor.cs" />
     <Compile Include="Services\IPropertyEditor.cs" />
     <Compile Include="Services\LineSeriesBuilder.cs" />
+    <Compile Include="Services\ListBoxForLV.cs" />
     <Compile Include="Services\PlotBindingService.cs" />
     <Compile Include="Services\PropertyEditor.cs" />
     <Compile Include="Services\QualitySettingsByPresetService.cs" />
@@ -132,6 +136,9 @@
     </Compile>
     <Compile Include="Views\ProjectPage.xaml.cs">
       <DependentUpon>ProjectPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SimpleExecutePage.xaml.cs">
+      <DependentUpon>SimpleExecutePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\StartPage.xaml.cs">
       <DependentUpon>StartPage.xaml</DependentUpon>
@@ -165,6 +172,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="NewRuleWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Icons.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -254,6 +265,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ProjectPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SimpleExecutePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

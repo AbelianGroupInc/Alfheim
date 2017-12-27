@@ -73,14 +73,17 @@ namespace Alfheim.FuzzyLogic.Rules.Model
             return ruleConditions.getMembershipDegree(fuzzificatedValues);
         }
 
-        public string Stringify()
+        public string Stringify
         {
-            if (OutputTerm == null)
-                throw new OutputTermIsNotSpecifiedException("Output term is not specified");
+            get
+            {
+                if (OutputTerm == null)
+                    throw new OutputTermIsNotSpecifiedException("Output term is not specified");
 
-            string outputTermString = OutputTerm.Variable.Name + " is " + OutputTerm.Name;
+                string outputTermString = OutputTerm.Variable.Name + " is " + OutputTerm.Name;
 
-            return "If " + ruleConditions.Stringify() + " then " + outputTermString;
+                return "If " + ruleConditions.Stringify() + " then " + outputTermString;
+            }
         }
 
         public override string ToString()

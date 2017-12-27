@@ -53,4 +53,9 @@
     <v:String x:Key="cProjectName">Имя</v:String>
     <v:String x:Key="cBack">Назад</v:String>
     <v:String x:Key="cBrowse">Обзор</v:String>
+    <v:String x:Key="cLinguisticVariables">Лингвистические переменные</v:String>
+    <v:String x:Key="cAddRule">Добавить правило</v:String>
+    <v:String x:Key="cNewLinguisticVariable">Добавить лингвистическую переменную</v:String>
+    <v:String x:Key="cInputLinguisticVariables">Входные лингвистические переменные</v:String>
+    <v:String x:Key="cOutputLinguisticVariables">Выходная лингвистическая переменная</v:String>
 </ResourceDictionary>

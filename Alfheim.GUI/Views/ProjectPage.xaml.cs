@@ -1,4 +1,6 @@
-﻿using Alfheim.FuzzyLogic.Variables.Model;
+﻿using Alfheim.FuzzyLogic.Rules.Model;
+using Alfheim.FuzzyLogic.Rules.Services;
+using Alfheim.FuzzyLogic.Variables.Model;
 using Alfheim.FuzzyLogic.Variables.Services;
 using Alfheim.GUI.Controls;
 using Alfheim.GUI.Resources;
@@ -32,7 +34,7 @@ namespace Alfheim.GUI.Views
         {
             InitializeComponent();
 
-            
+            mRulesLB.ItemsSource = RulesService.Instance.Rules;
             mOutputsList.ItemsSource = mLinguisticVariableService.OutputLinguisticVariables;
             mInputList.ItemsSource = mLinguisticVariableService.InputLinguisticVariables;
             mProjectNameTB.Text = ProjectName;
@@ -129,6 +131,32 @@ namespace Alfheim.GUI.Views
             var item = listBox.SelectedItem as LinguisticVariable;
 
             (Window.GetWindow(this) as MainWindow).OpenPage(new LinguisticVariablePage(this, item));
+        }
+
+        private void RulesListBoxDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void AddRules_Click(object sender, RoutedEventArgs e)
+        {
+            var nrw = new NewRuleWindow();
+
+            nrw.Owner = Window.GetWindow(this);
+            nrw.Show();
+        }
+
+        private void RemoveRule_Click(object sender, RoutedEventArgs e)
+        {
+            var rule = (mRulesLB.SelectedValue as Rule);
+
+            if (rule != null)
+                RulesService.Instance.RemoveRule(rule);
+        }
+
+        private void StartTest_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -51,7 +51,7 @@ namespace Alfheim.FuzzyLogic.Rules.Model.Tests
                 .OutputTerm(outputTerm)
                 .Build();
 
-            string ruleString = rule.Stringify();
+            string ruleString = rule.Stringify;
 
             Assert.AreEqual(ruleString, "If (var1 is not term1) and (var2 is term2) and (var3 is not term3) then outputVar is outputTerm");
         }

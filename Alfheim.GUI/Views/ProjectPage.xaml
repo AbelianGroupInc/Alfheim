@@ -20,7 +20,7 @@
 
             <Button 
                 DockPanel.Dock="Right"
-                Margin="5"
+                Margin="5 5 0 5"
                 Width="30" Height="30"
                 Style="{DynamicResource MetroCircleButtonStyle}"
                 VerticalAlignment="Center">
@@ -29,6 +29,22 @@
                     Width="10" Height="10">
                     <Rectangle.Fill>
                         <VisualBrush Visual="{StaticResource appbar_cog}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+
+            <Button 
+                DockPanel.Dock="Right"
+                Margin="-5 5 0 5"
+                Width="30" Height="30"
+                Click="StartTest_Click"
+                Style="{DynamicResource MetroCircleButtonStyle}"
+                VerticalAlignment="Center">
+
+                <Rectangle
+                    Width="10" Height="10">
+                    <Rectangle.Fill>
+                        <VisualBrush Visual="{StaticResource appbar_control_play}" />
                     </Rectangle.Fill>
                 </Rectangle>
             </Button>
@@ -95,12 +111,56 @@
                 </Grid>
             </Border>
 
-            <m:ListBoxWithHeader
+            <!--<m:ListBoxWithHeader
+                x:Name="mRulesLB"
                 Grid.Row="0" Grid.Column="0"
                 Grid.RowSpan="3"
                 Style="{StaticResource DefaultListBoxWithHeader}"
-                Title="{DynamicResource cRules}" />
+                Title="{DynamicResource cRules}" />-->
 
+            <Border
+                Grid.Row="0" Grid.Column="0"
+                Grid.RowSpan="3"
+                Margin="6 3"
+                Style="{StaticResource DefaultBorder}">
+                
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <DockPanel
+                        Grid.Row="0" 
+                        Style="{StaticResource HeaderDockPanel}">
+
+                        <TextBlock 
+                            DockPanel.Dock="Right"
+                            Style="{StaticResource HeaderWithoutBackground}"
+                            Text="{Binding ElementName=mRulesLB, Path=Items.Count}"/>
+
+                        <TextBlock
+                            Text="{DynamicResource cRules}"
+                            Style="{StaticResource HeaderWithoutBackground}"/>
+                    </DockPanel>
+
+                    <ListBox
+                        x:Name="mRulesLB"
+                        Grid.Row="1"
+                        Style="{StaticResource ListBoxWithHeader}">
+
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock 
+                                    Text="{Binding Path=Stringify}"
+                                    MouseDown="RulesListBoxDoubleClick" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+
+                    </ListBox>
+                </Grid>
+            </Border>
+            
             <Border
                 Grid.Row="2" Grid.Column="1"
                 Grid.ColumnSpan="2"
@@ -175,13 +235,40 @@
                 <TextBlock Text="{DynamicResource cRemove}"/>
             </Button>
 
-            <Button
-                Grid.Row="4" Grid.Column="0"
-                Style="{StaticResource BigFlatButton}"
-                Click="EditRules_Click">
+            <Grid
+                Grid.Row="4" Grid.Column="0" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
 
-                <TextBlock Text="{DynamicResource cEdit}"/>
-            </Button>
+                <Button
+                    Grid.Column="1"
+                    Style="{StaticResource BigFlatButton}"
+                    Click="RemoveRule_Click">
+
+                    <TextBlock Text="{DynamicResource cRemove}"/>
+                </Button>
+
+                <Button
+                    Visibility="Hidden"
+                    IsEnabled="False"
+                    Grid.Column="0"
+                    Style="{StaticResource BigFlatButton}"
+                    Click="EditRules_Click">
+
+                    <TextBlock Text="{DynamicResource cEdit}"/>
+                </Button>
+
+                <Button
+                    Grid.Column="2"
+                    Style="{StaticResource BigFlatButton}"
+                    Click="AddRules_Click">
+
+                    <TextBlock Text="{DynamicResource cAdd}"/>
+                </Button>
+            </Grid>
         </Grid>
     </DockPanel>
 </Page>

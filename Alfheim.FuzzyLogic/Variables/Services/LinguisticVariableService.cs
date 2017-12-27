@@ -78,7 +78,7 @@ namespace Alfheim.FuzzyLogic.Variables.Services
                                 "Term with name : " +
                                 term.Name +
                                 " cannot be moved until it is defined in rule: " +
-                                rule.Stringify()
+                                rule.Stringify
                             );
                 }
             }
