@@ -35,6 +35,10 @@ namespace Alfheim.FuzzyLogic
 
         public double Execute()
         {
+            FuzzificatedValues.Clear();
+            RulesLeftSideAggregatedValues.Clear();
+            CroppedFunctions.Clear();
+
             Fuzzificate();
             Aggregate();
             Activate();

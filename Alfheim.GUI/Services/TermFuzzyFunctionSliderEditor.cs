@@ -44,7 +44,7 @@ namespace Alfheim.GUI.Services
 
             foreach (var point in referencePoints)
             {
-                var sliderEditor = (new SliderPropertyEditor(point.Name));
+                var sliderEditor = (new SliderPropertyEditor(point.Name, false));
 
                 sliderEditor.Target = function;
                 sliderEditor.PropertyChanged += ReferencePointPropertyChanged;
@@ -53,9 +53,8 @@ namespace Alfheim.GUI.Services
                 var slider = (uiElements.Last() as Slider);
 
                 slider.Minimum = 0.1;
-                slider.Maximum = 100;
-                slider.TickFrequency = 1;
-                slider.IsSelectionRangeEnabled = false;
+                slider.Maximum = function.MaxInputValue * 5;
+                slider.TickFrequency = (slider.Minimum + slider.Maximum) / 20.0;
 
                 elements.AddRange(uiElements);
             }

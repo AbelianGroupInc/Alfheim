@@ -6,9 +6,12 @@ namespace Alfheim.GUI.Services
 {
     public class SliderPropertyEditor : PropertyEditor
     {
-        public SliderPropertyEditor(string targetPropertyName)
+        private bool mIsSelectionRangeEnabled = true;
+
+        public SliderPropertyEditor(string targetPropertyName, bool isSelectionRangeEnabled = true)
         {
             TargetPropertyName = targetPropertyName;
+            mIsSelectionRangeEnabled = isSelectionRangeEnabled;
         }
 
         public override event PropertyChangedEventHandler PropertyChanged;
@@ -30,13 +33,15 @@ namespace Alfheim.GUI.Services
 
             slider.Style = Application.Current.FindResource("SliderFlatStyle") as Style;
 
-            slider.IsSelectionRangeEnabled = true;
+            slider.IsSelectionRangeEnabled = mIsSelectionRangeEnabled;
 
             slider.AutoToolTipPlacement = System.Windows.Controls.Primitives.AutoToolTipPlacement.TopLeft;
             slider.AutoToolTipPrecision = 2;
             slider.IsSnapToTickEnabled = false;
             slider.TickPlacement = System.Windows.Controls.Primitives.TickPlacement.BottomRight;
 
+            slider.Minimum = (double)TargetProperty - 1;
+            slider.Maximum = (double)TargetProperty + 1;
             slider.Value = (double)TargetProperty;
             slider.ValueChanged += OnPropertyChanged;
 
