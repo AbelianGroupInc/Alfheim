@@ -66,16 +66,10 @@ namespace Alfheim.FuzzyLogic.Functions
                 return FuzzyFunctionType.Undefined;
             }
         }
-
-        protected double GetValue(double x)
-        {
-            
-            return JointFunctions.Max(f => f.GetValue(x));
-        }
-
+        
         protected override double Function(double x)
         {
-            return GetValue(x);
+            return JointFunctions.Max(f => f.GetValue(x));
         }
 
         protected override void InitProperties()

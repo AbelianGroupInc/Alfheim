@@ -42,6 +42,7 @@ namespace Alfheim.FuzzyLogic.Functions
         public CroppedFunction(IFuzzyFunction targetFunction, double cropValue)
         {
             mTargetFunction = targetFunction;
+            CropValue = cropValue;
             Type = FuzzyFunctionType.PiecewiseLinear | mTargetFunction.Type;
         }
 
