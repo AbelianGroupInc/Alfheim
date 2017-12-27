@@ -156,7 +156,10 @@ namespace Alfheim.GUI.Views
 
         private void StartTest_Click(object sender, RoutedEventArgs e)
         {
+            SimpleExecuteWindow sew = new SimpleExecuteWindow();
+            sew.Owner = Window.GetWindow(this);
 
+            sew.ShowDialog();
         }
     }
 }

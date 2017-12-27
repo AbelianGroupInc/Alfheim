@@ -58,4 +58,5 @@
     <v:String x:Key="cNewLinguisticVariable">Добавить лингвистическую переменную</v:String>
     <v:String x:Key="cInputLinguisticVariables">Входные лингвистические переменные</v:String>
     <v:String x:Key="cOutputLinguisticVariables">Выходная лингвистическая переменная</v:String>
+    <v:String x:Key="cExecute">Выполнить</v:String>
 </ResourceDictionary>

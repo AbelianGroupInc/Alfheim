@@ -15,7 +15,7 @@ namespace Alfheim.FuzzyLogic
     /// It has intermediate computations for comfortable output.
     /// Each result of each step of computation is stored inside the class for further using.
     /// </summary>
-    class FuzzyLogicQuery
+    public class FuzzyLogicQuery
     {
         public Dictionary<LinguisticVariable, double> Input { get; set; }
         public Dictionary<Term, double> FuzzificatedValues { get; set; }

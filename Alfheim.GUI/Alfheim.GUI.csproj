@@ -125,6 +125,9 @@
     <Compile Include="Services\TermPropertyViewService.cs" />
     <Compile Include="Services\TextBlockGenerator.cs" />
     <Compile Include="Services\TextBoxPropertyEditor.cs" />
+    <Compile Include="SimpleExecuteWindow.xaml.cs">
+      <DependentUpon>SimpleExecuteWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CreateProjectPage.xaml.cs">
       <DependentUpon>CreateProjectPage.xaml</DependentUpon>
     </Compile>
@@ -136,9 +139,6 @@
     </Compile>
     <Compile Include="Views\ProjectPage.xaml.cs">
       <DependentUpon>ProjectPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\SimpleExecutePage.xaml.cs">
-      <DependentUpon>SimpleExecutePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\StartPage.xaml.cs">
       <DependentUpon>StartPage.xaml</DependentUpon>
@@ -193,6 +193,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\lang.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SimpleExecuteWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -265,10 +269,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ProjectPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\SimpleExecutePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
