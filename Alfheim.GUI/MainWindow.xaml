@@ -14,7 +14,8 @@
         GlowBrush="Black"
         ResizeMode="CanResize"
         WindowTransitionsEnabled="False"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Closing="MainWindow_Closing">
     <Controls:MetroWindow.RightWindowCommands>
     <Controls:WindowCommands>
             <Menu            

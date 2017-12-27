@@ -161,5 +161,10 @@ namespace Alfheim.GUI.Views
 
             sew.ShowDialog();
         }
+
+        private void StartFullTest_Click(object sender, RoutedEventArgs e)
+        {
+            (Window.GetWindow(this) as MainWindow).OpenPage(new FullExecutePage(this));
+        }
     }
 }

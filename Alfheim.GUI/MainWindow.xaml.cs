@@ -1,4 +1,6 @@
-﻿using Alfheim.GUI.Model;
+﻿using Alfheim.FuzzyLogic;
+using Alfheim.FuzzyLogic.Fis;
+using Alfheim.GUI.Model;
 using Alfheim.GUI.Views;
 using MahApps.Metro.Controls;
 using System;
@@ -119,7 +121,13 @@ namespace Alfheim.GUI
 
         private void Home_Click(object sender, RoutedEventArgs e)
         {
+            //FisWriter.Write($"{Properties.Settings.Default.ProjectsFolder}/{FuzzyProject.Instance.Name}/{FuzzyProject.Instance.Name}");
             OpenPage(new StartPage());
+        }
+
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            //FisWriter.Write($"{Properties.Settings.Default.ProjectsFolder}/{FuzzyProject.Instance.Name}/{FuzzyProject.Instance.Name}");
         }
     }
 }

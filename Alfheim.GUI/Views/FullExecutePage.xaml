@@ -1,0 +1,90 @@
+﻿<Page x:Class="Alfheim.GUI.Views.FullExecutePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:ogl="clr-namespace:SharpGL.WPF;assembly=SharpGL.WPF"
+      xmlns:local="clr-namespace:Alfheim.GUI.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="500" d:DesignWidth="500"
+      Title="FullExecutePage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.3*" />
+            <ColumnDefinition Width="0.5*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid
+          Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <Border
+                Style="{StaticResource BorderForSimpleTextBlock}">
+
+                <StackPanel>
+                    <TextBlock 
+                        Text="{DynamicResource cConstantLinguisticVariables}"
+                        Style="{StaticResource Header}"/>
+
+                    <ScrollViewer
+                          VerticalScrollBarVisibility="Auto">
+
+                        <StackPanel 
+                              x:Name="ctrMainSP"/>
+                    </ScrollViewer>
+                </StackPanel>
+            </Border>
+
+            <Button 
+              Grid.Row="1"
+              Click="Exit_Click"
+              Style="{StaticResource BigFlatButton}"
+              Content="{DynamicResource cAdd}"/>
+            
+            <Button 
+              Grid.Row="2"
+              Click="Execute_Click"
+              Style="{StaticResource BigFlatButton}"
+              Content="{DynamicResource cRemove}"/>
+
+            <Button 
+              Grid.Row="3"
+              Click="Exit_Click"
+              Style="{StaticResource BigFlatButton}"
+              Content="{DynamicResource cBack}"/>
+        </Grid>
+
+        <Grid
+            Grid.Column="1">
+
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <ogl:OpenGLControl 
+                Grid.Row="0"
+                OpenGLDraw="OpenGLControl_OpenGLDraw"
+                OpenGLInitialized="OpenGLControl_OpenGLInitialized"
+                Resized="OpenGLControl_Resized"
+                DrawFPS="False"
+                RenderContextType="FBO"/>
+
+            <Slider 
+                Grid.Row="1"
+                Style="{StaticResource SliderFlatStyle}"
+                Minimum="-180" Maximum="180"
+                Value="0"
+                ValueChanged="Slider_ValueChanged">
+
+            </Slider>
+        </Grid>
+    </Grid>
+</Page>

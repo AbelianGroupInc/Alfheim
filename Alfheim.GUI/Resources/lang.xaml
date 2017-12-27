@@ -59,4 +59,5 @@
     <v:String x:Key="cInputLinguisticVariables">Input linguistic variables</v:String>
     <v:String x:Key="cOutputLinguisticVariables">Output linguistic variable</v:String>
     <v:String x:Key="cExecute">Execute</v:String>
+    <v:String x:Key="cConstantLinguisticVariables">Constant Linguistic Variables</v:String>
 </ResourceDictionary>
